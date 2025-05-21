@@ -1,0 +1,9 @@
+res://main.tscn
+res://Efectos Visuales.tscn
+res://Character.tscn
+res://dash Node.gd
+res://Bullet Time.gdshader
+res://Scripts/enemigo.gd
+res://Scripts/dash Node.gd
+res://Shader/Bullet Time.gdshader
+res://Enemigo.tscn
