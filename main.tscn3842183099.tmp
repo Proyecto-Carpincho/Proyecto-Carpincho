@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=4 uid="uid://cd87dq6xf2jlm"]
+
+[ext_resource type="Texture2D" uid="uid://fowm0tenege7" path="res://Wasteland-Files.png" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://player.gd" id="2_h2yge"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
+texture = ExtResource("1_h2yge")
+16:6/0 = 0
+17:6/0 = 0
+20:6/0 = 0
+21:6/0 = 0
+22:6/0 = 0
+23:6/0 = 0
+24:6/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+20:7/0 = 0
+21:7/0 = 0
+22:7/0 = 0
+23:7/0 = 0
+24:7/0 = 0
+6:8/0 = 0
+8:8/0 = 0
+10:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+16:8/0 = 0
+18:8/0 = 0
+20:8/0 = 0
+21:8/0 = 0
+22:8/0 = 0
+23:8/0 = 0
+24:8/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+23:9/0 = 0
+24:9/0 = 0
+17:10/0 = 0
+18:10/0 = 0
+19:10/0 = 0
+22:10/0 = 0
+23:10/0 = 0
+24:10/0 = 0
+25:10/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+20:11/0 = 0
+21:11/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_272bh"]
+sources/0 = SubResource("TileSetAtlasSource_7mycd")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(30, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(256, 16)
+
+[node name="TileMapLayer" type="TileMapLayer"]
+position = Vector2(682, 255)
+tile_map_data = PackedByteArray("AAD7/wAAAAANAAcAAAD8/wAAAAANAAcAAAD9/wAAAAANAAcAAAD+/wAAAAANAAcAAAD//wAAAAANAAcAAAAAAAAAAAANAAcAAAABAAAAAAANAAcAAAACAAAAAAANAAcAAAADAAAAAAANAAcAAAAEAAAAAAANAAcAAAAFAAAAAAANAAcAAAD6/wAAAAANAAcAAAD5/wAAAAANAAcAAAD4/wAAAAANAAcAAAAGAAAAAAANAAcAAAAHAAAAAAANAAcAAAA=")
+tile_set = SubResource("TileSet_272bh")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(0, -24)
+script = ExtResource("2_h2yge")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(-2.19345e-05, 0)
+scale = Vector2(0.242187, 0.253906)
+texture = ExtResource("2_1bvp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_h2yge")
