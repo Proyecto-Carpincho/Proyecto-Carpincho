@@ -5,13 +5,13 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tg4cr"]
 shader = ExtResource("1_v2lfg")
-shader_parameter/Amplitud = 0.01
+shader_parameter/Amplitud = 0.05
 shader_parameter/Velocidad = 1.0
-shader_parameter/Borde = 0.05
-shader_parameter/Gradiente = 0.04
+shader_parameter/Borde = 4.0
+shader_parameter/Gradiente = -3.86
 shader_parameter/Color1 = Color(0.0943044, 0.0943044, 0.0943044, 1)
-shader_parameter/Color2 = Color(0, 0, 0, 0.4)
-shader_parameter/Potencia = 0.0
+shader_parameter/Color2 = Color(0, 0, 0, 0.580392)
+shader_parameter/Potencia = 1.0
 
 [node name="Efectos Visuales" type="CanvasLayer"]
 script = ExtResource("1_obe7b")

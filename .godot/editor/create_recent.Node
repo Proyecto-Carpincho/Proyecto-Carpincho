@@ -1,3 +1,8 @@
+ColorRect
+Parallax2D
+Node2D
+ParallaxBackground
+ParallaxLayer
 TileMapLayer
 TileMap
 NavigationRegion2D
@@ -6,5 +11,4 @@ Area2D
 Timer
 NavigationAgent2D
 NavigationObstacle2D
-Node2D
 CharacterBody2D

@@ -18,7 +18,7 @@ void fragment() {
 
     if (edgeDist < limit) {
 
-        float t = smoothstep(0.0, Gradiente + time, edgeDist);
+        float t = smoothstep(0.0, Gradiente + time + Borde, edgeDist);
         COLOR = mix(Color1, Color2, t);
 		COLOR.a = COLOR.a * Potencia;
     } else {

@@ -7,6 +7,7 @@ var seDashActivo:bool
 @onready var ShapeCast:ShapeCast2D = get_node("ShapeCast2D")
 var PosicionPreDash:Vector2
 var VelociadMouse:Vector2
+var DistanciaMouse:float
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash"):
@@ -24,7 +25,6 @@ func _physics_process(delta: float) -> void:
 			VelociadMouse = Padre.position.direction_to(PositionMouse).normalized() * 60000
 			PosicionPreDash = Padre.global_position
 			
-			
 			Dash = true
 	else:
 		var Line2DNode:Line2D= get_node("Line2D")
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		EjecucionDash(delta)
 
 
-var DistanciaMouse:float
+
 func EjecucionDash(delta):
 	Padre.velocity = VelociadMouse * delta
 	
@@ -52,7 +52,7 @@ func PosicionLinea():
 	ShapeCast.rotation = Padre.get_local_mouse_position().angle()
 
 func StopTimer():
-	EfectosVisuales.RelentizarTiempo(0.2,false)
+	EfectosVisuales.RelentizarTiempo(0.5,false)
 	get_node("TiempoDeDash").stop()
 	Engine.time_scale = 1
 	seDashActivo = false
