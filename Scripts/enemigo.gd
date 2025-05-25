@@ -1,19 +1,23 @@
-extends CharacterBody2D
+extends CentralEnemigo
 
 
 const SPEED = 300.0
-const GravedadMax = 300
-@export var Personaje:CharacterBody2D
+const GravedadMax = 600
+
 @onready var Navegacion:NavigationAgent2D = $NavigationAgent2D
-var PosicionAir:Vector2
 
 func _physics_process(delta: float) -> void:
-	if global_position.direction_to(Navegacion.get_next_path_position()).length() < 5:
-		global_position.x=move_toward(global_position.x, Navegacion.get_next_path_position().x,delta*SPEED)
-		global_position.y=move_toward(global_position.y, Navegacion.get_next_path_position().y,delta*SPEED)
+	var auxPathPosicion:Vector2=Navegacion.get_next_path_position()
+	if global_position.direction_to(auxPathPosicion).length() < 5:
+		global_position.x=move_toward(global_position.x, auxPathPosicion.x,delta*SPEED)
+		if is_on_wall():
+			global_position.y=move_toward(global_position.y, auxPathPosicion.y,delta*SPEED)
 	else:
-		velocity.x = global_position.direction_to(Navegacion.get_next_path_position()).x * SPEED
-		velocity.y += global_position.direction_to(Navegacion.get_next_path_position()).y * SPEED
+		velocity.x = global_position.direction_to(auxPathPosicion).x * SPEED
+		if is_on_wall():
+			velocity.y += global_position.direction_to(auxPathPosicion).y * SPEED
+	
+	
 	
 	var auxGravedad = get_gravity() if not is_on_wall_only() else Vector2.ZERO
 	if not is_on_floor():
@@ -21,20 +25,21 @@ func _physics_process(delta: float) -> void:
 			velocity.y += auxGravedad.y * delta
 		else:
 			velocity.y = GravedadMax
-	
-	
-	
 	move_and_slide()
 
-func _AreaDeteccion_bodyEntered(body: Node2D) -> void:
-	if Personaje == body:
-		get_node("Timer").start()
-		
 
-func _AreaDeteccion_bodyExited(body: Node2D) -> void:
-	if Personaje == body:
+func _process(_delta: float) -> void:
+	if ComprobacionJugador() and EstaEnVision():
+		if get_node("Timer").is_stopped():
+			get_node("Timer").start()
+	else:
 		get_node("Timer").stop()
+
+func ComprobacionJugador() -> bool:
+	var Deteccion:Area2D = get_node("AreaDeteccion")
+	return Deteccion.get_overlapping_bodies().find(Jugador) != -1
+
 
 
 func _Timeout() -> void:
-	Navegacion.target_position = Personaje.global_position
+	Navegacion.target_position  = Jugador.global_position

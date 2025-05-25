@@ -9,11 +9,14 @@ var PosicionPreDash:Vector2
 var VelociadMouse:Vector2
 var DistanciaMouse:float
 
+var Prueba:bool
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and get_node("TiempoRecarga").is_stopped():
 		get_node("TiempoDeDash").start()
+
 		seDashActivo = true
 	if Input.is_action_pressed("dash") and seDashActivo:
+		Prueba = true
 		ShapeCast.enabled = true
 		PosicionLinea()
 		EfectosVisuales.RelentizarTiempo(0.2)
@@ -30,6 +33,11 @@ func _physics_process(delta: float) -> void:
 		var Line2DNode:Line2D= get_node("Line2D")
 		Line2DNode.set_point_position(1,Vector2.ZERO)
 		StopTimer()
+		if Prueba:
+			Prueba = false
+			if not Dash:
+				Ui.RecargaDash(get_node("TiempoRecarga").wait_time)
+				get_node("TiempoRecarga").start()
 	if Dash:
 		EjecucionDash(delta)
 
@@ -44,6 +52,9 @@ func EjecucionDash(delta):
 		Dash = false
 		Padre.velocity = VelociadMouse * delta / 2
 		get_node("TiempoDeDash").stop()
+		get_node("TiempoRecarga").start()
+		Ui.RecargaDash(get_node("TiempoRecarga").wait_time)
+		Prueba = false
 
 func PosicionLinea():
 	var Line2DNode:Line2D= get_node("Line2D")

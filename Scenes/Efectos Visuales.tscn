@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhxq3p4fn06a1"]
+
+[ext_resource type="Script" uid="uid://dbncsedlyj7f" path="res://Scripts/Efectos Visuales.gd" id="1_tpqwk"]
+[ext_resource type="Shader" uid="uid://c44nkjjhw6yl1" path="res://Shader/Bullet Time.gdshader" id="2_eh0ed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tg4cr"]
+shader = ExtResource("2_eh0ed")
+shader_parameter/Amplitud = 0.05
+shader_parameter/Velocidad = 1.0
+shader_parameter/Borde = 4.0
+shader_parameter/Gradiente = -3.86
+shader_parameter/Color1 = Color(0.0943044, 0.0943044, 0.0943044, 1)
+shader_parameter/Color2 = Color(0, 0, 0, 0.580392)
+shader_parameter/Potencia = 0.0
+
+[node name="Efectos Visuales" type="CanvasLayer"]
+script = ExtResource("1_tpqwk")
+
+[node name="Relentizar tiempo" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_tg4cr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -17,7 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-EfectosVisuales="*res://Efectos Visuales.tscn"
+EfectosVisuales="*res://Scenes/Efectos Visuales.tscn"
+Ui="*res://Scenes/UI.tscn"
 
 [input]
 
@@ -61,3 +62,16 @@ Click={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(392, 10),"global_position":Vector2(399, 53),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Mundo"
+2d_navigation/layer_1="Blindados"
+2d_physics/layer_2="Paredes Atravezables"
+2d_navigation/layer_2="Drones"
+2d_physics/layer_3="Enemigos"
+2d_navigation/layer_3="Francotiradores"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

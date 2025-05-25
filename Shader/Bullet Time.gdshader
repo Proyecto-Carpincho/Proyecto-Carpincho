@@ -14,7 +14,7 @@ void fragment() {
 
     float distX = min(UV.x, 1.0 - UV.x);
     float distY = min(UV.y, 1.0 - UV.y);
-    float edgeDist = min(distX, distY); // más cerca del borde general
+    float edgeDist = min(distX, distY);
 
     if (edgeDist < limit) {
 
