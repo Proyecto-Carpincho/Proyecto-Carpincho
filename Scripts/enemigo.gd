@@ -1,26 +1,27 @@
 extends CentralEnemigo
 
 
-const SPEED = 300.0
-const GravedadMax = 600
+const SPEED = 100
+const GravedadMax = 200
 
 @onready var Navegacion:NavigationAgent2D = $NavigationAgent2D
 
 func _physics_process(delta: float) -> void:
+	
 	var auxPathPosicion:Vector2=Navegacion.get_next_path_position()
-	if global_position.direction_to(auxPathPosicion).length() < 5:
-		global_position.x=move_toward(global_position.x, auxPathPosicion.x,delta*SPEED)
-		if is_on_wall():
-			global_position.y=move_toward(global_position.y, auxPathPosicion.y,delta*SPEED)
+	var DistanciaAlJugador:float = Jugador.global_position.distance_to(global_position)
+	#Comprobacion Si esta o muy cerca o muy lejos del jugaodor para moverse (para que no paresca que este hujendole pues)
+	if DistanciaAlJugador < 50 or DistanciaAlJugador > 100:
+		velocity.x = global_position.direction_to(auxPathPosicion).normalized().x * SPEED
 	else:
-		velocity.x = global_position.direction_to(auxPathPosicion).x * SPEED
-		if is_on_wall():
-			velocity.y += global_position.direction_to(auxPathPosicion).y * SPEED
+		velocity.x = 0.0
+	if is_on_wall():
+		var VelocidadEscalar = global_position.direction_to(auxPathPosicion).normalized().y * SPEED
+		velocity.y = VelocidadEscalar if abs(VelocidadEscalar) > 50 else 50 * VelocidadEscalar/abs(VelocidadEscalar)
+
 	
-	
-	
-	var auxGravedad = get_gravity() if not is_on_wall_only() else Vector2.ZERO
-	if not is_on_floor():
+	var auxGravedad = get_gravity()
+	if not is_on_floor() and not is_on_wall():
 		if velocity.y + auxGravedad.y < GravedadMax:
 			velocity.y += auxGravedad.y * delta
 		else:
@@ -42,4 +43,8 @@ func ComprobacionJugador() -> bool:
 
 
 func _Timeout() -> void:
-	Navegacion.target_position  = Jugador.global_position
+	
+	var Posicion = Jugador.global_position
+	if not (abs(Posicion.y - position.y) > 20):
+		Posicion.x += -100 if Jugador.position.x - position.x > 0 else 100 
+	Navegacion.target_position  = Posicion

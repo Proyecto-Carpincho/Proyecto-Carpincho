@@ -15,11 +15,12 @@ size = Vector2(2, 15)
 radius = 18.0
 
 [node name="Jugador" type="CharacterBody2D"]
-collision_mask = 3
+collision_layer = 8
+collision_mask = 7
 script = ExtResource("1_7ig0a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2.19345e-05, 0)
+position = Vector2(0.999978, 0)
 scale = Vector2(0.242187, 0.253906)
 texture = ExtResource("2_lcuhw")
 

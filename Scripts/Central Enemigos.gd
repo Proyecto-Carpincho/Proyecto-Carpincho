@@ -10,5 +10,5 @@ func EstaEnVision() -> bool:
 	
 	var RayVision:RayCast2D=get_node("VisionPersonaje")
 	
-	RayVision.rotation = global_position.direction_to(Jugador.global_position).angle()
+	RayVision.rotation = RayVision.global_position.direction_to(Jugador.global_position).angle()
 	return RayVision.get_collider() == Jugador

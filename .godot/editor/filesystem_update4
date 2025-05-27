@@ -1,16 +1,6 @@
-res://Enemigo blindado.tscn
-res://Shader/Bullet Time.gdshader
-res://Recarga.tres
-res://UI.tscn
-res://UI.gd
-res://Character.tscn
-res://Scripts/dash Node.gd
-res://main.tscn
-res://Efectos Visuales.tscn
-res://Scenes/UI.tscn
 res://Scenes/main.tscn
+res://Shader/Bullet Time.gdshader
 res://Shader/Recarga.tres
-res://Scenes/Efectos Visuales.tscn
-res://Scenes/Character.tscn
 res://Scenes/Enemigo blindado.tscn
-res://Scripts/UI.gd
+res://Scenes/Character.tscn
+res://Scripts/enemigo.gd
