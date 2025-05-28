@@ -254,8 +254,9 @@ tile_map_data = PackedByteArray("AAAWAAIAAAASAAgAAAAdAAMAAAAOAAgAAAAdAAQAAAAOAAg
 tile_set = SubResource("TileSet_5vw27")
 
 [node name="Enemigo" parent="." node_paths=PackedStringArray("Jugador") instance=ExtResource("4_1bvp3")]
-position = Vector2(1167, -210)
+position = Vector2(1167, -221)
 Jugador = NodePath("../CharacterBody2D")
+FuerzaDeEmpuje = 400.0
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_h2yge")]
 position = Vector2(50, -117)

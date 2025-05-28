@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=10 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_lcuhw"]
 [ext_resource type="Script" uid="uid://btvsu1trjovfw" path="res://Scripts/dash Node.gd" id="3_atbvg"]
 [ext_resource type="Script" uid="uid://i3yr45r3cjl7" path="res://Scripts/Daño.gd" id="4_atbvg"]
+[ext_resource type="Script" uid="uid://c7sgyctyy5jgk" path="res://Scripts/ataque Node.gd" id="5_vdqda"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atbvg"]
 radius = 15.72
@@ -13,6 +14,9 @@ size = Vector2(2, 15)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cxxw8"]
 radius = 18.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xloa1"]
+height = 58.0
 
 [node name="Jugador" type="CharacterBody2D"]
 collision_layer = 8
@@ -63,6 +67,19 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Vida/Area2D"]
 shape = SubResource("CircleShape2D_cxxw8")
 
+[node name="Ataque" type="Node2D" parent="."]
+script = ExtResource("5_vdqda")
+
+[node name="Area2D" type="Area2D" parent="Ataque"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ataque/Area2D"]
+position = Vector2(39, 0)
+shape = SubResource("CapsuleShape2D_xloa1")
+debug_color = Color(0, 0.638775, 0.374586, 0.42)
+
 [connection signal="timeout" from="Timer Maxima Culaso" to="." method="_Timeout_MaximaCulaso"]
 [connection signal="timeout" from="Dash/TiempoDeDash" to="Dash" method="StopTimer"]
 [connection signal="area_entered" from="Vida/Area2D" to="Dash" method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Ataque/Area2D" to="Ataque" method="_on_area_2d_body_entered"]

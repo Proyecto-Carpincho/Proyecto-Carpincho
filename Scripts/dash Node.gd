@@ -11,17 +11,17 @@ var DistanciaMouse:float
 
 var Prueba:bool
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash") and get_node("TiempoRecarga").is_stopped():
+	if Input.is_action_just_pressed("Bullet Time") and get_node("TiempoRecarga").is_stopped():
 		get_node("TiempoDeDash").start()
 
 		seDashActivo = true
-	if Input.is_action_pressed("dash") and seDashActivo:
+	if Input.is_action_pressed("Bullet Time") and seDashActivo:
 		Prueba = true
 		ShapeCast.enabled = true
 		PosicionLinea()
 		EfectosVisuales.RelentizarTiempo(0.2)
 		Engine.time_scale = 0.2
-		if Input.is_action_just_pressed("Click"):
+		if Input.is_action_just_pressed("Dash"):
 			StopTimer()
 			var PositionMouse:Vector2 = Padre.get_global_mouse_position()
 			DistanciaMouse = Padre.position.distance_to(PositionMouse)

@@ -35,10 +35,15 @@ debug_use_custom = true
 debug_path_custom_color = Color(1, 0, 0, 1)
 debug_path_custom_point_size = 9.6
 
+[node name="Tiempo Perderlo de vista" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="AreaDeteccion" type="Area2D" parent="."]
+position = Vector2(0, -39)
 collision_layer = 0
 collision_mask = 8
 
@@ -46,11 +51,24 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_8s8li")
 debug_color = Color(0.980814, 0, 0.376458, 0.42)
 
-[node name="VisionPersonaje" type="RayCast2D" parent="."]
-position = Vector2(0, -41)
+[node name="VisionPersonaje" type="Node2D" parent="."]
+position = Vector2(0, -39)
+
+[node name="RayCast2D" type="RayCast2D" parent="VisionPersonaje"]
+position = Vector2(0, -12)
 target_position = Vector2(350, 0)
 collision_mask = 9
 
+[node name="RayCast2D2" type="RayCast2D" parent="VisionPersonaje"]
+target_position = Vector2(350, 0)
+collision_mask = 9
+
+[node name="RayCast2D3" type="RayCast2D" parent="VisionPersonaje"]
+position = Vector2(0, 13)
+target_position = Vector2(350, 0)
+collision_mask = 9
+
+[connection signal="timeout" from="Tiempo Perderlo de vista" to="." method="_Timout_PerderloVista"]
 [connection signal="timeout" from="Timer" to="." method="_Timeout"]
 [connection signal="body_entered" from="AreaDeteccion" to="." method="_AreaDeteccion_bodyEntered"]
 [connection signal="body_exited" from="AreaDeteccion" to="." method="_AreaDeteccion_bodyExited"]

@@ -73,7 +73,7 @@ const velocidadMax:float = 300
 
 func Movimiento(delta):
 	var Direccion:float = Input.get_axis("ui.left","ui.right")
-	var auxDesaceleracion = ParametrosDeVelocidad(1000,2000)
+	var auxDesaceleracion = 2000
 	var auxAceleracion = ParametrosDeVelocidad(aceleracion,aceleracionMax)
 	var auxVelocidadMax = ParametrosDeVelocidad(velocidadMax*0.6,velocidadMax)
 	
