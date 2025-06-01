@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://113aa7y7fmak"]
+[gd_scene load_steps=6 format=3 uid="uid://113aa7y7fmak"]
 
 [ext_resource type="Script" uid="uid://cr3l2cdhhgvof" path="res://Scripts/enemigo.gd" id="1_p2sjk"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_qws2e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qtsd"]
+size = Vector2(139.469, 136.449)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4qtsd"]
 radius = 16.0
@@ -15,6 +18,23 @@ collision_layer = 4
 wall_min_slide_angle = 0.0
 script = ExtResource("1_p2sjk")
 
+[node name="Escudo" type="StaticBody2D" parent="."]
+position = Vector2(0, -26)
+scale = Vector2(0.251518, 0.394352)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Escudo"]
+position = Vector2(180, 0)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_4qtsd")
+one_way_collision = true
+
+[node name="Icon2" type="Sprite2D" parent="Escudo"]
+position = Vector2(198.793, 0)
+scale = Vector2(0.776535, 1.01036)
+texture = ExtResource("2_qws2e")
+
 [node name="Icon" type="Sprite2D" parent="."]
 modulate = Color(1, 0.362591, 0.295235, 1)
 position = Vector2(0, -26)
@@ -23,7 +43,9 @@ texture = ExtResource("2_qws2e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -26)
+rotation = 3.14159
 shape = SubResource("CapsuleShape2D_4qtsd")
+one_way_collision = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
@@ -39,7 +61,7 @@ debug_path_custom_point_size = 9.6
 wait_time = 0.5
 one_shot = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Tiempo Recalcular Movimiento" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="AreaDeteccion" type="Area2D" parent="."]
@@ -69,6 +91,6 @@ target_position = Vector2(350, 0)
 collision_mask = 9
 
 [connection signal="timeout" from="Tiempo Perderlo de vista" to="." method="_Timout_PerderloVista"]
-[connection signal="timeout" from="Timer" to="." method="_Timeout"]
+[connection signal="timeout" from="Tiempo Recalcular Movimiento" to="." method="_Timeout"]
 [connection signal="body_entered" from="AreaDeteccion" to="." method="_AreaDeteccion_bodyEntered"]
 [connection signal="body_exited" from="AreaDeteccion" to="." method="_AreaDeteccion_bodyExited"]

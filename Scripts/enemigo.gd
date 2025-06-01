@@ -8,10 +8,28 @@ const GravedadMax = 200
 
 func _physics_process(delta: float) -> void:
 	
+	Moviminento()
+	Gravedad(delta)
+	Escudo()
+
+	#Solo por ahora tiene esto que esta mal
+	velocity += VelocidadEmpuje
+	move_and_slide()
+
+func Escudo():
+	var elEscudoVe:int = 1 if get_node("Escudo").rotation == 0 else -1
+	var VistaPersonaje:int =1 if abs(get_node("VisionPersonaje").rotation) < 1.5 else -1
+	if velocity.normalized().x !=0:
+		if velocity.normalized().x < 0 and VistaPersonaje < 0:
+			get_node("Escudo").rotation_degrees = 180
+		elif VistaPersonaje > 0:
+			get_node("Escudo").rotation_degrees = 0
+
+func Moviminento():
 	var auxPathPosicion:Vector2=Navegacion.get_next_path_position()
 	var DistanciaAlJugador:float = Jugador.global_position.distance_to(global_position)
 	#Comprobacion Si esta o muy cerca o muy lejos del jugaodor para moverse (para que no paresca que este hujendole pues)
-	if (DistanciaAlJugador < 50 or DistanciaAlJugador > 100) or get_node("Timer").is_stopped():
+	if (DistanciaAlJugador < 80 or DistanciaAlJugador > 100) or get_node("Tiempo Recalcular Movimiento").is_stopped():
 		velocity.x = global_position.direction_to(auxPathPosicion).normalized().x * SPEED
 	else:
 		velocity.x = 0.0
@@ -19,23 +37,21 @@ func _physics_process(delta: float) -> void:
 		var VelocidadEscalar = global_position.direction_to(auxPathPosicion).normalized().y * SPEED 
 		VelocidadEscalar = VelocidadEscalar if abs(VelocidadEscalar) > 50 else 50 * VelocidadEscalar/abs(VelocidadEscalar)
 		velocity.y = VelocidadEscalar
-	
-	
+
+func Gravedad(delta):
 	var auxGravedad = get_gravity()
 	if not is_on_floor() and not is_on_wall():
 		if velocity.y + auxGravedad.y < GravedadMax:
 			velocity.y += auxGravedad.y * delta
 		else:
 			velocity.y = GravedadMax
-	#Solo por ahora tiene esto que esta mal
-	velocity += VelocidadEmpuje
-	
-	move_and_slide()
+
+
 
 func _process(_delta: float) -> void:
 	if ComprobacionJugador() and EstaEnVision():
-		if get_node("Timer").is_stopped():
-			get_node("Timer").start()
+		if get_node("Tiempo Recalcular Movimiento").is_stopped():
+			get_node("Tiempo Recalcular Movimiento").start()
 	elif get_node("Tiempo Perderlo de vista").is_stopped():
 		get_node("Tiempo Perderlo de vista").start()
 
@@ -54,4 +70,4 @@ func _Timeout() -> void:
 
 
 func _Timout_PerderloVista() -> void:
-	get_node("Timer").stop()
+	get_node("Tiempo Recalcular Movimiento").stop()
