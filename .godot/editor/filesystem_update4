@@ -1,7 +1,6 @@
 res://Scenes/main.tscn
 res://Shader/Bullet Time.gdshader
 res://Shader/Recarga.tres
-res://Scripts/enemigo.gd
 res://Scenes/Enemigo blindado.tscn
 res://Scenes/Character.tscn
 res://Scenes/UI.tscn

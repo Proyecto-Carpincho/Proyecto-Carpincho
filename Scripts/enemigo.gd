@@ -29,7 +29,7 @@ func Moviminento():
 	var auxPathPosicion:Vector2=Navegacion.get_next_path_position()
 	var DistanciaAlJugador:float = Jugador.global_position.distance_to(global_position)
 	#Comprobacion Si esta o muy cerca o muy lejos del jugaodor para moverse (para que no paresca que este hujendole pues)
-	if (DistanciaAlJugador < 80 or DistanciaAlJugador > 100) or get_node("Tiempo Recalcular Movimiento").is_stopped():
+	if (DistanciaAlJugador < 78 or DistanciaAlJugador > 100) or get_node("Tiempo Recalcular Movimiento").is_stopped():
 		velocity.x = global_position.direction_to(auxPathPosicion).normalized().x * SPEED
 	else:
 		velocity.x = 0.0

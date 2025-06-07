@@ -1,3 +1,7 @@
+AnimationTree
+AnimationPlayer
+AnimatedSprite2D
+Sprite2D
 CollisionShape2D
 StaticBody2D
 Timer
@@ -8,7 +12,3 @@ HBoxContainer
 Panel
 Control
 CanvasLayer
-ColorRect
-TileMapLayer
-TileMap
-Parallax2D
