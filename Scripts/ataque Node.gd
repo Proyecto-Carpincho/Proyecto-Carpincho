@@ -12,4 +12,4 @@ func _input(event: InputEvent) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.has_method("Golpeado"):
-		body.Golpeado(get_node("Area2D").rotation)
+		body.Golpeado(get_node("Area2D").rotation)a

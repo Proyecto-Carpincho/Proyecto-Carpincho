@@ -1,7 +1,7 @@
 extends Node
 
 
-var Dash:bool
+"""var Dash:bool
 var seDashActivo:bool
 @onready var Padre:CharacterBody2D = get_parent()
 @onready var ShapeCast:ShapeCast2D = get_node("ShapeCast2D")
@@ -13,7 +13,6 @@ var Prueba:bool
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Bullet Time") and get_node("TiempoRecarga").is_stopped():
 		get_node("TiempoDeDash").start()
-
 		seDashActivo = true
 	if Input.is_action_pressed("Bullet Time") and seDashActivo:
 		Prueba = true
@@ -67,3 +66,4 @@ func StopTimer():
 	get_node("TiempoDeDash").stop()
 	Engine.time_scale = 1
 	seDashActivo = false
+"""
