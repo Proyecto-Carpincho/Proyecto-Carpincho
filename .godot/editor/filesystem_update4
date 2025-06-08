@@ -1,11 +1,4 @@
-res://Scenes/Character.tscn
-res://Shader/Bullet Time.gdshader
-res://Shader/Recarga.tres
-res://Scenes/Accion Node.gd
-res://Scripts/dash Node.gd
-res://Scenes/State Machine.gd
 res://Scenes/main.tscn
-res://Scenes/Enemigo blindado.tscn
-res://Scenes/UI.tscn
-res://Scripts/ataque Node.gd
+res://Shader/Recarga.tres
+res://Scenes/Character.tscn
 res://Scripts/player.gd

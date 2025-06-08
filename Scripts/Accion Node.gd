@@ -7,8 +7,6 @@ ACCION NODE:
 
 ##AnimationTree con AnimationNodeStateMachine Dentro como esena principal
 @export var arbolDeAnimaciones:AnimationTree
-var TodosLosEstados:Array
-
 
 func ActivarTrancicion(NombredeTrancicion:String,Estado:bool):
 	arbolDeAnimaciones["parameters/conditions/"+NombredeTrancicion] = Estado

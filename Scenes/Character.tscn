@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_lcuhw"]
 [ext_resource type="Script" uid="uid://btvsu1trjovfw" path="res://Scripts/dash Node.gd" id="3_atbvg"]
 [ext_resource type="Script" uid="uid://i3yr45r3cjl7" path="res://Scripts/Daño.gd" id="4_atbvg"]
-[ext_resource type="Script" uid="uid://7xje60bd57tt" path="res://Scenes/Accion Node.gd" id="4_xloa1"]
-[ext_resource type="Script" uid="uid://dhsaubhb2lrb4" path="res://Scenes/State Machine.gd" id="5_4b18b"]
+[ext_resource type="Script" uid="uid://7xje60bd57tt" path="res://Scripts/Accion Node.gd" id="4_xloa1"]
+[ext_resource type="Script" uid="uid://dhsaubhb2lrb4" path="res://Scripts/State Machine.gd" id="5_4b18b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atbvg"]
 radius = 15.72
@@ -13,83 +13,59 @@ radius = 15.72
 [sub_resource type="CircleShape2D" id="CircleShape2D_cxxw8"]
 radius = 18.0
 
-[sub_resource type="Animation" id="Animation_xloa1"]
-resource_name = "Corre"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_cw27m"]
+resource_name = "ACCELERATION LETF"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/path = NodePath("Sprite2D2:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.266667, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(-32, 0)]
+"values": [Vector2(0.2, 0.2), Vector2(0.32, 0.32), Vector2(0.2, 0.2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:scale")
+tracks/1/path = NodePath("Sprite2D2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.2, 0.2)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 12.5664]
+"values": [Vector2(-37, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_4b18b"]
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_xxe07"]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/path = NodePath("Sprite2D2:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(32, 0)]
+"values": [Vector2(0.2, 0.2), Vector2(0.3, 0.3), Vector2(0.2, 0.2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:scale")
+tracks/1/path = NodePath("Sprite2D2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.2, 0.2)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -12.5664]
+"values": [Vector2(37, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_peemv"]
@@ -170,6 +146,129 @@ tracks/2/keys = {
 "values": [Vector2(0.2, 0.2)]
 }
 
+[sub_resource type="Animation" id="Animation_fgiha"]
+resource_name = "Salto"
+
+[sub_resource type="Animation" id="Animation_6s7kk"]
+
+[sub_resource type="Animation" id="Animation_0tob0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_xloa1"]
+resource_name = "Corre"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-32, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.5664]
+}
+
+[sub_resource type="Animation" id="Animation_4b18b"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -12.5664]
+}
+
 [sub_resource type="Animation" id="Animation_8au8k"]
 loop_mode = 1
 tracks/0/type = "value"
@@ -246,103 +345,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.28319]
-}
-
-[sub_resource type="Animation" id="Animation_fgiha"]
-resource_name = "Salto"
-
-[sub_resource type="Animation" id="Animation_6s7kk"]
-
-[sub_resource type="Animation" id="Animation_0tob0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.2, 0.2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(32, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D2:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_cw27m"]
-resource_name = "ACCELERATION LETF"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.466667, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(0.32, 0.32), Vector2(0.2, 0.2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-37, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xxe07"]
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(0.3, 0.3), Vector2(0.2, 0.2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(37, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0tob0"]
@@ -569,15 +571,13 @@ parameters/INTERMEDIO/blend_position = 0
 parameters/RUN/blend_position = Vector2(0, 0)
 parameters/WALK/blend_position = Vector2(0, 0)
 
-[node name="AccionNode" type="Node2D" parent="." node_paths=PackedStringArray("arbolDeAnimaciones")]
-script = ExtResource("4_xloa1")
-arbolDeAnimaciones = NodePath("../AnimationTree")
-metadata/_custom_type_script = "uid://7xje60bd57tt"
-
-[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("arbolDeAnimaciones", "NodoDeAcciones")]
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("arbolDeAnimaciones")]
 script = ExtResource("5_4b18b")
 arbolDeAnimaciones = NodePath("../AnimationTree")
-NodoDeAcciones = NodePath("../AccionNode")
+todosLosEstados = Dictionary[PackedStringArray, NodePath]({
+PackedStringArray("RUN", "WALK", "ACCELERATE", "INTERMEDIO", "IDLE"): NodePath("..")
+})
+metadata/_custom_type_script = "uid://dhsaubhb2lrb4"
 
 [node name="Dash" type="Node2D" parent="StateMachine"]
 script = ExtResource("3_atbvg")
@@ -597,6 +597,11 @@ ignore_time_scale = true
 [node name="ShapeCast2D" type="ShapeCast2D" parent="StateMachine/Dash"]
 shape = SubResource("RectangleShape2D_lcuhw")
 target_position = Vector2(25, 0)
+
+[node name="AccionNode" type="Node2D" parent="." node_paths=PackedStringArray("arbolDeAnimaciones")]
+script = ExtResource("4_xloa1")
+arbolDeAnimaciones = NodePath("../AnimationTree")
+metadata/_custom_type_script = "uid://7xje60bd57tt"
 
 [connection signal="timeout" from="Timer Maxima Culaso" to="." method="_Timeout_MaximaCulaso"]
 [connection signal="area_entered" from="Vida/Area2D" to="StateMachine/Dash" method="_on_area_2d_area_entered"]

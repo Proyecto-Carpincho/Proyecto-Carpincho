@@ -1,14 +1,2 @@
-AnimationPlayer
-AccionNode
-Node2D
 Node
-AnimationTree
-AnimatedSprite2D
-Sprite2D
-CollisionShape2D
-StaticBody2D
-Timer
-RayCast2D
-Area2D
-HBoxContainer
-Panel
+StateMachine
