@@ -16,6 +16,10 @@ func _process(delta: float) -> void:
 
 func InputJugador():
 	MovimientoTotal = Input.get_vector("ui.left","ui.right","ui.down","ui.up")
+	if MovimientoTotal.x != 0:
+		MovimientoTotal.x = 1 if MovimientoTotal.x > 0 else -1
+	if MovimientoTotal.y != 0:
+		MovimientoTotal.y = 1 if MovimientoTotal.y > 0 else -1
 	var estaQuieto:bool=MovimientoTotal.x == 0
 	var estaCorriendo:bool=Input.is_action_pressed("run")
 	PosicionIDLE = MovimientoTotal if MovimientoTotal != Vector2.ZERO else PosicionIDLE
@@ -38,9 +42,13 @@ var MaxCaminar:float = 8000
 func _physics_processMatch(delta:float,NodoActual:String):
 	match NodoActual:
 		"IDLE":
-			velocity.x = move_toward(velocity.x,0,delta*150)
+			var Friccion = 150 if velocity.x < 50 else 300
+			velocity.x = move_toward(velocity.x,0,delta*Friccion)
 		"ACCELERATE":
-			velocity.x = VelocidadAcelerar*MovimientoTotal.x*delta*50
+			if abs(velocity.x) < 5:
+				velocity.x = VelocidadAcelerar*MovimientoTotal.x*delta*50
+			else:
+				velocity.x = move_toward(velocity.x,0,delta*300)
 		"RUN":
 			if abs(velocity.x) > MaxCorrer*delta:
 				velocity.x = MaxCorrer*MovimientoTotal.x*delta
@@ -55,27 +63,28 @@ func _physics_processMatch(delta:float,NodoActual:String):
 	move_and_slide()
 
 var CantidadDeSaltoExtra:int=0
-var VelocidadSalto:int=-1000
+var VelocidadSalto:int=-150
 func Salto(NodoActual:String,delta):
-	
 	if NodoActual in ["ACCELERATE","RUN","WALK","IDLE"]:
 		NodoDeAcciones.BlendPosicion(NodoActual,PosicionIDLE)
-		if Input.is_action_just_pressed("ui.up"):
-			if is_on_wall():
-				velocity.y = -10000*delta*0.5
+		if is_on_wall():
+			if Input.is_action_pressed("ui.up"):
+				velocity.y = -1000*delta*1.5
+			if velocity.y<-120:
+				print(velocity.y)
+				velocity.y=move_toward(velocity.y,0,delta*1000)
+			CantidadDeSaltoExtra=0
+		elif Input.is_action_just_pressed("Jump"):
+			if is_on_floor():
+				velocity.y = VelocidadSalto*3
 				CantidadDeSaltoExtra=0
-			else:
-				if is_on_floor():
-					velocity.y = VelocidadSalto*3.5
-					CantidadDeSaltoExtra=0
-				elif CantidadDeSaltoExtra < SaltoExtra:
-					velocity.y = VelocidadSalto*2.5
-					CantidadDeSaltoExtra+=1
-		
-	if MovimientoTotal.y==0 and velocity.y < 0:
-		velocity.y *=0.9
+			elif CantidadDeSaltoExtra < SaltoExtra:
+				velocity.y = VelocidadSalto*3
+				CantidadDeSaltoExtra+=1
+	
 	var EstaEnPared= 1 if not is_on_wall() else 0.01
-	if velocity.y > MaxGravedad:
-		velocity.y=MaxGravedad*EstaEnPared
-	else:
-		velocity.y += get_gravity().y*delta*EstaEnPared
+	if not is_on_floor():
+		if velocity.y > MaxGravedad:
+			velocity.y=MaxGravedad*EstaEnPared
+		else:
+			velocity.y += get_gravity().y*delta*EstaEnPared
