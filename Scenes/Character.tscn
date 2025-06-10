@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=65 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_lcuhw"]
@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://7xje60bd57tt" path="res://Scripts/Accion Node.gd" id="4_xloa1"]
 [ext_resource type="Script" uid="uid://dhsaubhb2lrb4" path="res://Scripts/State Machine.gd" id="5_4b18b"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_atbvg"]
-radius = 15.72
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
+size = Vector2(30, 30)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cxxw8"]
 radius = 18.0
@@ -39,33 +39,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-37, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xxe07"]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(0.3, 0.3), Vector2(0.2, 0.2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D2:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(37, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_peemv"]
@@ -420,10 +393,23 @@ tracks/2/keys = {
 "values": [0.0, 6.28319]
 }
 
+[sub_resource type="Animation" id="Animation_xxe07"]
+resource_name = "WALL JUMP left"
+
+[sub_resource type="Animation" id="Animation_kw72g"]
+resource_name = "WALL JUMP Right"
+
+[sub_resource type="Animation" id="Animation_nxr2n"]
+resource_name = "ESCALADO"
+
+[sub_resource type="Animation" id="Animation_uis85"]
+resource_name = "ESCALADO Right"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0tob0"]
 _data = {
 &"ACCELERATE Left": SubResource("Animation_cw27m"),
-&"ACCELERATE Right": SubResource("Animation_xxe07"),
+&"ESCALADO Left": SubResource("Animation_nxr2n"),
+&"ESCALADO Right": SubResource("Animation_uis85"),
 &"IDLE Left": SubResource("Animation_peemv"),
 &"IDLE Right": SubResource("Animation_omicx"),
 &"JUMP Left": SubResource("Animation_fgiha"),
@@ -432,7 +418,9 @@ _data = {
 &"RUN Left": SubResource("Animation_xloa1"),
 &"RUN Right": SubResource("Animation_4b18b"),
 &"WALK Left": SubResource("Animation_8au8k"),
-&"WALK Right": SubResource("Animation_p3cti")
+&"WALK Right": SubResource("Animation_p3cti"),
+&"WALL JUMP Right": SubResource("Animation_kw72g"),
+&"WALL JUMP left": SubResource("Animation_xxe07")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xloa1"]
@@ -456,6 +444,8 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_p3cti")
 blend_point_2/pos = Vector2(-0.4, 0.5)
 blend_point_3/node = SubResource("AnimationNodeAnimation_cw27m")
 blend_point_3/pos = Vector2(0.4, 0.5)
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_d4e0j"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4b18b"]
 animation = &"IDLE Left"
@@ -525,6 +515,8 @@ blend_point_2/pos = Vector2(0.5, 0.5)
 blend_point_3/node = SubResource("AnimationNodeAnimation_wcxyp")
 blend_point_3/pos = Vector2(-0.5, 0.5)
 
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_nn15e"]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_khphl"]
 advance_mode = 2
 
@@ -560,10 +552,40 @@ advance_condition = &"Empieza A Caminar"
 advance_mode = 2
 advance_condition = &"Empieza A Correr"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wcxyp"]
+advance_mode = 2
+advance_condition = &"Desacelerar"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wjmpa"]
+advance_mode = 2
+advance_condition = &"Esta en Piso"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b611v"]
+advance_mode = 2
+advance_condition = &"Salto en pared"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mogpt"]
+advance_mode = 2
+advance_condition = &"Comienza a escalar"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yw36p"]
+advance_mode = 2
+advance_condition = &"Comienza a escalar"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3u423"]
+advance_mode = 2
+advance_condition = &"Comienza a escalar"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hm30g"]
+advance_mode = 2
+advance_condition = &"Deja de Escalar"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_peemv"]
 states/ACCELERATE/node = SubResource("AnimationNodeBlendSpace2D_xloa1")
-states/ACCELERATE/position = Vector2(375.738, 168.274)
+states/ACCELERATE/position = Vector2(586.405, 149.607)
 states/End/position = Vector2(763, 71.2744)
+states/Escalar/node = SubResource("AnimationNodeBlendSpace1D_d4e0j")
+states/Escalar/position = Vector2(229.516, 445.189)
 states/IDLE/node = SubResource("AnimationNodeBlendSpace2D_fgiha")
 states/IDLE/position = Vector2(375.738, 71.2744)
 states/INTERMEDIO/node = SubResource("AnimationNodeBlendSpace1D_xloa1")
@@ -573,8 +595,10 @@ states/RUN/position = Vector2(520.738, 325.274)
 states/Start/position = Vector2(184, 71.2744)
 states/WALK/node = SubResource("AnimationNodeBlendSpace2D_b611v")
 states/WALK/position = Vector2(229.738, 325.274)
-transitions = ["Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_khphl"), "IDLE", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_fdd6p"), "WALK", "RUN", SubResource("AnimationNodeStateMachineTransition_g0or5"), "RUN", "WALK", SubResource("AnimationNodeStateMachineTransition_k0a7x"), "WALK", "IDLE", SubResource("AnimationNodeStateMachineTransition_7hvrm"), "RUN", "IDLE", SubResource("AnimationNodeStateMachineTransition_omrrf"), "ACCELERATE", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_4b18b"), "INTERMEDIO", "WALK", SubResource("AnimationNodeStateMachineTransition_peemv"), "INTERMEDIO", "RUN", SubResource("AnimationNodeStateMachineTransition_omicx")]
-graph_offset = Vector2(27.7383, 44.5223)
+"states/WALL JUMP/node" = SubResource("AnimationNodeBlendSpace1D_nn15e")
+"states/WALL JUMP/position" = Vector2(591.738, 256.123)
+transitions = ["Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_khphl"), "IDLE", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_fdd6p"), "WALK", "RUN", SubResource("AnimationNodeStateMachineTransition_g0or5"), "RUN", "WALK", SubResource("AnimationNodeStateMachineTransition_k0a7x"), "WALK", "IDLE", SubResource("AnimationNodeStateMachineTransition_7hvrm"), "RUN", "IDLE", SubResource("AnimationNodeStateMachineTransition_omrrf"), "ACCELERATE", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_4b18b"), "INTERMEDIO", "WALK", SubResource("AnimationNodeStateMachineTransition_peemv"), "INTERMEDIO", "RUN", SubResource("AnimationNodeStateMachineTransition_omicx"), "INTERMEDIO", "IDLE", SubResource("AnimationNodeStateMachineTransition_wcxyp"), "WALL JUMP", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_wjmpa"), "Escalar", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_b611v"), "INTERMEDIO", "Escalar", SubResource("AnimationNodeStateMachineTransition_mogpt"), "RUN", "Escalar", SubResource("AnimationNodeStateMachineTransition_yw36p"), "WALK", "Escalar", SubResource("AnimationNodeStateMachineTransition_3u423"), "Escalar", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_hm30g")]
+graph_offset = Vector2(27.7383, 142.24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lcuhw"]
 size = Vector2(2, 15)
@@ -597,7 +621,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_lcuhw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_atbvg")
+shape = SubResource("RectangleShape2D_xloa1")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.3, 1.3)
@@ -625,14 +649,20 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_peemv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/Acelera = false
+"parameters/conditions/Comienza a escalar" = false
+"parameters/conditions/Deja de Escalar" = false
 parameters/conditions/Desacelerar = false
 "parameters/conditions/Empieza A Caminar" = false
 "parameters/conditions/Empieza A Correr" = false
-parameters/ACCELERATE/blend_position = Vector2(-0.00220263, 0.968421)
+"parameters/conditions/Esta en Piso" = false
+"parameters/conditions/Salto en pared" = false
+parameters/ACCELERATE/blend_position = Vector2(-0.028754, 0.0473933)
+parameters/Escalar/blend_position = 0.229437
 parameters/IDLE/blend_position = Vector2(-0.660793, 0.463158)
-parameters/INTERMEDIO/blend_position = 0
+parameters/INTERMEDIO/blend_position = 0.0166667
 parameters/RUN/blend_position = Vector2(0, 0)
 parameters/WALK/blend_position = Vector2(0, 0)
+"parameters/WALL JUMP/blend_position" = 0.590188
 
 [node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("arbolDeAnimaciones")]
 script = ExtResource("5_4b18b")

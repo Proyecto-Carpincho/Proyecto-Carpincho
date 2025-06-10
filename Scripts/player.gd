@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 
 func InputJugador():
 	MovimientoTotal = Input.get_vector("ui.left","ui.right","ui.down","ui.up")
+	##Normalizacion entre 1 y 0 en x,y
 	if MovimientoTotal.x != 0:
 		MovimientoTotal.x = 1 if MovimientoTotal.x > 0 else -1
 	if MovimientoTotal.y != 0:
@@ -25,12 +26,19 @@ func InputJugador():
 	PosicionIDLE = MovimientoTotal if MovimientoTotal != Vector2.ZERO else PosicionIDLE
 	PosicionIDLE.y=0
 	var NodoActual:String=arbolDeAnimaciones["parameters/playback"].get_current_node()
+	print(NodoActual)
+	##Cambio de los travees a true o false para el movimiento en X
 	NodoDeAcciones.ActivarTrancicion("Acelera",not estaQuieto)
 	NodoDeAcciones.ActivarTrancicion("Desacelerar",estaQuieto)
-	
 	if not estaQuieto:
 		NodoDeAcciones.ActivarTrancicion("Empieza A Correr",estaCorriendo)
 		NodoDeAcciones.ActivarTrancicion("Empieza A Caminar",not estaCorriendo)
+	
+	##Cambio de los traves a true o false en el eje y
+	NodoDeAcciones.ActivarTrancicion("Comienza a escalar", Input.is_action_pressed("ui.up") and is_on_wall())
+	NodoDeAcciones.ActivarTrancicion("Deja de Escalar",not Input.is_action_pressed("ui.up") or not is_on_wall())
+	NodoDeAcciones.ActivarTrancicion("Salto en pared", Input.is_action_just_pressed("Jump"))
+	NodoDeAcciones.ActivarTrancicion("Esta en Piso", is_on_floor())
 	
 	if NodoActual in ["ACCELERATE","RUN","WALK"]:
 		NodoDeAcciones.BlendPosicion(NodoActual,PosicionIDLE)
@@ -67,14 +75,7 @@ var VelocidadSalto:int=-150
 func Salto(NodoActual:String,delta):
 	if NodoActual in ["ACCELERATE","RUN","WALK","IDLE"]:
 		NodoDeAcciones.BlendPosicion(NodoActual,PosicionIDLE)
-		if is_on_wall():
-			if Input.is_action_pressed("ui.up"):
-				velocity.y = -1000*delta*1.5
-			if velocity.y<-120:
-				print(velocity.y)
-				velocity.y=move_toward(velocity.y,0,delta*1000)
-			CantidadDeSaltoExtra=0
-		elif Input.is_action_just_pressed("Jump"):
+		if Input.is_action_just_pressed("Jump"):
 			if is_on_floor():
 				velocity.y = VelocidadSalto*3
 				CantidadDeSaltoExtra=0
