@@ -1,17 +1,12 @@
-[gd_scene load_steps=65 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=66 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_lcuhw"]
-[ext_resource type="Script" uid="uid://btvsu1trjovfw" path="res://Scripts/dash Node.gd" id="3_atbvg"]
-[ext_resource type="Script" uid="uid://i3yr45r3cjl7" path="res://Scripts/Daño.gd" id="4_atbvg"]
 [ext_resource type="Script" uid="uid://7xje60bd57tt" path="res://Scripts/Accion Node.gd" id="4_xloa1"]
 [ext_resource type="Script" uid="uid://dhsaubhb2lrb4" path="res://Scripts/State Machine.gd" id="5_4b18b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
 size = Vector2(30, 30)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_cxxw8"]
-radius = 18.0
 
 [sub_resource type="Animation" id="Animation_cw27m"]
 resource_name = "ACCELERATION LETF"
@@ -445,7 +440,9 @@ blend_point_2/pos = Vector2(-0.4, 0.5)
 blend_point_3/node = SubResource("AnimationNodeAnimation_cw27m")
 blend_point_3/pos = Vector2(0.4, 0.5)
 
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_d4e0j"]
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_v7dgu"]
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_vdqda"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4b18b"]
 animation = &"IDLE Left"
@@ -515,7 +512,7 @@ blend_point_2/pos = Vector2(0.5, 0.5)
 blend_point_3/node = SubResource("AnimationNodeAnimation_wcxyp")
 blend_point_3/pos = Vector2(-0.5, 0.5)
 
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_nn15e"]
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_4b18b"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_khphl"]
 advance_mode = 2
@@ -556,35 +553,40 @@ advance_condition = &"Empieza A Correr"
 advance_mode = 2
 advance_condition = &"Desacelerar"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wjmpa"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8au8k"]
 advance_mode = 2
-advance_condition = &"Esta en Piso"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b611v"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p3cti"]
 advance_mode = 2
-advance_condition = &"Salto en pared"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mogpt"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fgiha"]
 advance_mode = 2
-advance_condition = &"Comienza a escalar"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yw36p"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6s7kk"]
 advance_mode = 2
-advance_condition = &"Comienza a escalar"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3u423"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0tob0"]
 advance_mode = 2
-advance_condition = &"Comienza a escalar"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hm30g"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cw27m"]
 advance_mode = 2
-advance_condition = &"Deja de Escalar"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xxe07"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kw72g"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nxr2n"]
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_peemv"]
 states/ACCELERATE/node = SubResource("AnimationNodeBlendSpace2D_xloa1")
-states/ACCELERATE/position = Vector2(627, 254.927)
-states/CLIMB/node = SubResource("AnimationNodeBlendSpace1D_d4e0j")
-states/CLIMB/position = Vector2(375.738, 537.189)
+states/ACCELERATE/position = Vector2(738, 254.927)
+states/CLIMB/node = SubResource("AnimationNodeBlendSpace1D_vdqda")
+states/CLIMB/position = Vector2(375.738, 511.533)
+"states/CLIMB STOP/node" = SubResource("AnimationNodeBlendSpace1D_v7dgu")
+"states/CLIMB STOP/position" = Vector2(375.738, 427.713)
 states/End/position = Vector2(763, 71.2744)
 states/IDLE/node = SubResource("AnimationNodeBlendSpace2D_fgiha")
 states/IDLE/position = Vector2(375.738, 71.2744)
@@ -595,23 +597,23 @@ states/RUN/position = Vector2(525.738, 320.274)
 states/Start/position = Vector2(184, 71.2744)
 states/WALK/node = SubResource("AnimationNodeBlendSpace2D_b611v")
 states/WALK/position = Vector2(229.738, 325.274)
-"states/WALL JUMP/node" = SubResource("AnimationNodeBlendSpace1D_nn15e")
-"states/WALL JUMP/position" = Vector2(602, 473.189)
-transitions = ["Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_khphl"), "IDLE", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_fdd6p"), "WALK", "RUN", SubResource("AnimationNodeStateMachineTransition_g0or5"), "RUN", "WALK", SubResource("AnimationNodeStateMachineTransition_k0a7x"), "WALK", "IDLE", SubResource("AnimationNodeStateMachineTransition_7hvrm"), "RUN", "IDLE", SubResource("AnimationNodeStateMachineTransition_omrrf"), "ACCELERATE", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_4b18b"), "INTERMEDIO", "WALK", SubResource("AnimationNodeStateMachineTransition_peemv"), "INTERMEDIO", "RUN", SubResource("AnimationNodeStateMachineTransition_omicx"), "INTERMEDIO", "IDLE", SubResource("AnimationNodeStateMachineTransition_wcxyp"), "WALL JUMP", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_wjmpa"), "CLIMB", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_b611v"), "INTERMEDIO", "CLIMB", SubResource("AnimationNodeStateMachineTransition_mogpt"), "RUN", "CLIMB", SubResource("AnimationNodeStateMachineTransition_yw36p"), "WALK", "CLIMB", SubResource("AnimationNodeStateMachineTransition_3u423"), "CLIMB", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_hm30g")]
-graph_offset = Vector2(27.7383, 38.4735)
+"states/WALL JUMP/node" = SubResource("AnimationNodeBlendSpace1D_4b18b")
+"states/WALL JUMP/position" = Vector2(196.738, 427.713)
+transitions = ["Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_khphl"), "IDLE", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_fdd6p"), "WALK", "RUN", SubResource("AnimationNodeStateMachineTransition_g0or5"), "RUN", "WALK", SubResource("AnimationNodeStateMachineTransition_k0a7x"), "WALK", "IDLE", SubResource("AnimationNodeStateMachineTransition_7hvrm"), "RUN", "IDLE", SubResource("AnimationNodeStateMachineTransition_omrrf"), "ACCELERATE", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_4b18b"), "INTERMEDIO", "WALK", SubResource("AnimationNodeStateMachineTransition_peemv"), "INTERMEDIO", "RUN", SubResource("AnimationNodeStateMachineTransition_omicx"), "INTERMEDIO", "IDLE", SubResource("AnimationNodeStateMachineTransition_wcxyp"), "WALK", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_8au8k"), "RUN", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_p3cti"), "INTERMEDIO", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_fgiha"), "CLIMB STOP", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_6s7kk"), "CLIMB STOP", "CLIMB", SubResource("AnimationNodeStateMachineTransition_0tob0"), "CLIMB", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_cw27m"), "CLIMB STOP", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_xxe07"), "CLIMB", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_kw72g"), "WALL JUMP", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_nxr2n")]
+graph_offset = Vector2(-31.9416, 216.823)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcuhw"]
-size = Vector2(2, 15)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uis85"]
+size = Vector2(4.5, 28.5)
 
 [node name="Jugador" type="CharacterBody2D" node_paths=PackedStringArray("NodoDeAcciones", "arbolDeAnimaciones")]
 collision_layer = 8
 collision_mask = 7
 slide_on_ceiling = false
 wall_min_slide_angle = 3.14159
-safe_margin = 24.196
+safe_margin = 2.0
 script = ExtResource("1_7ig0a")
-NodoDeAcciones = NodePath("AccionNode")
-arbolDeAnimaciones = NodePath("AnimationTree")
+NodoDeAcciones = NodePath("Maquina de estados/AccionNode")
+arbolDeAnimaciones = NodePath("Maquina de estados/AnimationTree")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.999978, 0)
@@ -629,76 +631,48 @@ shape = SubResource("RectangleShape2D_xloa1")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.3, 1.3)
 
-[node name="Timer Maxima Culaso" type="Timer" parent="."]
-wait_time = 0.3
-one_shot = true
+[node name="Maquina de estados" type="Node2D" parent="."]
 
-[node name="Vida" type="Node2D" parent="."]
-script = ExtResource("4_atbvg")
-
-[node name="Area2D" type="Area2D" parent="Vida"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vida/Area2D"]
-shape = SubResource("CircleShape2D_cxxw8")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Maquina de estados"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_0tob0")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="Maquina de estados"]
+root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_peemv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/Acelera = false
-"parameters/conditions/Comienza a escalar" = true
-"parameters/conditions/Deja de Escalar" = false
 parameters/conditions/Desacelerar = false
 "parameters/conditions/Empieza A Caminar" = false
 "parameters/conditions/Empieza A Correr" = false
-"parameters/conditions/Esta en Piso" = true
-"parameters/conditions/Salto en pared" = false
 parameters/ACCELERATE/blend_position = Vector2(-0.028754, 0.0473933)
-parameters/CLIMB/blend_position = -0.332689
+parameters/CLIMB/blend_position = 0
+"parameters/CLIMB STOP/blend_position" = 0
 parameters/IDLE/blend_position = Vector2(-0.660793, 0.463158)
 parameters/INTERMEDIO/blend_position = 0.0166667
 parameters/RUN/blend_position = Vector2(-0.125395, -0.379447)
 parameters/WALK/blend_position = Vector2(0, 0)
-"parameters/WALL JUMP/blend_position" = 0.590188
+"parameters/WALL JUMP/blend_position" = 0.338491
 
-[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("arbolDeAnimaciones")]
+[node name="StateMachine" type="Node2D" parent="Maquina de estados" node_paths=PackedStringArray("arbolDeAnimaciones")]
 script = ExtResource("5_4b18b")
 arbolDeAnimaciones = NodePath("../AnimationTree")
 todosLosEstados = Dictionary[PackedStringArray, NodePath]({
-PackedStringArray("RUN", "WALK", "ACCELERATE", "INTERMEDIO", "IDLE"): NodePath("..")
+PackedStringArray("RUN", "WALK", "ACCELERATE", "INTERMEDIO", "IDLE"): NodePath("../..")
 })
 metadata/_custom_type_script = "uid://dhsaubhb2lrb4"
 
-[node name="Dash" type="Node2D" parent="StateMachine"]
-script = ExtResource("3_atbvg")
-
-[node name="Line2D" type="Line2D" parent="StateMachine/Dash"]
-points = PackedVector2Array(0, 0, 0, 0)
-
-[node name="TiempoDeDash" type="Timer" parent="StateMachine/Dash"]
-one_shot = true
-ignore_time_scale = true
-
-[node name="TiempoRecarga" type="Timer" parent="StateMachine/Dash"]
-wait_time = 2.0
-one_shot = true
-ignore_time_scale = true
-
-[node name="ShapeCast2D" type="ShapeCast2D" parent="StateMachine/Dash"]
-shape = SubResource("RectangleShape2D_lcuhw")
-target_position = Vector2(25, 0)
-
-[node name="AccionNode" type="Node2D" parent="." node_paths=PackedStringArray("arbolDeAnimaciones")]
+[node name="AccionNode" type="Node2D" parent="Maquina de estados" node_paths=PackedStringArray("arbolDeAnimaciones")]
 script = ExtResource("4_xloa1")
 arbolDeAnimaciones = NodePath("../AnimationTree")
 metadata/_custom_type_script = "uid://7xje60bd57tt"
 
-[connection signal="timeout" from="Timer Maxima Culaso" to="." method="_Timeout_MaximaCulaso"]
-[connection signal="area_entered" from="Vida/Area2D" to="StateMachine/Dash" method="_on_area_2d_area_entered"]
-[connection signal="timeout" from="StateMachine/Dash/TiempoDeDash" to="StateMachine/Dash" method="StopTimer"]
+[node name="ShapeCast Comprobacion" type="Node2D" parent="."]
+
+[node name="Shape Pared" type="ShapeCast2D" parent="ShapeCast Comprobacion"]
+shape = SubResource("RectangleShape2D_uis85")
+target_position = Vector2(18, 0)
+
+[node name="Shape Piso" type="ShapeCast2D" parent="ShapeCast Comprobacion"]

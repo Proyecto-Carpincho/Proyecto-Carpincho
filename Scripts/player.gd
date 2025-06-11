@@ -46,9 +46,9 @@ func InputJugador():
 		NodoDeAcciones.ActivarTrancicion("Empieza A Caminar", not estaCorriendo)
 
 	# Transiciones verticales y estados
-	NodoDeAcciones.ActivarTrancicion("Comienza a escalar", (Input.is_action_pressed("ui.up") and is_on_wall()) or is_on_wall_only())
+	NodoDeAcciones.ActivarTrancicion("Comienza a escalar", (is_on_wall()))
 	NodoDeAcciones.ActivarTrancicion("Deja de Escalar", not is_on_wall())
-	print( not is_on_wall())
+
 	NodoDeAcciones.ActivarTrancicion("Salto en pared", Input.is_action_just_pressed("Jump"))
 	NodoDeAcciones.ActivarTrancicion("Esta en Piso", is_on_floor())
 
@@ -86,12 +86,8 @@ func _physics_processMatch(delta: float, NodoActual: String):
 				velocity.x += VelocidadCaminar * MovimientoTotal.x * delta
 
 		"CLIMB":
-			if Input.is_action_pressed("ui.up") or Input.is_action_pressed("ui.down"):
-				var Dirreccion= 1 if not Input.is_action_pressed("ui.up") else -1
-				if abs(velocity.y) > MaxCaminar * delta:
-					velocity.y = MaxCaminar * delta * Dirreccion
-				else:
-					velocity.y += MaxCaminar * delta * 0.2 * Dirreccion
+			pass
+
 	Salto(NodoActual, delta)
 
 func Salto(NodoActual: String, delta):
@@ -104,11 +100,3 @@ func Salto(NodoActual: String, delta):
 			elif CantidadDeSaltoExtra < SaltoExtra:
 				velocity.y = VelocidadSalto * 3
 				CantidadDeSaltoExtra += 1
-
-	var EstaEnPared = 1 if NodoActual != "CLIMB" else 0.01
-	
-	if not is_on_floor():
-		if velocity.y > MaxGravedad:
-			velocity.y = MaxGravedad * EstaEnPared
-		else:
-			velocity.y += get_gravity().y * delta * EstaEnPared
