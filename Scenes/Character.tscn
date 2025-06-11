@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=68 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_lcuhw"]
@@ -555,38 +555,51 @@ advance_condition = &"Desacelerar"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8au8k"]
 advance_mode = 2
+advance_condition = &"Comienza a escalar"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p3cti"]
 advance_mode = 2
+advance_condition = &"Comienza a escalar"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fgiha"]
 advance_mode = 2
+advance_condition = &"Comienza a escalar"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6s7kk"]
 advance_mode = 2
+advance_condition = &"Deja de Escalar"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0tob0"]
 advance_mode = 2
+advance_condition = &"Subir"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cw27m"]
 advance_mode = 2
+advance_condition = &"Parado"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xxe07"]
 advance_mode = 2
+advance_condition = &"Salto Pared"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kw72g"]
 advance_mode = 2
+advance_condition = &"Salto Pared"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nxr2n"]
 advance_mode = 2
+advance_condition = &"Esta en Piso"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v7dgu"]
+advance_mode = 2
+advance_condition = &"Deja de Escalar"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_peemv"]
 states/ACCELERATE/node = SubResource("AnimationNodeBlendSpace2D_xloa1")
 states/ACCELERATE/position = Vector2(738, 254.927)
 states/CLIMB/node = SubResource("AnimationNodeBlendSpace1D_vdqda")
-states/CLIMB/position = Vector2(375.738, 511.533)
+states/CLIMB/position = Vector2(411.738, 532.867)
 "states/CLIMB STOP/node" = SubResource("AnimationNodeBlendSpace1D_v7dgu")
-"states/CLIMB STOP/position" = Vector2(375.738, 427.713)
+"states/CLIMB STOP/position" = Vector2(395.294, 466.38)
 states/End/position = Vector2(763, 71.2744)
 states/IDLE/node = SubResource("AnimationNodeBlendSpace2D_fgiha")
 states/IDLE/position = Vector2(375.738, 71.2744)
@@ -599,11 +612,14 @@ states/WALK/node = SubResource("AnimationNodeBlendSpace2D_b611v")
 states/WALK/position = Vector2(229.738, 325.274)
 "states/WALL JUMP/node" = SubResource("AnimationNodeBlendSpace1D_4b18b")
 "states/WALL JUMP/position" = Vector2(196.738, 427.713)
-transitions = ["Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_khphl"), "IDLE", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_fdd6p"), "WALK", "RUN", SubResource("AnimationNodeStateMachineTransition_g0or5"), "RUN", "WALK", SubResource("AnimationNodeStateMachineTransition_k0a7x"), "WALK", "IDLE", SubResource("AnimationNodeStateMachineTransition_7hvrm"), "RUN", "IDLE", SubResource("AnimationNodeStateMachineTransition_omrrf"), "ACCELERATE", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_4b18b"), "INTERMEDIO", "WALK", SubResource("AnimationNodeStateMachineTransition_peemv"), "INTERMEDIO", "RUN", SubResource("AnimationNodeStateMachineTransition_omicx"), "INTERMEDIO", "IDLE", SubResource("AnimationNodeStateMachineTransition_wcxyp"), "WALK", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_8au8k"), "RUN", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_p3cti"), "INTERMEDIO", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_fgiha"), "CLIMB STOP", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_6s7kk"), "CLIMB STOP", "CLIMB", SubResource("AnimationNodeStateMachineTransition_0tob0"), "CLIMB", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_cw27m"), "CLIMB STOP", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_xxe07"), "CLIMB", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_kw72g"), "WALL JUMP", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_nxr2n")]
-graph_offset = Vector2(-31.9416, 216.823)
+transitions = ["Start", "IDLE", SubResource("AnimationNodeStateMachineTransition_khphl"), "IDLE", "ACCELERATE", SubResource("AnimationNodeStateMachineTransition_fdd6p"), "WALK", "RUN", SubResource("AnimationNodeStateMachineTransition_g0or5"), "RUN", "WALK", SubResource("AnimationNodeStateMachineTransition_k0a7x"), "WALK", "IDLE", SubResource("AnimationNodeStateMachineTransition_7hvrm"), "RUN", "IDLE", SubResource("AnimationNodeStateMachineTransition_omrrf"), "ACCELERATE", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_4b18b"), "INTERMEDIO", "WALK", SubResource("AnimationNodeStateMachineTransition_peemv"), "INTERMEDIO", "RUN", SubResource("AnimationNodeStateMachineTransition_omicx"), "INTERMEDIO", "IDLE", SubResource("AnimationNodeStateMachineTransition_wcxyp"), "WALK", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_8au8k"), "RUN", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_p3cti"), "INTERMEDIO", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_fgiha"), "CLIMB STOP", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_6s7kk"), "CLIMB STOP", "CLIMB", SubResource("AnimationNodeStateMachineTransition_0tob0"), "CLIMB", "CLIMB STOP", SubResource("AnimationNodeStateMachineTransition_cw27m"), "CLIMB STOP", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_xxe07"), "CLIMB", "WALL JUMP", SubResource("AnimationNodeStateMachineTransition_kw72g"), "WALL JUMP", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_nxr2n"), "CLIMB", "INTERMEDIO", SubResource("AnimationNodeStateMachineTransition_v7dgu")]
+graph_offset = Vector2(88.0932, 132.22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uis85"]
-size = Vector2(4.5, 28.5)
+size = Vector2(4.5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7dgu"]
+size = Vector2(31, 14)
 
 [node name="Jugador" type="CharacterBody2D" node_paths=PackedStringArray("NodoDeAcciones", "arbolDeAnimaciones")]
 collision_layer = 8
@@ -644,12 +660,18 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_peemv")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/Acelera = false
+"parameters/conditions/Comienza a escalar" = false
+"parameters/conditions/Deja de Escalar" = false
 parameters/conditions/Desacelerar = false
 "parameters/conditions/Empieza A Caminar" = false
 "parameters/conditions/Empieza A Correr" = false
+"parameters/conditions/Esta en Piso" = false
+parameters/conditions/Parado = false
+"parameters/conditions/Salto Pared" = false
+parameters/conditions/Subir = false
 parameters/ACCELERATE/blend_position = Vector2(-0.028754, 0.0473933)
 parameters/CLIMB/blend_position = 0
-"parameters/CLIMB STOP/blend_position" = 0
+"parameters/CLIMB STOP/blend_position" = 0.20548
 parameters/IDLE/blend_position = Vector2(-0.660793, 0.463158)
 parameters/INTERMEDIO/blend_position = 0.0166667
 parameters/RUN/blend_position = Vector2(-0.125395, -0.379447)
@@ -660,7 +682,7 @@ parameters/WALK/blend_position = Vector2(0, 0)
 script = ExtResource("5_4b18b")
 arbolDeAnimaciones = NodePath("../AnimationTree")
 todosLosEstados = Dictionary[PackedStringArray, NodePath]({
-PackedStringArray("RUN", "WALK", "ACCELERATE", "INTERMEDIO", "IDLE"): NodePath("../..")
+PackedStringArray("IDLE", "INTERMEDIO", "ACCELERATE", "WALK", "RUN", "CLIMB STOP", "CLIMB", "WALL JUMP"): NodePath("../..")
 })
 metadata/_custom_type_script = "uid://dhsaubhb2lrb4"
 
@@ -676,3 +698,5 @@ shape = SubResource("RectangleShape2D_uis85")
 target_position = Vector2(18, 0)
 
 [node name="Shape Piso" type="ShapeCast2D" parent="ShapeCast Comprobacion"]
+shape = SubResource("RectangleShape2D_v7dgu")
+target_position = Vector2(0, 11)

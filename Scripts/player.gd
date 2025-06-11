@@ -5,9 +5,9 @@ extends CharacterBody2D
 
 var SaltoExtra: int = 1
 var CantidadDeSaltoExtra: int = 0
-var VelocidadSalto: int = -150
+var VelocidadSalto: int = -200
 
-var MaxGravedad = 300
+var MaxGravedad = 100000000000000
 var VelocidadAcelerar = 120
 var VelocidadCaminar = 150
 var VelocidadCorrer = 200
@@ -38,28 +38,35 @@ func InputJugador():
 
 	var NodoActual: String = arbolDeAnimaciones["parameters/playback"].get_current_node()
 
-	# Transiciones horizontales
+	#region Transiciones horizontales
 	NodoDeAcciones.ActivarTrancicion("Acelera", not estaQuieto)
 	NodoDeAcciones.ActivarTrancicion("Desacelerar", estaQuieto)
 	if not estaQuieto:
 		NodoDeAcciones.ActivarTrancicion("Empieza A Correr", estaCorriendo)
 		NodoDeAcciones.ActivarTrancicion("Empieza A Caminar", not estaCorriendo)
+	#endregion
 
-	# Transiciones verticales y estados
-	NodoDeAcciones.ActivarTrancicion("Comienza a escalar", (is_on_wall()))
-	NodoDeAcciones.ActivarTrancicion("Deja de Escalar", not is_on_wall())
-
-	NodoDeAcciones.ActivarTrancicion("Salto en pared", Input.is_action_just_pressed("Jump"))
-	NodoDeAcciones.ActivarTrancicion("Esta en Piso", is_on_floor())
-
+	#region Transiciones verticales y estados
+	NodoDeAcciones.ActivarTrancicion("Comienza a escalar", estaEnPared())
+	NodoDeAcciones.ActivarTrancicion("Deja de Escalar", not estaEnPared())
+	NodoDeAcciones.ActivarTrancicion("Parado",not Input.is_action_pressed("ui.up"))
+	NodoDeAcciones.ActivarTrancicion("Subir", Input.is_action_pressed("ui.up"))
+	NodoDeAcciones.ActivarTrancicion("Salto Pared", Input.is_action_just_pressed("Jump"))
+	NodoDeAcciones.ActivarTrancicion("Esta en Piso", estaEnPiso())
+	#endregion
+	
 	if NodoActual in ["ACCELERATE", "RUN", "WALK"]:
 		NodoDeAcciones.BlendPosicion(NodoActual, PosicionIDLE)
 	NodoDeAcciones.BlendPosicion("IDLE", PosicionIDLE)
 
-func _physics_process(delta: float) -> void:
-	var NodoActual: String = arbolDeAnimaciones["parameters/playback"].get_current_node()
-	_physics_processMatch(delta, NodoActual)
-	move_and_slide()
+func estaEnPiso() -> bool:
+	return get_node("ShapeCast Comprobacion/Shape Piso").is_colliding()
+
+func estaEnPared() -> bool:
+	get_node("ShapeCast Comprobacion/Shape Pared").rotation = PosicionIDLE.angle()
+	return get_node("ShapeCast Comprobacion/Shape Pared").is_colliding()
+
+var PosicionPared:int
 
 func _physics_processMatch(delta: float, NodoActual: String):
 	match NodoActual:
@@ -85,18 +92,37 @@ func _physics_processMatch(delta: float, NodoActual: String):
 			else:
 				velocity.x += VelocidadCaminar * MovimientoTotal.x * delta
 
-		"CLIMB":
-			pass
-
+		"CLIMB","CLIMB STOP":
+			PosicionPared = PosicionIDLE.x
+			if NodoActual == "CLIMB":
+				if velocity.y > MaxCaminar * delta * 0.5:
+					velocity.y = -MaxCaminar * delta * 0.5
+				else:
+					velocity.y -= MaxCaminar * delta * 0.2
+		
+		"WALL JUMP":
+			if estaEnPared() and PosicionPared == PosicionIDLE.x:
+				velocity = Vector2(PosicionPared,1) * VelocidadSalto
+	print(NodoActual)
 	Salto(NodoActual, delta)
+	move_and_slide()
 
 func Salto(NodoActual: String, delta):
-	if NodoActual in ["ACCELERATE", "RUN", "WALK", "IDLE"]:
+	if NodoActual in ["ACCELERATE", "RUN", "WALK", "IDLE", "WALL JUMP"]:
 		NodoDeAcciones.BlendPosicion(NodoActual, PosicionIDLE)
 		if Input.is_action_just_pressed("Jump"):
-			if is_on_floor():
+			if estaEnPiso():
 				velocity.y = VelocidadSalto * 3
 				CantidadDeSaltoExtra = 0
 			elif CantidadDeSaltoExtra < SaltoExtra:
 				velocity.y = VelocidadSalto * 3
 				CantidadDeSaltoExtra += 1
+		if not Input.is_action_pressed("Jump") and velocity.y < 0:
+			velocity.y *= 0.9
+	
+	var FuerzaCaida:float = 2 if not NodoActual in ["CLIMB","CLIMB STOP"] else 0.2
+	if not estaEnPiso():
+		if velocity.y > MaxGravedad * FuerzaCaida:
+			velocity.y = MaxGravedad * FuerzaCaida
+		else:
+			velocity.y += get_gravity().y * delta * FuerzaCaida

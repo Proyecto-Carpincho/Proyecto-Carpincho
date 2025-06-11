@@ -1,4 +1,4 @@
-res://Scenes/main.tscn
-res://Shader/Recarga.tres
 res://Scenes/Character.tscn
+res://Shader/Recarga.tres
 res://Scripts/player.gd
+res://Scenes/main.tscn
