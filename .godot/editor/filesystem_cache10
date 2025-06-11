@@ -1,33 +1,33 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1749574880
-icon.svg::CompressedTexture2D/CompressedTexture2D::4582955492473367723::1749475176::1749475314::1::::<><><>0<>0<>2767fa82992bc1c16ac969eb6ca39230<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
-::res://Scenes/::1749480417
-Character.tscn::PackedScene::5430354299401772867::1749480250::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/player.gd<>uid://b6kauwett0agh::::res://icon.svg<>uid://btvsu1trjovfw::::res://Scripts/dash Node.gd<>uid://i3yr45r3cjl7::::res://Scripts/Daño.gd<>uid://7xje60bd57tt::::res://Scripts/Accion Node.gd<>uid://dhsaubhb2lrb4::::res://Scripts/State Machine.gd
-Efectos Visuales.tscn::PackedScene/PackedScene::2926245584511451278::1749475175::0::1::::<><><>0<>0<><>::uid://dbncsedlyj7f::::res://Scripts/Efectos Visuales.gd<>uid://c44nkjjhw6yl1::::res://Shader/Bullet Time.gdshader
-Enemigo blindado.tscn::PackedScene/PackedScene::1880283882559021794::1749475175::0::1::::<><><>0<>0<><>::uid://cr3l2cdhhgvof::::res://Scripts/enemigo.gd<>uid://b6kauwett0agh::::res://icon.svg
-main.tscn::PackedScene::6527271177826231845::1749480417::0::1::::<><><>0<>0<><>::uid://fowm0tenege7::::res://Sprites/Wasteland-Files.png<>uid://c481bs28p3l84::::res://Sprites/Wasteland_Sky.png<>uid://bwy8mw68hmuas::::res://Sprites/Tile set prueba.png<>uid://cjmre3cjowgo6::::res://Scenes/Character.tscn<>uid://113aa7y7fmak::::res://Scenes/Enemigo blindado.tscn
-UI.tscn::PackedScene/PackedScene::1569257852081533593::1749475175::0::1::::<><><>0<>0<><>::uid://hb7hnjiy5lmh::::res://Scripts/UI.gd<>uid://7n36rfciw6en::::res://Shader/Recarga.tres<>uid://b6kauwett0agh::::res://icon.svg
-::res://Scripts/::1749480417
-Accion Node.gd::GDScript/GDScript::2294078947765554969::1749475269::0::1::::AccionNode<>Node2D<><>0<>0<><>::
-ataque Node.gd::GDScript/GDScript::7056450459908326826::1749475269::0::1::::<>Node2D<><>0<>0<><>::
-Central Enemigos.gd::GDScript/GDScript::22029292330244634::1749475175::0::1::::CentralEnemigo<>CharacterBody2D<><>0<>0<><>::
-dash Node.gd::GDScript/GDScript::3764490663142257524::1749475269::0::1::::<>Node<><>0<>0<><>::
-Daño.gd::GDScript/GDScript::620802462871906858::1749475175::0::1::::<>Node2D<><>0<>0<><>::
-Efectos Visuales.gd::GDScript/GDScript::213424752913411769::1749475175::0::1::::<>CanvasLayer<><>0<>0<><>::
-enemigo.gd::GDScript/GDScript::6024570499711066101::1749475269::0::1::::<>CentralEnemigo<><>0<>0<><>::
-player.gd::GDScript::8798652093948548212::1749480417::0::1::::<>CharacterBody2D<><>0<>0<><>::
-sprite_2d.gd::GDScript/GDScript::2727266909432229095::1749475175::0::1::::<>CharacterBody2D<><>0<>0<><>::
-State Machine.gd::GDScript/GDScript::7687778535415653355::1749475269::0::1::::StateMachine<>Node2D<><>0<>0<><>::
-UI.gd::GDScript/GDScript::495342424649686907::1749475175::0::1::::<>CanvasLayer<><>0<>0<><>::
-::res://Shader/::1749476598
-Bullet Time.gdshader::Shader/Shader::6868992453563972712::1749475175::0::1::::<><><>0<>0<><>::
-Recarga.tres::VisualShader::2274636243351762881::1749476598::0::1::::<><><>0<>0<><>::
-::res://Sprites/::1749475313
-ATTACK 1.png::CompressedTexture2D/CompressedTexture2D::6612001428696146816::1749475176::1749475313::1::::<><><>0<>0<>fd58ff422364523691b4ab156a2ea15f<>res://.godot/imported/ATTACK 1.png-02a33b2d9daee950a40ff9374d0c0dad.ctex::
-HURT.png::CompressedTexture2D/CompressedTexture2D::6790275643109404007::1749475176::1749475313::1::::<><><>0<>0<>cdc28a63bf3b3a0fb44e2e36fa3fa693<>res://.godot/imported/HURT.png-4edeb227a23436c945e7d3975eb2bf20.ctex::
-IDLE.png::CompressedTexture2D/CompressedTexture2D::5935960484207982418::1749475176::1749475313::1::::<><><>0<>0<>170c25ac2829943009f7d4bad1825c70<>res://.godot/imported/IDLE.png-504bb8e5fa2ed9fddab3806a328e3e84.ctex::
-RUN.png::CompressedTexture2D/CompressedTexture2D::3362987126849289599::1749475176::1749475313::1::::<><><>0<>0<>9543165c4f37af5dc2f90397d45137dc<>res://.godot/imported/RUN.png-8e3df264ddb3e6a1c3066ac32fe2678e.ctex::
-Tile set prueba.png::CompressedTexture2D/CompressedTexture2D::3982146605027258386::1749475176::1749475313::1::::<><><>0<>0<>07048282bfcd2195a72988ea7b925ef1<>res://.godot/imported/Tile set prueba.png-99551a3d66fb2364978a5bbbf0283508.ctex::
-Wasteland-Files.png::CompressedTexture2D/CompressedTexture2D::381204052749035632::1749475176::1749475313::1::::<><><>0<>0<>94d2176df6f597cadb83dab3b9ffeb9d<>res://.godot/imported/Wasteland-Files.png-ed73e7032c3eefb732182a2ef18c890f.ctex::
-Wasteland_Mountains_2.png::CompressedTexture2D/CompressedTexture2D::4986846163574492059::1749475176::1749475313::1::::<><><>0<>0<>70326a40ca1c4b462f865fab33528406<>res://.godot/imported/Wasteland_Mountains_2.png-07346041740a979f2f0a1e54221fc65b.ctex::
-Wasteland_Sky.png::CompressedTexture2D/CompressedTexture2D::6878023715029497051::1749475176::1749475313::1::::<><><>0<>0<>3fa66f2741d81393789117d58a3dc1b9<>res://.godot/imported/Wasteland_Sky.png-a0af0fc9b59b5e5dac761444d3b824ea.ctex::
+::res://::1749590305
+icon.svg::CompressedTexture2D/CompressedTexture2D::4582955492473367723::1747787078::1749397858::1::::<><><>0<>0<>2767fa82992bc1c16ac969eb6ca39230<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://Scenes/::1749590222
+Character.tscn::PackedScene::5430354299401772867::1749590222::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/player.gd<>uid://b6kauwett0agh::::res://icon.svg<>uid://btvsu1trjovfw::::res://Scripts/dash Node.gd<>uid://i3yr45r3cjl7::::res://Scripts/Daño.gd<>uid://7xje60bd57tt::::res://Scripts/Accion Node.gd<>uid://dhsaubhb2lrb4::::res://Scripts/State Machine.gd
+Efectos Visuales.tscn::PackedScene::2926245584511451278::1748366049::0::1::::<><><>0<>0<><>::uid://dbncsedlyj7f::::res://Scripts/Efectos Visuales.gd<>uid://c44nkjjhw6yl1::::res://Shader/Bullet Time.gdshader
+Enemigo blindado.tscn::PackedScene::1880283882559021794::1749359728::0::1::::<><><>0<>0<><>::uid://cr3l2cdhhgvof::::res://Scripts/enemigo.gd<>uid://b6kauwett0agh::::res://icon.svg
+main.tscn::PackedScene::6527271177826231845::1749428405::0::1::::<><><>0<>0<><>::uid://fowm0tenege7::::res://Sprites/Wasteland-Files.png<>uid://c481bs28p3l84::::res://Sprites/Wasteland_Sky.png<>uid://bwy8mw68hmuas::::res://Sprites/Tile set prueba.png<>uid://cjmre3cjowgo6::::res://Scenes/Character.tscn<>uid://113aa7y7fmak::::res://Scenes/Enemigo blindado.tscn
+UI.tscn::PackedScene::1569257852081533593::1749359728::0::1::::<><><>0<>0<><>::uid://hb7hnjiy5lmh::::res://Scripts/UI.gd<>uid://7n36rfciw6en::::res://Shader/Recarga.tres<>uid://b6kauwett0agh::::res://icon.svg
+::res://Scripts/::1749590222
+Accion Node.gd::GDScript::2294078947765554969::1749401976::0::1::::AccionNode<>Node2D<><>0<>0<><>::
+ataque Node.gd::GDScript::7056450459908326826::1749353528::0::1::::<>Node2D<><>0<>0<><>::
+Central Enemigos.gd::GDScript::22029292330244634::1748467024::0::1::::CentralEnemigo<>CharacterBody2D<><>0<>0<><>::
+dash Node.gd::GDScript::3764490663142257524::1749327403::0::1::::<>Node<><>0<>0<><>::
+Daño.gd::GDScript::620802462871906858::1747848430::0::1::::<>Node2D<><>0<>0<><>::
+Efectos Visuales.gd::GDScript::213424752913411769::1747787078::0::1::::<>CanvasLayer<><>0<>0<><>::
+enemigo.gd::GDScript::6024570499711066101::1748896040::0::1::::<>CentralEnemigo<><>0<>0<><>::
+player.gd::GDScript::8798652093948548212::1749590222::0::1::::<>CharacterBody2D<><>0<>0<><>::
+sprite_2d.gd::GDScript::2727266909432229095::1747787078::0::1::::<>CharacterBody2D<><>0<>0<><>::
+State Machine.gd::GDScript::7687778535415653355::1749402471::0::1::::StateMachine<>Node2D<><>0<>0<><>::
+UI.gd::GDScript::495342424649686907::1748211375::0::1::::<>CanvasLayer<><>0<>0<><>::
+::res://Shader/::1749424297
+Bullet Time.gdshader::Shader::6868992453563972712::1749360124::0::1::::<><><>0<>0<><>::
+Recarga.tres::VisualShader::2274636243351762881::1749424297::0::1::::<><><>0<>0<><>::
+::res://Sprites/::1749397858
+ATTACK 1.png::CompressedTexture2D/CompressedTexture2D::6612001428696146816::1747787078::1749397858::1::::<><><>0<>0<>fd58ff422364523691b4ab156a2ea15f<>res://.godot/imported/ATTACK 1.png-02a33b2d9daee950a40ff9374d0c0dad.ctex::
+HURT.png::CompressedTexture2D/CompressedTexture2D::6790275643109404007::1747787078::1749397858::1::::<><><>0<>0<>cdc28a63bf3b3a0fb44e2e36fa3fa693<>res://.godot/imported/HURT.png-4edeb227a23436c945e7d3975eb2bf20.ctex::
+IDLE.png::CompressedTexture2D/CompressedTexture2D::5935960484207982418::1747787078::1749397858::1::::<><><>0<>0<>170c25ac2829943009f7d4bad1825c70<>res://.godot/imported/IDLE.png-504bb8e5fa2ed9fddab3806a328e3e84.ctex::
+RUN.png::CompressedTexture2D/CompressedTexture2D::3362987126849289599::1747787078::1749397858::1::::<><><>0<>0<>9543165c4f37af5dc2f90397d45137dc<>res://.godot/imported/RUN.png-8e3df264ddb3e6a1c3066ac32fe2678e.ctex::
+Tile set prueba.png::CompressedTexture2D/CompressedTexture2D::3982146605027258386::1748215888::1749397858::1::::<><><>0<>0<>07048282bfcd2195a72988ea7b925ef1<>res://.godot/imported/Tile set prueba.png-99551a3d66fb2364978a5bbbf0283508.ctex::
+Wasteland-Files.png::CompressedTexture2D/CompressedTexture2D::381204052749035632::1747787078::1749397858::1::::<><><>0<>0<>94d2176df6f597cadb83dab3b9ffeb9d<>res://.godot/imported/Wasteland-Files.png-ed73e7032c3eefb732182a2ef18c890f.ctex::
+Wasteland_Mountains_2.png::CompressedTexture2D/CompressedTexture2D::4986846163574492059::1747787078::1749397858::1::::<><><>0<>0<>70326a40ca1c4b462f865fab33528406<>res://.godot/imported/Wasteland_Mountains_2.png-07346041740a979f2f0a1e54221fc65b.ctex::
+Wasteland_Sky.png::CompressedTexture2D/CompressedTexture2D::6878023715029497051::1747787078::1749397858::1::::<><><>0<>0<>3fa66f2741d81393789117d58a3dc1b9<>res://.godot/imported/Wasteland_Sky.png-a0af0fc9b59b5e5dac761444d3b824ea.ctex::
