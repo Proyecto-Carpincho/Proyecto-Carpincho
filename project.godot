@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 EfectosVisuales="*res://Scenes/Efectos Visuales.tscn"
 Ui="*res://Scenes/UI.tscn"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/state_machine_ultimate/plugin.cfg")
+
 [input]
 
 ui.right={
