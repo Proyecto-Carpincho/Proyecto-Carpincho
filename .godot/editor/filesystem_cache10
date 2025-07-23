@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1753212690
+::res://::1753296662
 icon.svg::CompressedTexture2D/CompressedTexture2D::4582955492473367723::1747787078::1749397858::1::::<><><>0<>0<>2767fa82992bc1c16ac969eb6ca39230<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://addons/::1753212586
 ::res://addons/State Machine Ultimate/::1753212563
@@ -7,12 +7,11 @@ plugin.cfg::TextFile/TextFile::-1::1753212514::0::1::::<><><>0<>0<><>::
 ::res://addons/State Machine Ultimate/Nodes/::1753212649
 ::res://addons/State Machine Ultimate/Nodes/State Machine/::1753215791
 State Machine.gd::GDScript::5388069220050760892::1753215791::0::1::::<>Node<><>0<>0<><>::
-::res://addons/State Machine Ultimate/Nodes/State Tree/::1753215791
-Accion Node.gd::GDScript::2294078947765554969::1753215791::0::1::::AccionNode<>Node<><>0<>0<><>::
+::res://addons/State Machine Ultimate/Nodes/State Tree/::1753216493
+Executor State Tree.gd::GDScript::7687778535415653355::1753216493::0::1::::ExecutorStateTree<>Node<><>0<>0<><>::
 State Tree.gd::GDScript::4188412660181929953::1753214258::0::1::::StateTree<>Node<><>0<>0<><>::
-State Machine.gd::GDScript::7687778535415653355::1753215791::0::1::::ExecutorStateTree<>Node<><>0<>0<><>::
-::res://Scenes/::1753215791
-Character.tscn::PackedScene::5430354299401772867::1753215791::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/Jugador/player.gd
+::res://Scenes/::1753216493
+Character.tscn::PackedScene::5430354299401772867::1753216493::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/Jugador/player.gd
 Efectos Visuales.tscn::PackedScene/PackedScene::2926245584511451278::1748366049::0::1::::<><><>0<>0<><>::uid://dbncsedlyj7f::::res://Scripts/Efectos Visuales.gd<>uid://c44nkjjhw6yl1::::res://Shader/Bullet Time.gdshader
 Enemigo blindado.tscn::PackedScene/PackedScene::1880283882559021794::1749359728::0::1::::<><><>0<>0<><>::uid://cr3l2cdhhgvof::::res://Scripts/enemigo.gd<>uid://b6kauwett0agh::::res://icon.svg
 main.tscn::PackedScene/PackedScene::6527271177826231845::1749594712::0::1::::<><><>0<>0<><>::uid://fowm0tenege7::::res://Sprites/Wasteland-Files.png<>uid://c481bs28p3l84::::res://Sprites/Wasteland_Sky.png<>uid://bwy8mw68hmuas::::res://Sprites/Tile set prueba.png<>uid://cjmre3cjowgo6::::res://Scenes/Character.tscn<>uid://113aa7y7fmak::::res://Scenes/Enemigo blindado.tscn
@@ -24,10 +23,10 @@ Efectos Visuales.gd::GDScript/GDScript::213424752913411769::1747787078::0::1::::
 enemigo.gd::GDScript/GDScript::6024570499711066101::1748896040::0::1::::<>CentralEnemigo<><>0<>0<><>::
 UI.gd::GDScript/GDScript::495342424649686907::1748211375::0::1::::<>CanvasLayer<><>0<>0<><>::
 ::res://Scripts/Jugador/::1753212700
-player.gd::GDScript::8798652093948548212::1749684091::0::1::::<>CharacterBody2D<><>0<>0<><>::
+player.gd::GDScript/GDScript::8798652093948548212::1749684091::0::1::::<>CharacterBody2D<><>0<>0<><>::
 ::res://Shader/::1753212594
 Bullet Time.gdshader::Shader/Shader::6868992453563972712::1749360124::0::1::::<><><>0<>0<><>::
-Recarga.tres::VisualShader/VisualShader::2274636243351762881::1753212594::0::1::::<><><>0<>0<><>::
+Recarga.tres::VisualShader::2274636243351762881::1753212594::0::1::::<><><>0<>0<><>::
 ::res://Sprites/::1749397858
 ATTACK 1.png::CompressedTexture2D/CompressedTexture2D::6612001428696146816::1747787078::1749397858::1::::<><><>0<>0<>fd58ff422364523691b4ab156a2ea15f<>res://.godot/imported/ATTACK 1.png-02a33b2d9daee950a40ff9374d0c0dad.ctex::
 HURT.png::CompressedTexture2D/CompressedTexture2D::6790275643109404007::1747787078::1749397858::1::::<><><>0<>0<>cdc28a63bf3b3a0fb44e2e36fa3fa693<>res://.godot/imported/HURT.png-4edeb227a23436c945e7d3975eb2bf20.ctex::

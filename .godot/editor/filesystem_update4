@@ -1,8 +1,6 @@
 res://Scenes/Character.tscn
 res://Shader/Recarga.tres
-res://Scripts/Accion Node.gd
-res://addons/State Machine Ultimate/Nodes/State Tree/State Machine.gd
-res://addons/State Machine Ultimate/Nodes/State Tree/State Tree.gd
-res://addons/State Machine Ultimate/Nodes/State Tree/Accion Node.gd
-res://addons/State Machine Ultimate/Nodes/State Machine/State Machine.gd
 res://addons/State Machine Ultimate/Nodes/State Tree/Executor State Tree.gd
+res://Scripts/Jugador/player.gd
+res://addons/State Machine Ultimate/Nodes/State Machine/State Machine.gd
+res://addons/State Machine Ultimate/Nodes/State Tree/State Tree.gd
