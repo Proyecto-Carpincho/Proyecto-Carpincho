@@ -22,7 +22,7 @@ Ui="*res://Scenes/UI.tscn"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/state_machine_ultimate/plugin.cfg")
+enabled=PackedStringArray("res://addons/State Machine Ultimate/plugin.cfg")
 
 [input]
 
