@@ -1,6 +1,7 @@
-res://Scenes/main.tscn
+res://Scenes/Character.tscn
 res://Shader/Bullet Time.gdshader
 res://Shader/Recarga.tres
 res://Scripts/Prueba.gd
-res://Scenes/Character.tscn
+res://Scenes/main.tscn
+res://Scenes/UI.tscn
 res://Scripts/Jugador/player.gd

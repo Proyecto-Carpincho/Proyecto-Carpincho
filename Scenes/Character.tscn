@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=7 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/Jugador/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_677pu"]
@@ -7,11 +7,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
 size = Vector2(30, 43)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_677pu"]
+size = Vector2(20, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7dgu"]
+
 [node name="Jugador" type="CharacterBody2D"]
 slide_on_ceiling = false
 wall_min_slide_angle = 3.14159
 safe_margin = 2.0
 script = ExtResource("1_7ig0a")
+gravityMultiplyWall = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -39,3 +45,11 @@ PhysicsStates = Dictionary[String, NodePath]({
 metadata/_custom_type_script = "uid://ci1ayib00djei"
 
 [node name="Secundary State Machines" type="Node" parent="."]
+
+[node name="Shape Pared" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_677pu")
+target_position = Vector2(10, 0)
+
+[node name="Shape Piso" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_v7dgu")
+target_position = Vector2(0, 20)

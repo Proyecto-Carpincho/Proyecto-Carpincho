@@ -1,7 +1,10 @@
+ShapeCast2D
+Node2D
+RichTextLabel
+Label
+TextureRect
 CollisionShape2D
 StaticBody2D
 Node
 StateMachine
-Node2D
-ShapeCast2D
 RayCast2D
