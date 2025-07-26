@@ -1,8 +1,6 @@
-res://Scenes/Character.tscn
+res://Scenes/main.tscn
 res://Shader/Bullet Time.gdshader
 res://Shader/Recarga.tres
-res://addons/State Machine Ultimate/StMachine Ultimate.gd
-res://Scripts/Jugador/player.gd
 res://Scripts/Prueba.gd
-res://Scenes/main.tscn
-res://addons/State Machine Ultimate/Nodes/State Machine/State Machine.gd
+res://Scenes/Character.tscn
+res://Scripts/Jugador/player.gd

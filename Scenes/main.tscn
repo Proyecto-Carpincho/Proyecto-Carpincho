@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=4 uid="uid://cy84g5jb5i82l"]
+[gd_scene load_steps=15 format=4 uid="uid://cy84g5jb5i82l"]
 
 [ext_resource type="Texture2D" uid="uid://fowm0tenege7" path="res://Sprites/Wasteland-Files.png" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://c481bs28p3l84" path="res://Sprites/Wasteland_Sky.png" id="1_ig7tw"]
 [ext_resource type="Texture2D" uid="uid://bwy8mw68hmuas" path="res://Sprites/Tile set prueba.png" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cjmre3cjowgo6" path="res://Scenes/Character.tscn" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://113aa7y7fmak" path="res://Scenes/Enemigo blindado.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="6_21xkr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("2_lquwl")
@@ -215,8 +216,8 @@ texture = ExtResource("1_h2yge")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_272bh")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
-size = Vector2(48, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bp64"]
+size = Vector2(80, 10)
 
 [node name="Node2D" type="Node2D"]
 
@@ -255,21 +256,28 @@ tile_set = SubResource("TileSet_5vw27")
 
 [node name="Enemigo" parent="." node_paths=PackedStringArray("Jugador") instance=ExtResource("4_1bvp3")]
 position = Vector2(1170, -207)
-Jugador = NodePath("../CharacterBody2D")
+Jugador = NodePath("../Jugador")
 FuerzaDeEmpuje = 400.0
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_h2yge")]
-position = Vector2(50, -117)
+[node name="Jugador" parent="." instance=ExtResource("3_h2yge")]
+position = Vector2(24, -155)
+gravity = 1000.0
+maxGravity = 1500.0
+walkVelocity = 100.0
+maxWalkVelocity = 100.0
+runVelocity = 150.0
+maxRunVelocity = 300.0
+extraJump = 1
+velocityJump = -275.0
+jumpMultiplyBoosted = 1.15
 
-[node name="PlataformaAtravesable" type="StaticBody2D" parent="."]
-position = Vector2(-87, -35)
-collision_layer = 3
-collision_mask = 0
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-14, -47)
 
-[node name="Sprite2D" type="Sprite2D" parent="PlataformaAtravesable"]
-scale = Vector2(0.09375, 0.0429688)
-texture = ExtResource("1_ig7tw")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlataformaAtravesable"]
-shape = SubResource("RectangleShape2D_kek77")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_6bp64")
 one_way_collision = true
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.66, 0.09)
+texture = ExtResource("6_21xkr")
