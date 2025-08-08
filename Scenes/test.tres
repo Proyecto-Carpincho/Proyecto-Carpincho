@@ -1,0 +1,189 @@
+[gd_resource type="VisualShader" load_steps=15 format=3 uid="uid://bkym27wgfbqwq"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_ntqls"]
+parameter_name = "ColorDelBorde"
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_oge5h"]
+size = Vector2(760, 460)
+expression = "float t = max(UV.x,UV.y);
+float dist = length(UV);
+float inter =mix(t,dist,0.5) * (sin(Time*Frecuencia)*Altura+1.5);
+COLOR = mix(Fondo,Borde,inter);"
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_d4fhh"]
+parameter_name = "ColorDelFondo"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_2p4m5"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_gt21x"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_oge5h"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_d4fhh"]
+parameter_name = "Frecuencia"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_2p4m5"]
+parameter_name = "Altura"
+hint = 1
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ntqls"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_d4fhh"]
+output_port_for_preview = 0
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+function = 4
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_2p4m5"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0.5, 0.5)]
+op_type = 0
+operator = 1
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_gt21x"]
+output_port_for_preview = 0
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0), 2, Vector2(0.25, 0)]
+expanded_output_ports = [0]
+op_type = 1
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_ntqls"]
+parameter_name = "Bordeado"
+hint = 1
+default_value_enabled = true
+default_value = 0.3
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_fwbpe"]
+op_type = 0
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 ColorDelBorde : source_color;
+uniform vec4 ColorDelFondo : source_color;
+uniform float Bordeado : hint_range(0.0, 1.0) = 0.30000001192093;
+uniform float Frecuencia;
+uniform float Altura : hint_range(0.0, 1.0);
+
+
+
+void fragment() {
+// ColorParameter:11
+	vec4 n_out11p0 = ColorDelBorde;
+
+
+// ColorParameter:13
+	vec4 n_out13p0 = ColorDelFondo;
+
+
+// Input:2
+	vec2 n_out2p0 = UV;
+
+
+// VectorOp:5
+	vec2 n_in5p1 = vec2(0.50000, 0.50000);
+	vec2 n_out5p0 = n_out2p0 - n_in5p1;
+
+
+// VectorFunc:4
+	vec2 n_out4p0 = abs(n_out5p0);
+
+
+// FloatParameter:8
+	float n_out8p0 = Bordeado;
+
+
+// VectorCompose:9
+	vec2 n_out9p0 = vec2(n_out8p0, n_out8p0);
+
+
+// SmoothStep:7
+	vec2 n_in7p1 = vec2(0.00000, 0.00000);
+	vec2 n_out7p0 = smoothstep(n_out4p0, n_in7p1, n_out9p0);
+
+
+// Input:16
+	float n_out16p0 = TIME;
+
+
+// FloatParameter:17
+	float n_out17p0 = Frecuencia;
+
+
+// FloatParameter:18
+	float n_out18p0 = Altura;
+
+
+	vec4 n_out12p0;
+// Expression:12
+	n_out12p0 = vec4(0.0, 0.0, 0.0, 0.0);
+	{
+		float t = max(n_out7p0.x,n_out7p0.y);
+		float dist = length(n_out7p0);
+		float inter =mix(t,dist,0.5) * (sin(n_out16p0*n_out17p0)*n_out18p0+1.5);
+		n_out12p0 = mix(n_out13p0,n_out11p0,inter);
+	}
+
+
+// VectorDecompose:14
+	float n_out14p0 = n_out12p0.x;
+	float n_out14p1 = n_out12p0.y;
+	float n_out14p2 = n_out12p0.z;
+	float n_out14p3 = n_out12p0.w;
+
+
+// VectorCompose:15
+	vec3 n_out15p0 = vec3(n_out14p0, n_out14p1, n_out14p2);
+
+
+// Output:0
+	COLOR.rgb = n_out15p0;
+	COLOR.a = n_out14p3;
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(2420, 120)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_ntqls")
+nodes/fragment/2/position = Vector2(-100, 40)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorFunc_d4fhh")
+nodes/fragment/4/position = Vector2(440, 40)
+nodes/fragment/5/node = SubResource("VisualShaderNodeVectorOp_2p4m5")
+nodes/fragment/5/position = Vector2(240, 40)
+nodes/fragment/7/node = SubResource("VisualShaderNodeSmoothStep_gt21x")
+nodes/fragment/7/position = Vector2(700, 80)
+nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_ntqls")
+nodes/fragment/8/position = Vector2(140, 440)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorCompose_fwbpe")
+nodes/fragment/9/position = Vector2(440, 400)
+nodes/fragment/11/node = SubResource("VisualShaderNodeColorParameter_ntqls")
+nodes/fragment/11/position = Vector2(680, 500)
+nodes/fragment/12/node = SubResource("VisualShaderNodeExpression_oge5h")
+nodes/fragment/12/position = Vector2(1140, 60)
+nodes/fragment/12/size = Vector2(760, 460)
+nodes/fragment/12/input_ports = "0,5,Borde;1,5,Fondo;2,3,UV;3,0,Time;4,0,Frecuencia;5,0,Altura;"
+nodes/fragment/12/output_ports = "0,5,COLOR;"
+nodes/fragment/12/expression = "float t = max(UV.x,UV.y);
+float dist = length(UV);
+float inter =mix(t,dist,0.5) * (sin(Time*Frecuencia)*Altura+1.5);
+COLOR = mix(Fondo,Borde,inter);"
+nodes/fragment/13/node = SubResource("VisualShaderNodeColorParameter_d4fhh")
+nodes/fragment/13/position = Vector2(680, 680)
+nodes/fragment/14/node = SubResource("VisualShaderNodeVectorDecompose_2p4m5")
+nodes/fragment/14/position = Vector2(2000, 80)
+nodes/fragment/15/node = SubResource("VisualShaderNodeVectorCompose_gt21x")
+nodes/fragment/15/position = Vector2(2220, 80)
+nodes/fragment/16/node = SubResource("VisualShaderNodeInput_oge5h")
+nodes/fragment/16/position = Vector2(-260, -180)
+nodes/fragment/17/node = SubResource("VisualShaderNodeFloatParameter_d4fhh")
+nodes/fragment/17/position = Vector2(680, 880)
+nodes/fragment/18/node = SubResource("VisualShaderNodeFloatParameter_2p4m5")
+nodes/fragment/18/position = Vector2(680, 1060)
+nodes/fragment/connections = PackedInt32Array(12, 0, 14, 0, 14, 3, 0, 1, 14, 0, 15, 0, 14, 1, 15, 1, 14, 2, 15, 2, 15, 0, 0, 0, 5, 0, 4, 0, 4, 0, 7, 0, 8, 0, 9, 0, 8, 0, 9, 1, 9, 0, 7, 2, 2, 0, 5, 0, 7, 0, 12, 2, 16, 0, 12, 3, 17, 0, 12, 4, 18, 0, 12, 5, 11, 0, 12, 0, 13, 0, 12, 1)

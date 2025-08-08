@@ -14,14 +14,21 @@ void fragment() {
 
     float distX = min(UV.x, 1.0 - UV.x);
     float distY = min(UV.y, 1.0 - UV.y);
-    float edgeDist = min(distX, distY);
 
-    if (edgeDist < limit) {
+    if (distY < limit) {
 
-        float t = smoothstep(0.0, Gradiente + time + Borde, edgeDist);
+        float t = smoothstep(0.0, Gradiente + time + Borde, distY);
         COLOR = mix(Color1, Color2, t);
 		COLOR.a = COLOR.a * Potencia;
-    } else {
+	}
+	
+	 if (distX < limit){
+		float t = smoothstep(0.0, Gradiente + time + Borde, distX);
+        COLOR = mix(Color1, Color2, t);
+		COLOR.a = COLOR.a * Potencia;
+	}
+	
+    else {
 		COLOR = Color2;
         COLOR.a = COLOR.a * Potencia;
     }

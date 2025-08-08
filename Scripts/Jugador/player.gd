@@ -25,11 +25,15 @@ extends CharacterBody2D
 @export_group("Wall")
 @export var wallVelocity:float
 
+@export_group("Bullet Time")
+@export var buTimeIsActive:bool
+@export var bulletTimesec:float
+@export var Cooldown:float
 
-func inputWalk()->int:
+func inputWalk()->float:
 	return Input.get_axis("Move Left","Move Right")
 
-func inputWall()->int:
+func inputWall()->float:
 	return Input.get_axis("Move Down","Move Up")
 
 func inputRun()->bool:

@@ -47,4 +47,7 @@ func SetActualState(State:String) -> void:
 	if not (PhysicsStates.has(State) or ProcessStates.has(State)):
 		push_error("This State (",State,") not exist in PhysicsStates or ProcessStates")
 		return
+	var node:Node = get_node(ProcessStates[State]) if ProcessStates.has(State) else get_node(PhysicsStates[State]) as StateMachine
+	if node != self: #Para que no tenga llamas infinitas
+		node.SetActualState(State)
 	ActualState = [State, ProcessStates[State]] if ProcessStates.has(State) else [State, PhysicsStates[State]]

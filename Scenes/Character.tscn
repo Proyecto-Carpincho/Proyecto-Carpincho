@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=8 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/Jugador/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_677pu"]
-[ext_resource type="Script" uid="uid://ds1vj1qx7bbci" path="res://Scripts/Prueba.gd" id="2_jo2ib"]
+[ext_resource type="Script" uid="uid://ds1vj1qx7bbci" path="res://Scripts/Jugador/Estados Basicos Jugador.gd" id="2_jo2ib"]
+[ext_resource type="Script" uid="uid://c76pnj52yjy3k" path="res://Scripts/Jugador/Estado Dash.gd" id="4_v7dgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
 size = Vector2(30, 43)
@@ -38,6 +39,7 @@ PhysicsStates = Dictionary[String, NodePath]({
 "Caminar": NodePath("."),
 "Colgado Pared": NodePath("."),
 "Correr": NodePath("."),
+"Dash": NodePath("../Secundary State Machines/State Dash"),
 "Deslizarse Pared": NodePath("."),
 "Muerte": NodePath("."),
 "Quieto": NodePath(".")
@@ -46,6 +48,14 @@ metadata/_custom_type_script = "uid://ci1ayib00djei"
 
 [node name="Secundary State Machines" type="Node" parent="."]
 
+[node name="State Dash" type="Node" parent="Secundary State Machines"]
+script = ExtResource("4_v7dgu")
+PhysicsStates = Dictionary[String, NodePath]({
+"Dash": NodePath("."),
+"Quieto": NodePath("../../Central State Machine")
+})
+metadata/_custom_type_script = "uid://ci1ayib00djei"
+
 [node name="Shape Pared" type="ShapeCast2D" parent="."]
 shape = SubResource("RectangleShape2D_677pu")
 target_position = Vector2(10, 0)
@@ -53,3 +63,12 @@ target_position = Vector2(10, 0)
 [node name="Shape Piso" type="ShapeCast2D" parent="."]
 shape = SubResource("RectangleShape2D_v7dgu")
 target_position = Vector2(0, 20)
+
+[node name="Cooldown Bullet Time" type="Timer" parent="."]
+one_shot = true
+
+[node name="State Dash" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="State Dash"]
+
+[connection signal="timeout" from="Cooldown Bullet Time" to="Central State Machine" method="_on_bullet_time_timeout"]
