@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhxq3p4fn06a1"]
 
 [ext_resource type="Script" uid="uid://dbncsedlyj7f" path="res://Scripts/Efectos Visuales.gd" id="1_tpqwk"]
-[ext_resource type="Shader" uid="uid://bkym27wgfbqwq" path="res://Scenes/test.tres" id="2_tpqwk"]
+[ext_resource type="Shader" uid="uid://bkym27wgfbqwq" path="res://Shader/Bullet Time.tres" id="2_tpqwk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eh0ed"]
 shader = ExtResource("2_tpqwk")

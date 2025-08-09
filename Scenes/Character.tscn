@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=14 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/Jugador/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_677pu"]
 [ext_resource type="Script" uid="uid://ds1vj1qx7bbci" path="res://Scripts/Jugador/Estados Basicos Jugador.gd" id="2_jo2ib"]
 [ext_resource type="Script" uid="uid://c76pnj52yjy3k" path="res://Scripts/Jugador/Estado Dash.gd" id="4_v7dgu"]
+[ext_resource type="Shader" uid="uid://bq45bc81yb4sr" path="res://Shader/Linea.tres" id="4_vdqda"]
+[ext_resource type="Texture2D" uid="uid://bukd0lwp0dg5a" path="res://Sprites/Flecha.png" id="5_xloa1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
 size = Vector2(30, 43)
@@ -12,6 +14,26 @@ size = Vector2(30, 43)
 size = Vector2(20, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7dgu"]
+
+[sub_resource type="Gradient" id="Gradient_4b18b"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.6)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_peemv"]
+frequency = 0.0165
+fractal_type = 3
+fractal_octaves = 1
+fractal_ping_pong_strength = 0.495
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_omicx"]
+bump_strength = 21.0
+color_ramp = SubResource("Gradient_4b18b")
+noise = SubResource("FastNoiseLite_peemv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_omicx"]
+shader = ExtResource("4_vdqda")
+shader_parameter/Texture2DParameter = ExtResource("5_xloa1")
+shader_parameter/Texture2DParameter2 = SubResource("NoiseTexture2D_omicx")
 
 [node name="Jugador" type="CharacterBody2D"]
 slide_on_ceiling = false
@@ -39,20 +61,10 @@ PhysicsStates = Dictionary[String, NodePath]({
 "Caminar": NodePath("."),
 "Colgado Pared": NodePath("."),
 "Correr": NodePath("."),
-"Dash": NodePath("../Secundary State Machines/State Dash"),
+"Dash": NodePath("../State Dash/State Dash"),
 "Deslizarse Pared": NodePath("."),
 "Muerte": NodePath("."),
 "Quieto": NodePath(".")
-})
-metadata/_custom_type_script = "uid://ci1ayib00djei"
-
-[node name="Secundary State Machines" type="Node" parent="."]
-
-[node name="State Dash" type="Node" parent="Secundary State Machines"]
-script = ExtResource("4_v7dgu")
-PhysicsStates = Dictionary[String, NodePath]({
-"Dash": NodePath("."),
-"Quieto": NodePath("../../Central State Machine")
 })
 metadata/_custom_type_script = "uid://ci1ayib00djei"
 
@@ -70,5 +82,18 @@ one_shot = true
 [node name="State Dash" type="Node2D" parent="."]
 
 [node name="Line2D" type="Line2D" parent="State Dash"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_omicx")
+points = PackedVector2Array(0, 0, 144, 0)
+width = 20.405
+texture_mode = 1
+
+[node name="State Dash" type="Node" parent="State Dash"]
+script = ExtResource("4_v7dgu")
+PhysicsStates = Dictionary[String, NodePath]({
+"Dash": NodePath("."),
+"Quieto": NodePath("../../Central State Machine")
+})
+metadata/_custom_type_script = "uid://ci1ayib00djei"
 
 [connection signal="timeout" from="Cooldown Bullet Time" to="Central State Machine" method="_on_bullet_time_timeout"]

@@ -1,9 +1,7 @@
 res://Scenes/Character.tscn
-res://Scenes/test.tres
+res://Shader/Bullet Time.tres
 res://Shader/Recarga.tres
-res://Shader/Bullet Time.gdshader
-res://addons/State Machine Ultimate/Nodes/State Machine/State Machine.gd
+res://Shader/Linea.tres
 res://Scenes/main.tscn
 res://Scenes/UI.tscn
 res://Scenes/Efectos Visuales.tscn
-res://Scripts/Jugador/Estado Dash.gd
