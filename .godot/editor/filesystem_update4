@@ -5,3 +5,5 @@ res://Shader/Linea.tres
 res://Scenes/main.tscn
 res://Scenes/UI.tscn
 res://Scenes/Efectos Visuales.tscn
+res://Scripts/Jugador/Estados Basicos Jugador.gd
+res://Scripts/Jugador/Estado Dash.gd

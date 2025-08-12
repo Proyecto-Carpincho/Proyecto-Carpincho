@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://cy84g5jb5i82l"]
 
-[ext_resource type="Texture2D" uid="uid://fowm0tenege7" path="res://Sprites/Wasteland-Files.png" id="1_h2yge"]
-[ext_resource type="Texture2D" uid="uid://c481bs28p3l84" path="res://Sprites/Wasteland_Sky.png" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://bwy8mw68hmuas" path="res://Sprites/Tile set prueba.png" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://brpj3c85xngah" path="res://Sprites/Wasteland-Files.png" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://nw076mgo6ocp" path="res://Sprites/Wasteland_Sky.png" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://dpd222nvw6jnk" path="res://Sprites/Tile set prueba.png" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cjmre3cjowgo6" path="res://Scenes/Character.tscn" id="3_h2yge"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
@@ -263,7 +263,7 @@ runVelocity = 125.0
 maxRunVelocity = 250.0
 extraJump = 1
 velocityJump = -275.0
-jumpMultiplyBoosted = 1.15
+jumpMultiplyBoosted = 1.5
 wallVelocity = -7500.0
 buTimeIsActive = true
 bulletTimesec = 2.0

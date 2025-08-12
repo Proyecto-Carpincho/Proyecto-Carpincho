@@ -1,6 +1,7 @@
 extends StateMachine
 
 @onready var Parent:CharacterBody2D=get_parent()
+@export var DashNode:StateMachine
 func _ready() -> void:
 	SetVelocity()
 	SetActualState("Quieto")
@@ -85,7 +86,7 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 
 		"Deslizarse Pared":
 			inWall= true
-			Parent.velocity.y = Parent.wallVelocity * 2 * Parent.inputWall() * delta
+			Parent.velocity.y = Parent.wallVelocity * 1.5 * Parent.inputWall() * delta
 			if Parent.isOnFloor() or (not Parent.shapeIsColliding() and not Parent.isOnFloor()):
 				SetActualState("Quieto")
 				inWall= false
@@ -98,7 +99,11 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 			pass
 
 	#Default
-	if not Parent.isOnFloor():
+	var EnDash:bool =DashNode.EnDash
+	if DashNode:
+		EnDash =DashNode.EnDash
+	
+	if not Parent.isOnFloor() and not EnDash:
 		var multiplyGravity:float= 1 if not inWall else Parent.gravityMultiplyWall
 		if Parent.velocity.y < Parent.maxGravity * multiplyGravity or State=="Deslizarse Pared":
 			Parent.velocity.y += Parent.gravity * multiplyGravity * delta
@@ -121,8 +126,9 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 		Parent.get_node("Cooldown Bullet Time").start()
 		Ui.RecargaDash(Parent.Cooldown)
 	
-	if Input.is_action_just_pressed("Dash"):
-		SetActualState("Dash")
+	if Input.is_action_just_pressed("Dash")and(DashNode.ActualState.find("Dash") == -1):
+		DashNode.InicioEstado = true
+		DashNode.SetActualState("Dash")
 	
 	Parent.move_and_slide()
 var Cooldown:bool=true
@@ -165,9 +171,11 @@ func wallJump()->void:
 	if Jumping:
 		if wallDirection == 0:
 			wallDirection=Parent.getShapeDireccion()
-		Parent.velocity.y+=Parent.velocityJump* 0.5
-		Parent.velocity.x=-1 * wallDirection * Parent.runVelocity * 1.5
 		Parent.setShapeRotation(-1 * wallDirection)
+		if not Parent.shapeIsColliding():
+			Parent.velocity.y+=Parent.velocityJump* 0.8
+			Parent.velocity.x=-1 * wallDirection * Parent.runVelocity * 1.5
+		
 	else:
 		wallDirection=0
 

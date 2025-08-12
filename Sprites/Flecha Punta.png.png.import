@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b64dqesmkk25u"
-path="res://.godot/imported/HURT.png-4edeb227a23436c945e7d3975eb2bf20.ctex"
+uid="uid://bp205c3k0qc4h"
+path="res://.godot/imported/Flecha Punta.png.png-2c4ba410014f445633e5639a703e0bf7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/HURT.png"
-dest_files=["res://.godot/imported/HURT.png-4edeb227a23436c945e7d3975eb2bf20.ctex"]
+source_file="res://Sprites/Flecha Punta.png.png"
+dest_files=["res://.godot/imported/Flecha Punta.png.png-2c4ba410014f445633e5639a703e0bf7.ctex"]
 
 [params]
 
