@@ -1,4 +1,8 @@
 Timer
+HBoxContainer
+TextureRect
+VSeparator
+HSeparator
 Line2D
 Node2D
 StateMachine
@@ -6,8 +10,5 @@ ColorRect
 ShapeCast2D
 RichTextLabel
 Label
-TextureRect
 CollisionShape2D
 StaticBody2D
-Node
-RayCast2D
