@@ -7,44 +7,36 @@ const GravedadMax = 200
 @onready var Navegacion:NavigationAgent2D = $NavigationAgent2D
 
 func _physics_process(delta: float) -> void:
+	
 	Moviminento()
 	Gravedad(delta)
 	Escudo()
 
 	#Solo por ahora tiene esto que esta mal
-	velocity.x += VelocidadEmpuje.x
+	velocity += VelocidadEmpuje
 	move_and_slide()
 
 func Escudo():
-	if velocity.x != 0:
-		if velocity.x < 0 && $Escudo.global_position.x > 0:
-			$Escudo.position.x = -30
-		elif velocity.x > 0 && $Escudo.global_position.x < 0:
-			$Escudo.position.x = 30
-		 
-	# TODO ¿Que hace "vistaPersonaje"?
-	#var elEscudoVe:int = 1 if get_node("Escudo").rotation == 0 else -1
-	#var VistaPersonaje:int =1 if abs(get_node("VisionPersonaje").rotation) < 1.5 else -1
-	#if velocity.normalized().x !=0:
-		#if velocity.normalized().x < 0 and VistaPersonaje < 0:
-			#$Escudo.position.x *= -1
-		#elif VistaPersonaje > 0:
-			#get_node("Escudo").rotation_degrees = 0
+	var elEscudoVe:int = 1 if get_node("Escudo").rotation == 0 else -1
+	var VistaPersonaje:int =1 if abs(get_node("VisionPersonaje").rotation) < 1.5 else -1
+	if velocity.normalized().x !=0:
+		if velocity.normalized().x < 0 and VistaPersonaje < 0:
+			get_node("Escudo").rotation_degrees = 180
+		elif VistaPersonaje > 0:
+			get_node("Escudo").rotation_degrees = 0
 
 func Moviminento():
+	var auxPathPosicion:Vector2=Navegacion.get_next_path_position()
 	var DistanciaAlJugador:float = Jugador.global_position.distance_to(global_position)
-	Navegacion.target_position = Jugador.global_position
-	var direccion:Vector2 = (Navegacion.get_next_path_position() - global_position).normalized()
 	#Comprobacion Si esta o muy cerca o muy lejos del jugaodor para moverse (para que no paresca que este hujendole pues)
 	if (DistanciaAlJugador < 78 or DistanciaAlJugador > 100) or get_node("Tiempo Recalcular Movimiento").is_stopped():
-		velocity = direccion * SPEED
+		velocity.x = global_position.direction_to(auxPathPosicion).normalized().x * SPEED
 	else:
 		velocity.x = 0.0
 	if is_on_wall():
-		#TODO agregar escalar muros
-		velocity.y = 100
-	else: 
-		velocity.y = 0
+		var VelocidadEscalar = global_position.direction_to(auxPathPosicion).normalized().y * SPEED 
+		VelocidadEscalar = VelocidadEscalar if abs(VelocidadEscalar) > 50 else 50 * VelocidadEscalar/abs(VelocidadEscalar)
+		velocity.y = VelocidadEscalar
 
 func Gravedad(delta):
 	var auxGravedad = get_gravity()
