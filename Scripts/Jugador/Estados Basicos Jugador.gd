@@ -3,7 +3,6 @@ extends StateMachine
 @export var Player:CharacterBody2D=get_parent()
 @export var DashNode:Node2D
 func _ready() -> void:
-	SetVelocity()
 	SetActualState("Quieto")
 
 func _physics_process(delta: float) -> void:

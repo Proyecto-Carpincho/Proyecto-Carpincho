@@ -3,3 +3,8 @@ res://Shader/Bullet Time.tres
 res://Shader/Recarga.tres
 res://Shader/Linea.tres
 res://Scripts/enemigo.gd
+res://Scenes/Enemigo blindado.tscn
+res://addons/State Machine Ultimate/Nodes/State Machine/State Machine.gd
+res://Scripts/Jugador/Estados Basicos Jugador.gd
+res://addons/State Machine Ultimate/Nodes/State Tree/Executor State Tree.gd
+res://addons/State Machine Ultimate/Nodes/State Tree/State Tree.gd
