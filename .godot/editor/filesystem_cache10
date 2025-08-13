@@ -1,41 +1,41 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1755041705
+::res://::1755102696
 icon.svg::CompressedTexture2D/CompressedTexture2D::4582955492473367723::1747787078::1755029655::1::::<><><>0<>0<>2767fa82992bc1c16ac969eb6ca39230<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://addons/::1753316453
 ::res://addons/State Machine Ultimate/::1753316453
 plugin.cfg::TextFile/TextFile::-1::1753316453::0::1::::<><><>0<>0<><>::
 StMachine Ultimate.gd::GDScript/GDScript::1627453459375326624::1753316453::0::1::::<>EditorPlugin<><>0<>1<><>::
 ::res://addons/State Machine Ultimate/Nodes/::1753316453
-::res://addons/State Machine Ultimate/Nodes/State Machine/::1754670696
-State Machine.gd::GDScript/GDScript::5388069220050760892::1754670696::0::1::::StateMachine<>Node<><>0<>0<><>::
-::res://addons/State Machine Ultimate/Nodes/State Tree/::1753316453
-Executor State Tree.gd::GDScript/GDScript::7687778535415653355::1753316453::0::1::::ExecutorStateTree<>Node<><>0<>0<><>::
-State Tree.gd::GDScript/GDScript::4188412660181929953::1753316453::0::1::::StateTree<>Node<><>0<>0<><>::
-::res://Scenes/::1755037361
-Character.tscn::PackedScene::5430354299401772867::1755037361::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/Jugador/player.gd<>uid://b6kauwett0agh::::res://icon.svg<>uid://ds1vj1qx7bbci::::res://Scripts/Jugador/Estados Basicos Jugador.gd<>uid://c2sirg4no04bb::::res://Scenes/Habilidades Modulares/Dash.tscn
-Efectos Visuales.tscn::PackedScene::2926245584511451278::1755037361::0::1::::<><><>0<>0<><>::uid://dbncsedlyj7f::::res://Scripts/Efectos Visuales.gd<>uid://bkym27wgfbqwq::::res://Shader/Bullet Time.tres
-Enemigo blindado.tscn::PackedScene/PackedScene::1880283882559021794::1749359728::0::1::::<><><>0<>0<><>::uid://cr3l2cdhhgvof::::res://Scripts/enemigo.gd<>uid://b6kauwett0agh::::res://icon.svg
-main.tscn::PackedScene::6527271177826231845::1755037361::0::1::::<><><>0<>0<><>::uid://brpj3c85xngah::::res://Sprites/Wasteland-Files.png<>uid://nw076mgo6ocp::::res://Sprites/Wasteland_Sky.png<>uid://dpd222nvw6jnk::::res://Sprites/Tile set prueba.png<>uid://cjmre3cjowgo6::::res://Scenes/Character.tscn
-UI.tscn::PackedScene::1569257852081533593::1755037361::0::1::::<><><>0<>0<><>::uid://hb7hnjiy5lmh::::res://Scripts/UI.gd<>uid://7n36rfciw6en::::res://Shader/Recarga.tres<>uid://b6kauwett0agh::::res://icon.svg
+::res://addons/State Machine Ultimate/Nodes/State Machine/::1755051527
+State Machine.gd::GDScript::5388069220050760892::1755051527::0::1::::StateMachine<>Node<><>0<>0<><>::
+::res://addons/State Machine Ultimate/Nodes/State Tree/::1755052167
+Executor State Tree.gd::GDScript::7687778535415653355::1755052151::0::1::::ExecutorStateTree<>Node<><>0<>0<><>::
+State Tree.gd::GDScript::4188412660181929953::1755052167::0::1::::StateTree<>Node<><>0<>0<><>::
+::res://Scenes/::1755052167
+Character.tscn::PackedScene/PackedScene::5430354299401772867::1755037361::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/Jugador/player.gd<>uid://b6kauwett0agh::::res://icon.svg<>uid://ds1vj1qx7bbci::::res://Scripts/Jugador/Estados Basicos Jugador.gd<>uid://c2sirg4no04bb::::res://Scenes/Habilidades Modulares/Dash.tscn
+Efectos Visuales.tscn::PackedScene/PackedScene::2926245584511451278::1755037361::0::1::::<><><>0<>0<><>::uid://dbncsedlyj7f::::res://Scripts/Efectos Visuales.gd<>uid://bkym27wgfbqwq::::res://Shader/Bullet Time.tres
+Enemigo blindado.tscn::PackedScene::1880283882559021794::1755052167::0::1::::<><><>0<>0<><>::uid://cr3l2cdhhgvof::::res://Scripts/enemigo.gd<>uid://b6kauwett0agh::::res://icon.svg
+main.tscn::PackedScene::6527271177826231845::1755041810::0::1::::<><><>0<>0<><>::uid://brpj3c85xngah::::res://Sprites/Wasteland-Files.png<>uid://nw076mgo6ocp::::res://Sprites/Wasteland_Sky.png<>uid://dpd222nvw6jnk::::res://Sprites/Tile set prueba.png<>uid://cjmre3cjowgo6::::res://Scenes/Character.tscn
+UI.tscn::PackedScene/PackedScene::1569257852081533593::1755037361::0::1::::<><><>0<>0<><>::uid://hb7hnjiy5lmh::::res://Scripts/UI.gd<>uid://7n36rfciw6en::::res://Shader/Recarga.tres<>uid://b6kauwett0agh::::res://icon.svg
 ::res://Scenes/Habilidades Modulares/::1755037361
-Dash.gd::GDScript::3327477096537508628::1755037222::0::1::::<>Node2D<><>0<>0<><>::
-Dash.tscn::PackedScene::6705615400174481695::1755037361::0::1::::<><><>0<>0<><>::uid://bnn4cdijx1ixg::::res://Scenes/Habilidades Modulares/Dash.gd<>uid://bq45bc81yb4sr::::res://Shader/Linea.tres<>uid://bwy0wlcn0e62w::::res://Sprites/Flecha.png<>uid://c76pnj52yjy3k::::res://Scripts/Jugador/Habilidades Modulares/Dash/Estado Dash.gd
-::res://Scripts/::1755041519
+Dash.gd::GDScript/GDScript::3327477096537508628::1755037222::0::1::::<>Node2D<><>0<>0<><>::
+Dash.tscn::PackedScene/PackedScene::6705615400174481695::1755037361::0::1::::<><><>0<>0<><>::uid://bnn4cdijx1ixg::::res://Scenes/Habilidades Modulares/Dash.gd<>uid://bq45bc81yb4sr::::res://Shader/Linea.tres<>uid://bwy0wlcn0e62w::::res://Sprites/Flecha.png<>uid://c76pnj52yjy3k::::res://Scripts/Jugador/Habilidades Modulares/Dash/Estado Dash.gd
+::res://Scripts/::1755050536
 Central Enemigos.gd::GDScript/GDScript::22029292330244634::1748467024::0::1::::CentralEnemigo<>CharacterBody2D<><>0<>0<><>::
 Daño.gd::GDScript/GDScript::620802462871906858::1747848430::0::1::::<>Node2D<><>0<>0<><>::
 Efectos Visuales.gd::GDScript/GDScript::213424752913411769::1754664942::0::1::::<>CanvasLayer<><>0<>0<><>::
-enemigo.gd::GDScript::6024570499711066101::1755041519::0::1::::<>CentralEnemigo<><>0<>0<><>::
-UI.gd::GDScript::495342424649686907::1755037222::0::1::::<>CanvasLayer<><>0<>0<><>::
-::res://Scripts/Jugador/::1755037222
-Estados Basicos Jugador.gd::GDScript::8477627578574472504::1755037222::0::1::::<>StateMachine<><>0<>0<><>::
-player.gd::GDScript::8798652093948548212::1755034965::0::1::::<>CharacterBody2D<><>0<>0<><>::
+enemigo.gd::GDScript::6024570499711066101::1755050536::0::1::::<>CentralEnemigo<><>0<>0<><>::
+UI.gd::GDScript/GDScript::495342424649686907::1755037222::0::1::::<>CanvasLayer<><>0<>0<><>::
+::res://Scripts/Jugador/::1755050562
+Estados Basicos Jugador.gd::GDScript::8477627578574472504::1755050562::0::1::::<>StateMachine<><>0<>0<><>::
+player.gd::GDScript/GDScript::8798652093948548212::1755034965::0::1::::<>CharacterBody2D<><>0<>0<><>::
 ::res://Scripts/Jugador/Habilidades Modulares/::1755035134
 ::res://Scripts/Jugador/Habilidades Modulares/Dash/::1755037245
-Estado Dash.gd::GDScript::7083814564704846794::1755037245::0::1::::<>StateMachine<><>0<>0<><>::
-::res://Shader/::1755038500
-Bullet Time.tres::VisualShader::3138632721531743828::1755038500::0::1::::<><><>0<>0<><>::
-Linea.tres::VisualShader::3571132589584964081::1755038500::0::1::::<><><>0<>0<><>::
-Recarga.tres::VisualShader::2274636243351762881::1755038500::0::1::::<><><>0<>0<><>::
+Estado Dash.gd::GDScript/GDScript::7083814564704846794::1755037245::0::1::::<>StateMachine<><>0<>0<><>::
+::res://Shader/::1755052872
+Bullet Time.tres::VisualShader::3138632721531743828::1755052872::0::1::::<><><>0<>0<><>::
+Linea.tres::VisualShader::3571132589584964081::1755052872::0::1::::<><><>0<>0<><>::
+Recarga.tres::VisualShader::2274636243351762881::1755052872::0::1::::<><><>0<>0<><>::
 ::res://Sprites/::1755029655
 ATTACK 1.png::CompressedTexture2D/CompressedTexture2D::4833326557990849675::1747787078::1755029655::1::::<><><>0<>0<>1ef0d811c4a6076868b522f700a116cc<>res://.godot/imported/ATTACK 1.png-02a33b2d9daee950a40ff9374d0c0dad.ctex::
 Flecha Punta.png.png::CompressedTexture2D/CompressedTexture2D::3496563185049127993::1754843913::1755029655::1::::<><><>0<>0<>cc6d1129142670bb57e53ced3316b287<>res://.godot/imported/Flecha Punta.png.png-2c4ba410014f445633e5639a703e0bf7.ctex::

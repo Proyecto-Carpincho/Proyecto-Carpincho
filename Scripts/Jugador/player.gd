@@ -19,6 +19,7 @@ extends CharacterBody2D
 
 @export_group("Jump")
 @export var extraJump:int
+@export var extraJumpBoost:float
 @export var velocityJump:float
 @export var jumpMultiplyBoosted:float
 
@@ -56,6 +57,3 @@ func isOnWall()->bool:
 
 func getShapeDireccion()->int:
 	return 1 if get_node("Shape Pared").get_rotation_degrees() != 180 else -1
-
-func isOnFloor()->bool:
-	return get_node("Shape Piso").is_colliding()

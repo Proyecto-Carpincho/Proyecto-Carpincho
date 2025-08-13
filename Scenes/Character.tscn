@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=7 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/Jugador/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_677pu"]
@@ -10,8 +10,6 @@ size = Vector2(30, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_677pu"]
 size = Vector2(20, 40)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7dgu"]
 
 [node name="Jugador" type="CharacterBody2D"]
 z_index = 1
@@ -52,15 +50,16 @@ metadata/_custom_type_script = "uid://ci1ayib00djei"
 shape = SubResource("RectangleShape2D_677pu")
 target_position = Vector2(10, 0)
 
-[node name="Shape Piso" type="ShapeCast2D" parent="."]
-shape = SubResource("RectangleShape2D_v7dgu")
-target_position = Vector2(0, 20)
-
 [node name="Cooldown Bullet Time" type="Timer" parent="."]
+one_shot = true
+
+[node name="Timer Coyote" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
 [node name="Dash" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_v7dgu")]
 Player = NodePath("..")
-TiempoDeRecarga = 0.5
+TiempoDeRecarga = 5.0
 
 [connection signal="timeout" from="Cooldown Bullet Time" to="Central State Machine" method="_on_bullet_time_timeout"]
+[connection signal="timeout" from="Timer Coyote" to="Central State Machine" method="_on_timer_coyote_timeout"]

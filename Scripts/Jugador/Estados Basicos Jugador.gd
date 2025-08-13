@@ -2,6 +2,9 @@ extends StateMachine
 
 @export var Player:CharacterBody2D=get_parent()
 @export var DashNode:Node2D
+
+@onready var TimerBulletTime:Timer = Player.get_node("Cooldown Bullet Time")
+@onready var TimerCoyote:Timer = Player.get_node("Timer Coyote")
 func _ready() -> void:
 	SetActualState("Quieto")
 
@@ -20,11 +23,7 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 			if Player.inputWalk() != 0:
 				SetActualState("Caminar")
 			jump()
-			if not Player.is_on_floor() and Player.isOnWall():
-				Player.velocity.y=0
-				SetActualState("Colgado Pared")
-			if Player.isOnWall() and Player.inputWall() != 0:
-				SetActualState("Deslizarse Pared")
+			InputToWall()
 
 		"Caminar":
 			Player.velocity.x += Player.inputWalk() * Player.walkVelocity * delta
@@ -36,9 +35,7 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 				SetActualState("Quieto")
 			if Player.inputRun():
 				SetActualState("Correr")
-			if Player.isOnWall():
-				Player.velocity.y=0
-				SetActualState("Colgado Pared")
+			InputToWall()
 			
 			jump()
 			
@@ -63,21 +60,21 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 				SetActualState("Quieto")
 			if not Player.inputRun():
 				SetActualState("Caminar")
-			if Player.isOnWall():
-				Player.velocity.y=0
-				SetActualState("Colgado Pared")
+			InputToWall()
 			
 			jump(Player.jumpMultiplyBoosted)
 
 		"Colgado Pared":
 			inWall= true
-			if Player.is_on_floor() or (not Player.isOnWall()):
+			if Player.is_on_floor() or not Player.isOnWall():
 				SetActualState("Quieto")
 				inWall= false
+				
 			if Player.inputWall() != 0:
-				Player.velocity.y=0
+				Player.velocity.y = 0
 				SetActualState("Deslizarse Pared")
-			if Player.velocity.y<0:
+				
+			if Player.velocity.y < 0:
 				
 				Player.velocity.y = Player.velocity.y *0.1
 				
@@ -86,29 +83,34 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 		"Deslizarse Pared":
 			inWall= true
 			Player.velocity.y = Player.wallVelocity * 1.5 * Player.inputWall() * delta
-			if Player.isOnFloor() or (not Player.isOnWall() and not Player.is_on_floor()):
+			if (Player.is_on_floor() and Player.inputWall() == 0) or (not Player.isOnWall() and not Player.is_on_floor()):
 				SetActualState("Quieto")
-				inWall= false
+				inWall = false
+				
 			if Player.inputWall() == 0:
-				Player.velocity.y=0
+				Player.velocity.y = 0
 				SetActualState("Colgado Pared")
+				
 			wallJump()
 
 		"Muerte":
 			pass
 
-	#Default
+	#region Default cosas que todos los estados comparten
+	
+	
 	var EnDash:bool =DashNode.EnDash
 	if DashNode:
 		EnDash =DashNode.EnDash
 	
-	if not Player.is_on_floor() and not EnDash:
+
+	#Gravedad
+	if not Player.is_on_floor() and not EnDash and TimerCoyote.is_stopped():
 		var multiplyGravity:float= 1 if not inWall else Player.gravityMultiplyWall
 		if Player.velocity.y < Player.maxGravity * multiplyGravity or State=="Deslizarse Pared":
 			Player.velocity.y += Player.gravity * multiplyGravity * delta
 		else:
 			Player.velocity.y = Player.maxGravity * multiplyGravity
-	
 	
 	if Player.life == 0:
 		SetActualState("Muerte")
@@ -121,27 +123,47 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 		await get_tree().create_timer(Player.bulletTimesec).timeout
 		EfectosVisuales.RelentizarTiempo(1,false)
 		Engine.time_scale = 1
-		Player.get_node("Cooldown Bullet Time").wait_time = Player.Cooldown
-		Player.get_node("Cooldown Bullet Time").start()
+		TimerBulletTime.wait_time = Player.Cooldown
+		TimerBulletTime.start()
 		Ui.RecargaBulletTime(Player.Cooldown)
 	
 	if Input.is_action_just_pressed("Dash")and(DashNode.ActualState.find("Dash") == -1):
 		DashNode.InicioEstado = true
 		DashNode.SetEstadoActual("Dash")
-	
+	CoyoteTime()
 	Player.move_and_slide()
+	#endregion
+
 var Cooldown:bool=true
 
 var Jumping:bool
 var ExtraJump:bool
-var boolJump
+var boolJump:bool
+func InputToWall():
+	if not Player.is_on_floor() and Player.isOnWall():
+		Player.velocity.y=0
+		SetActualState("Colgado Pared")
+	if Player.isOnWall() and Player.inputWall() != 0:
+		SetActualState("Deslizarse Pared")
+
+var a
 func jump(Multiply:float=1.0)->void:
+	if Player.is_on_floor():
+		a = true
 	if Player.inputJump():
-		if Player.is_on_floor():
+		if Player.is_on_floor() or (boolJump and a):
+			a = false
 			CountJump=Player.extraJump
 			Jumping=true
 			boolJump=true
+			if boolJump:
+				Player.velocity.y = 0 
+				boolJump = false
+				TimerCoyote.stop()
 		elif CountJump!=0:
+			if Player.velocity.y < 0:
+				Player.velocity.y = 0
+			 
 			CountJump-=1
 			Jumping=true
 			ExtraJump=true
@@ -149,14 +171,12 @@ func jump(Multiply:float=1.0)->void:
 		CountJump=Player.extraJump
 	if Jumping:
 		if not ExtraJump:
-			Player.velocity.y+=Player.velocityJump*Multiply* 0.1
+			Player.velocity.y+=Player.velocityJump*Multiply* 0.25
 			if Player.velocity.y < Player.velocityJump*Multiply or not Player.inputIsJumping():
 				Jumping=false
 		else:
 			ExtraJump=false
-			Player.velocity.y=Player.velocityJump*Multiply
-			
-
+			Player.velocity.y=Player.velocityJump*Multiply* Player.extraJumpBoost
 
 var wallDirection:int
 func wallJump()->void:
@@ -178,6 +198,23 @@ func wallJump()->void:
 	else:
 		wallDirection=0
 
-
 func _on_bullet_time_timeout() -> void:
 	Cooldown = true
+
+var Enpiso:bool
+func CoyoteTime():
+	if Player.is_on_floor():
+		TimerCoyote.stop()
+		Enpiso = true
+		boolJump = false
+	elif TimerCoyote.is_stopped() and Enpiso:
+		TimerCoyote.start()
+		Enpiso =false
+		boolJump = true
+	
+	
+
+
+func _on_timer_coyote_timeout() -> void:
+	boolJump = false
+	pass # Replace with function body.

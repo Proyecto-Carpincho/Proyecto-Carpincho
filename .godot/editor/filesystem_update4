@@ -2,9 +2,10 @@ res://Scenes/main.tscn
 res://Shader/Bullet Time.tres
 res://Shader/Recarga.tres
 res://Shader/Linea.tres
-res://Scripts/enemigo.gd
+res://Scenes/Character.tscn
+res://Scenes/UI.tscn
+res://Scenes/Efectos Visuales.tscn
+res://Scenes/Habilidades Modulares/Dash.tscn
 res://Scenes/Enemigo blindado.tscn
-res://addons/State Machine Ultimate/Nodes/State Machine/State Machine.gd
+res://Scripts/Jugador/player.gd
 res://Scripts/Jugador/Estados Basicos Jugador.gd
-res://addons/State Machine Ultimate/Nodes/State Tree/Executor State Tree.gd
-res://addons/State Machine Ultimate/Nodes/State Tree/State Tree.gd
