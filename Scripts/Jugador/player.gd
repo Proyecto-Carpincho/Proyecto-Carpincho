@@ -19,6 +19,7 @@ extends CharacterBody2D
 
 @export_group("Jump")
 @export var extraJump:int
+@export var extraJumpBoost:float
 @export var velocityJump:float
 @export var jumpMultiplyBoosted:float
 
@@ -51,11 +52,8 @@ func setShapeRotation(OtherRotation:int=0)->void:
 		auxDirection= 0 if auxDirection == 1 else 180
 		get_node("Shape Pared").set_rotation_degrees(auxDirection)
 
-func shapeIsColliding()->bool:
+func isOnWall()->bool:
 	return get_node("Shape Pared").is_colliding()
 
 func getShapeDireccion()->int:
 	return 1 if get_node("Shape Pared").get_rotation_degrees() != 180 else -1
-
-func isOnFloor()->bool:
-	return get_node("Shape Piso").is_colliding()

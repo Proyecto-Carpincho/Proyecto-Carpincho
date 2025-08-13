@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://cy84g5jb5i82l"]
+[gd_scene load_steps=12 format=4 uid="uid://cy84g5jb5i82l"]
 
-[ext_resource type="Texture2D" uid="uid://fowm0tenege7" path="res://Sprites/Wasteland-Files.png" id="1_h2yge"]
-[ext_resource type="Texture2D" uid="uid://c481bs28p3l84" path="res://Sprites/Wasteland_Sky.png" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://bwy8mw68hmuas" path="res://Sprites/Tile set prueba.png" id="2_lquwl"]
+[ext_resource type="Texture2D" uid="uid://brpj3c85xngah" path="res://Sprites/Wasteland-Files.png" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://nw076mgo6ocp" path="res://Sprites/Wasteland_Sky.png" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://dpd222nvw6jnk" path="res://Sprites/Tile set prueba.png" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://cjmre3cjowgo6" path="res://Scenes/Character.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://113aa7y7fmak" path="res://Scenes/Enemigo blindado.tscn" id="5_kry3j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mycd"]
 texture = ExtResource("2_lquwl")
@@ -263,13 +262,10 @@ maxWalkVelocity = 200.0
 runVelocity = 125.0
 maxRunVelocity = 250.0
 extraJump = 1
-velocityJump = -275.0
-jumpMultiplyBoosted = 1.15
+extraJumpBoost = 1.6
+velocityJump = -150.0
+jumpMultiplyBoosted = 1.2
 wallVelocity = -7500.0
 buTimeIsActive = true
 bulletTimesec = 2.0
 Cooldown = 1.5
-
-[node name="Enemigo" parent="." node_paths=PackedStringArray("Jugador") instance=ExtResource("5_kry3j")]
-position = Vector2(176, -19)
-Jugador = NodePath("../Jugador")

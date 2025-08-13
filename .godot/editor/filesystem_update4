@@ -1,9 +1,11 @@
-res://Scenes/Character.tscn
+res://Scenes/main.tscn
 res://Shader/Bullet Time.tres
 res://Shader/Recarga.tres
 res://Shader/Linea.tres
-res://Scenes/main.tscn
+res://Scenes/Character.tscn
 res://Scenes/UI.tscn
 res://Scenes/Efectos Visuales.tscn
+res://Scenes/Habilidades Modulares/Dash.tscn
+res://Scenes/Enemigo blindado.tscn
+res://Scripts/Jugador/player.gd
 res://Scripts/Jugador/Estados Basicos Jugador.gd
-res://Scripts/Jugador/Estado Dash.gd

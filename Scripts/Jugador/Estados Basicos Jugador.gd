@@ -1,9 +1,11 @@
 extends StateMachine
 
-@onready var Parent:CharacterBody2D=get_parent()
-@export var DashNode:StateMachine
+@export var Player:CharacterBody2D=get_parent()
+@export var DashNode:Node2D
+
+@onready var TimerBulletTime:Timer = Player.get_node("Cooldown Bullet Time")
+@onready var TimerCoyote:Timer = Player.get_node("Timer Coyote")
 func _ready() -> void:
-	SetVelocity()
 	SetActualState("Quieto")
 
 func _physics_process(delta: float) -> void:
@@ -14,171 +16,205 @@ var inWall:bool
 func _PhysicsMatch(delta:float,State:String) -> void:
 	Ui.SetState(State)
 	if State in ["Correr","Quieto","Caminar"]:
-		Parent.setShapeRotation()
+		Player.setShapeRotation()
 	match State:
 		"Quieto":
-			Parent.velocity.x = move_toward(Parent.velocity.x,0,delta*250)
-			if Parent.inputWalk() != 0:
+			Player.velocity.x = move_toward(Player.velocity.x,0,delta*250)
+			if Player.inputWalk() != 0:
 				SetActualState("Caminar")
 			jump()
-			if not Parent.isOnFloor() and Parent.shapeIsColliding():
-				Parent.velocity.y=0
-				SetActualState("Colgado Pared")
-			if Parent.shapeIsColliding() and Parent.inputWall() != 0:
-				SetActualState("Deslizarse Pared")
+			InputToWall()
 
 		"Caminar":
-			Parent.velocity.x += Parent.inputWalk() * Parent.walkVelocity * delta
+			Player.velocity.x += Player.inputWalk() * Player.walkVelocity * delta
 			
-			if abs(Parent.velocity.x)>Parent.maxWalkVelocity:
-				Parent.velocity.x=Parent.inputWalk() * Parent.maxWalkVelocity
+			if abs(Player.velocity.x)>Player.maxWalkVelocity:
+				Player.velocity.x=Player.inputWalk() * Player.maxWalkVelocity
 			
-			if Parent.inputWalk() == 0:
+			if Player.inputWalk() == 0:
 				SetActualState("Quieto")
-			if Parent.inputRun():
+			if Player.inputRun():
 				SetActualState("Correr")
-			if Parent.shapeIsColliding():
-				Parent.velocity.y=0
-				SetActualState("Colgado Pared")
+			InputToWall()
 			
 			jump()
 			
-			var Direccion = -1 if Parent.velocity.x < 0 else 1
+			var Direccion = -1 if Player.velocity.x < 0 else 1
 			
-			if Direccion != Parent.inputWalk():
-				Parent.velocity.x = Parent.velocity.x*0.9
+			if Direccion != Player.inputWalk():
+				Player.velocity.x = Player.velocity.x*0.9
 
 		"Correr":
-			if Parent.inputWalk()!=0:
-				Parent.velocity.x += Parent.inputWalk() * Parent.runVelocity * delta
-				if abs(Parent.velocity.x)>Parent.maxRunVelocity:
+			if Player.inputWalk()!=0:
+				Player.velocity.x += Player.inputWalk() * Player.runVelocity * delta
+				if abs(Player.velocity.x)>Player.maxRunVelocity:
 					
-					Parent.velocity.x=Parent.inputWalk() * Parent.maxRunVelocity
+					Player.velocity.x=Player.inputWalk() * Player.maxRunVelocity
 				
-				var Direccion = -1 if Parent.velocity.x < 0 else 1
+				var Direccion = -1 if Player.velocity.x < 0 else 1
 			
-				if Direccion != Parent.inputWalk():
-					Parent.velocity.x = Parent.velocity.x*0.9
+				if Direccion != Player.inputWalk():
+					Player.velocity.x = Player.velocity.x*0.9
 			
-			if Parent.inputWalk() == 0 and not Parent.inputRun():
+			if Player.inputWalk() == 0 and not Player.inputRun():
 				SetActualState("Quieto")
-			if not Parent.inputRun():
+			if not Player.inputRun():
 				SetActualState("Caminar")
-			if Parent.shapeIsColliding():
-				Parent.velocity.y=0
-				SetActualState("Colgado Pared")
+			InputToWall()
 			
-			jump(Parent.jumpMultiplyBoosted)
+			jump(Player.jumpMultiplyBoosted)
 
 		"Colgado Pared":
 			inWall= true
-			if Parent.isOnFloor() or (not Parent.shapeIsColliding() and not Parent.isOnFloor()):
+			if Player.is_on_floor() or not Player.isOnWall():
 				SetActualState("Quieto")
 				inWall= false
-			if Parent.inputWall() != 0:
-				Parent.velocity.y=0
-				SetActualState("Deslizarse Pared")
-			if Parent.velocity.y<0:
 				
-				Parent.velocity.y = Parent.velocity.y *0.1
+			if Player.inputWall() != 0:
+				Player.velocity.y = 0
+				SetActualState("Deslizarse Pared")
+				
+			if Player.velocity.y < 0:
+				
+				Player.velocity.y = Player.velocity.y *0.1
 				
 			wallJump()
 
 		"Deslizarse Pared":
 			inWall= true
-			Parent.velocity.y = Parent.wallVelocity * 1.5 * Parent.inputWall() * delta
-			if Parent.isOnFloor() or (not Parent.shapeIsColliding() and not Parent.isOnFloor()):
+			Player.velocity.y = Player.wallVelocity * 1.5 * Player.inputWall() * delta
+			if (Player.is_on_floor() and Player.inputWall() == 0) or (not Player.isOnWall() and not Player.is_on_floor()):
 				SetActualState("Quieto")
-				inWall= false
-			if Parent.inputWall() == 0:
-				Parent.velocity.y=0
+				inWall = false
+				
+			if Player.inputWall() == 0:
+				Player.velocity.y = 0
 				SetActualState("Colgado Pared")
+				
 			wallJump()
 
 		"Muerte":
 			pass
 
-	#Default
+	#region Default cosas que todos los estados comparten
+	
+	
 	var EnDash:bool =DashNode.EnDash
 	if DashNode:
 		EnDash =DashNode.EnDash
 	
-	if not Parent.isOnFloor() and not EnDash:
-		var multiplyGravity:float= 1 if not inWall else Parent.gravityMultiplyWall
-		if Parent.velocity.y < Parent.maxGravity * multiplyGravity or State=="Deslizarse Pared":
-			Parent.velocity.y += Parent.gravity * multiplyGravity * delta
+
+	#Gravedad
+	if not Player.is_on_floor() and not EnDash and TimerCoyote.is_stopped():
+		var multiplyGravity:float= 1 if not inWall else Player.gravityMultiplyWall
+		if Player.velocity.y < Player.maxGravity * multiplyGravity or State=="Deslizarse Pared":
+			Player.velocity.y += Player.gravity * multiplyGravity * delta
 		else:
-			Parent.velocity.y = Parent.maxGravity * multiplyGravity
+			Player.velocity.y = Player.maxGravity * multiplyGravity
 	
-	
-	if Parent.life == 0:
+	if Player.life == 0:
 		SetActualState("Muerte")
 	#lo pongo aca por que x
-	if Input.is_action_just_pressed("Bullet Time") and Cooldown and Parent.buTimeIsActive:
+	if Input.is_action_just_pressed("Bullet Time") and Cooldown and Player.buTimeIsActive:
 		Cooldown = false
 		EfectosVisuales.RelentizarTiempo(0.3)
 		await get_tree().create_timer(0.15).timeout
 		Engine.time_scale = 0.35
-		await get_tree().create_timer(Parent.bulletTimesec).timeout
+		await get_tree().create_timer(Player.bulletTimesec).timeout
 		EfectosVisuales.RelentizarTiempo(1,false)
 		Engine.time_scale = 1
-		Parent.get_node("Cooldown Bullet Time").wait_time = Parent.Cooldown
-		Parent.get_node("Cooldown Bullet Time").start()
-		Ui.RecargaDash(Parent.Cooldown)
+		TimerBulletTime.wait_time = Player.Cooldown
+		TimerBulletTime.start()
+		Ui.RecargaBulletTime(Player.Cooldown)
 	
 	if Input.is_action_just_pressed("Dash")and(DashNode.ActualState.find("Dash") == -1):
 		DashNode.InicioEstado = true
-		DashNode.SetActualState("Dash")
-	
-	Parent.move_and_slide()
+		DashNode.SetEstadoActual("Dash")
+	CoyoteTime()
+	Player.move_and_slide()
+	#endregion
+
 var Cooldown:bool=true
 
 var Jumping:bool
 var ExtraJump:bool
-var boolJump
+var boolJump:bool
+func InputToWall():
+	if not Player.is_on_floor() and Player.isOnWall():
+		Player.velocity.y=0
+		SetActualState("Colgado Pared")
+	if Player.isOnWall() and Player.inputWall() != 0:
+		SetActualState("Deslizarse Pared")
+
+var a
 func jump(Multiply:float=1.0)->void:
-	if Parent.inputJump():
-		if Parent.is_on_floor() or Parent.isOnFloor():
-			CountJump=Parent.extraJump
+	if Player.is_on_floor():
+		a = true
+	if Player.inputJump():
+		if Player.is_on_floor() or (boolJump and a):
+			a = false
+			CountJump=Player.extraJump
 			Jumping=true
 			boolJump=true
+			if boolJump:
+				Player.velocity.y = 0 
+				boolJump = false
+				TimerCoyote.stop()
 		elif CountJump!=0:
+			if Player.velocity.y < 0:
+				Player.velocity.y = 0
+			 
 			CountJump-=1
 			Jumping=true
 			ExtraJump=true
-	if Parent.is_on_floor():
-		CountJump=Parent.extraJump
+	if Player.is_on_floor():
+		CountJump=Player.extraJump
 	if Jumping:
 		if not ExtraJump:
-			Parent.velocity.y+=Parent.velocityJump*Multiply* 0.1
-			if Parent.velocity.y < Parent.velocityJump*Multiply or not Parent.inputIsJumping():
+			Player.velocity.y+=Player.velocityJump*Multiply* 0.25
+			if Player.velocity.y < Player.velocityJump*Multiply or not Player.inputIsJumping():
 				Jumping=false
 		else:
 			ExtraJump=false
-			Parent.velocity.y=Parent.velocityJump*Multiply
-			
-
+			Player.velocity.y=Player.velocityJump*Multiply* Player.extraJumpBoost
 
 var wallDirection:int
 func wallJump()->void:
 	##hay un bug donde cuando se pone una posicion muy justa y saltas estando en el estado "quieto" salta y la variable Jumping hace cosas raras y se pone a volar
-	if Parent.inputJump():
-		if Parent.shapeIsColliding():
-			CountJump=Parent.extraJump
+	if Player.inputJump():
+		if Player.isOnWall():
+			CountJump=Player.extraJump
 			Jumping=true
-			wallDirection=Parent.getShapeDireccion()
-			Parent.velocity.y=0
+			wallDirection=Player.getShapeDireccion()
+			Player.velocity.y=0
 	if Jumping:
 		if wallDirection == 0:
-			wallDirection=Parent.getShapeDireccion()
-		Parent.setShapeRotation(-1 * wallDirection)
-		if not Parent.shapeIsColliding():
-			Parent.velocity.y+=Parent.velocityJump* 0.8
-			Parent.velocity.x=-1 * wallDirection * Parent.runVelocity * 1.5
+			wallDirection=Player.getShapeDireccion()
+		Player.setShapeRotation(-1 * wallDirection)
+		if not Player.isOnWall():
+			Player.velocity.y+=Player.velocityJump* 0.8
+			Player.velocity.x=-1 * wallDirection * Player.runVelocity * 1.5
 		
 	else:
 		wallDirection=0
 
-
 func _on_bullet_time_timeout() -> void:
 	Cooldown = true
+
+var Enpiso:bool
+func CoyoteTime():
+	if Player.is_on_floor():
+		TimerCoyote.stop()
+		Enpiso = true
+		boolJump = false
+	elif TimerCoyote.is_stopped() and Enpiso:
+		TimerCoyote.start()
+		Enpiso =false
+		boolJump = true
+	
+	
+
+
+func _on_timer_coyote_timeout() -> void:
+	boolJump = false
+	pass # Replace with function body.
