@@ -25,6 +25,7 @@ extends CharacterBody2D
 
 @export_group("Wall")
 @export var wallVelocity:float
+@export var wallJumpVelocity:float
 
 @export_group("Bullet Time")
 @export var buTimeIsActive:bool

@@ -16,6 +16,7 @@ var EnDash:bool
 var InicioEstado:bool
 var PrimerFrameEnDash:bool
 var TiempoDeRecarga:float
+
 func _PhysicsMatch(delta:float,State:String) -> void:
 	match State:
 		"Dash":

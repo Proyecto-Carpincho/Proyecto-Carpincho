@@ -1,18 +1,46 @@
 extends StateMachine
 
+
+"""
+	Estados Basicos Jugador:
+		#Funcion:
+			Ser los la maquina de estado principal del jugador
+		#Notas:
+			Aun esta en proceso asi que no es del todo entendible su funcionamiento 
+			(especialmente en nombres de funciones y variables). 
+			Voy poco a poco mejorando eso
+			tiene 248 lineas 👀 siempre llego a casi las 300 por alguna razon (Te estoy viendo Cinematic Player)"""
+
+#region Variables
 @export var Player:CharacterBody2D=get_parent()
+##Nodo padre de la escena Dash
 @export var DashNode:Node2D
 
+var CountJump:int
+var inWall:bool
+var Cooldown:bool=true
+var Jumping:bool
+var ExtraJump:bool
+var IsInCoyoteTime:bool
+var a:bool #Buen nombre eh
+var wallDirection:int
+var InFloor:bool
+
+
+#region Timers
 @onready var TimerBulletTime:Timer = Player.get_node("Cooldown Bullet Time")
 @onready var TimerCoyote:Timer = Player.get_node("Timer Coyote")
+#endregion
+#endregion Variables
+
+
 func _ready() -> void:
 	SetActualState("Quieto")
 
 func _physics_process(delta: float) -> void:
 	ExecutePhysics(delta)
 
-var CountJump:int
-var inWall:bool
+
 func _PhysicsMatch(delta:float,State:String) -> void:
 	Ui.SetState(State)
 	if State in ["Correr","Quieto","Caminar"]:
@@ -105,16 +133,20 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 	
 
 	#Gravedad
-	if not Player.is_on_floor() and not EnDash and TimerCoyote.is_stopped():
+	#este if actua cuando no esta en el piso, no tiene coyote time y ademas no esta Dasheando
+	if (not Player.is_on_floor() and TimerCoyote.is_stopped()) and not EnDash:
 		var multiplyGravity:float= 1 if not inWall else Player.gravityMultiplyWall
-		if Player.velocity.y < Player.maxGravity * multiplyGravity or State=="Deslizarse Pared":
+		
+		if Player.velocity.y < (Player.maxGravity * multiplyGravity) or State=="Deslizarse Pared":
 			Player.velocity.y += Player.gravity * multiplyGravity * delta
 		else:
 			Player.velocity.y = Player.maxGravity * multiplyGravity
 	
+	#estado para morir
 	if Player.life == 0:
+		#Aun no tiene nada por que no tenemos interfaz aun para poner algo como "te moriste we"
 		SetActualState("Muerte")
-	#lo pongo aca por que x
+	#region Bullet time
 	if Input.is_action_just_pressed("Bullet Time") and Cooldown and Player.buTimeIsActive:
 		Cooldown = false
 		EfectosVisuales.RelentizarTiempo(0.3)
@@ -126,19 +158,19 @@ func _PhysicsMatch(delta:float,State:String) -> void:
 		TimerBulletTime.wait_time = Player.Cooldown
 		TimerBulletTime.start()
 		Ui.RecargaBulletTime(Player.Cooldown)
+	#endregion Bullet time
 	
+	#Input Dash
 	if Input.is_action_just_pressed("Dash")and(DashNode.ActualState.find("Dash") == -1):
+		#dato importante uso al nodo que es padre del state machine como intermediario. 
+		#Ya que como es una escena distinta no puedo acceder a sus nodos hijos (bueno si puedo pero no debo)
 		DashNode.InicioEstado = true
 		DashNode.SetEstadoActual("Dash")
 	CoyoteTime()
 	Player.move_and_slide()
 	#endregion
 
-var Cooldown:bool=true
 
-var Jumping:bool
-var ExtraJump:bool
-var boolJump:bool
 func InputToWall():
 	if not Player.is_on_floor() and Player.isOnWall():
 		Player.velocity.y=0
@@ -146,19 +178,18 @@ func InputToWall():
 	if Player.isOnWall() and Player.inputWall() != 0:
 		SetActualState("Deslizarse Pared")
 
-var a
+
 func jump(Multiply:float=1.0)->void:
 	if Player.is_on_floor():
 		a = true
 	if Player.inputJump():
-		if Player.is_on_floor() or (boolJump and a):
+		if Player.is_on_floor() or (IsInCoyoteTime and a):
 			a = false
 			CountJump=Player.extraJump
 			Jumping=true
-			boolJump=true
-			if boolJump:
+			if IsInCoyoteTime:
 				Player.velocity.y = 0 
-				boolJump = false
+				IsInCoyoteTime = false
 				TimerCoyote.stop()
 		elif CountJump!=0:
 			if Player.velocity.y < 0:
@@ -169,6 +200,8 @@ func jump(Multiply:float=1.0)->void:
 			ExtraJump=true
 	if Player.is_on_floor():
 		CountJump=Player.extraJump
+	
+	#el input y el salto estan en partes distintas para hacer que el jugador pueda nivelar la fuerza del salto hasta un maximo
 	if Jumping:
 		if not ExtraJump:
 			Player.velocity.y+=Player.velocityJump*Multiply* 0.25
@@ -178,7 +211,7 @@ func jump(Multiply:float=1.0)->void:
 			ExtraJump=false
 			Player.velocity.y=Player.velocityJump*Multiply* Player.extraJumpBoost
 
-var wallDirection:int
+
 func wallJump()->void:
 	##hay un bug donde cuando se pone una posicion muy justa y saltas estando en el estado "quieto" salta y la variable Jumping hace cosas raras y se pone a volar
 	if Player.inputJump():
@@ -192,7 +225,7 @@ func wallJump()->void:
 			wallDirection=Player.getShapeDireccion()
 		Player.setShapeRotation(-1 * wallDirection)
 		if not Player.isOnWall():
-			Player.velocity.y+=Player.velocityJump* 0.8
+			Player.velocity.y+=Player.wallJumpVelocity
 			Player.velocity.x=-1 * wallDirection * Player.runVelocity * 1.5
 		
 	else:
@@ -201,20 +234,15 @@ func wallJump()->void:
 func _on_bullet_time_timeout() -> void:
 	Cooldown = true
 
-var Enpiso:bool
 func CoyoteTime():
 	if Player.is_on_floor():
 		TimerCoyote.stop()
-		Enpiso = true
-		boolJump = false
-	elif TimerCoyote.is_stopped() and Enpiso:
+		InFloor = true
+		IsInCoyoteTime = false
+	elif TimerCoyote.is_stopped() and InFloor:
 		TimerCoyote.start()
-		Enpiso =false
-		boolJump = true
-	
-	
-
+		InFloor =false
+		IsInCoyoteTime = true
 
 func _on_timer_coyote_timeout() -> void:
-	boolJump = false
-	pass # Replace with function body.
+	IsInCoyoteTime = false

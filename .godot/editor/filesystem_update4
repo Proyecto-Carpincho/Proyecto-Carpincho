@@ -1,11 +1,15 @@
-res://Scenes/main.tscn
+res://Scenes/Character.tscn
 res://Shader/Bullet Time.tres
 res://Shader/Recarga.tres
 res://Shader/Linea.tres
-res://Scenes/Character.tscn
+res://Scenes/Habilidades Modulares/Dash.gd
+res://Scripts/Jugador/Estados Basicos Jugador.gd
+res://addons/State Machine Ultimate/StMachine Ultimate.gd
+res://Scripts/UI.gd
+res://Scripts/Jugador/Habilidades Modulares/Dash/Estado Dash.gd
+res://Scenes/main.tscn
 res://Scenes/UI.tscn
 res://Scenes/Efectos Visuales.tscn
 res://Scenes/Habilidades Modulares/Dash.tscn
 res://Scenes/Enemigo blindado.tscn
 res://Scripts/Jugador/player.gd
-res://Scripts/Jugador/Estados Basicos Jugador.gd
