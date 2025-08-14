@@ -1,3 +1,5 @@
+CollisionShape2D
+StaticBody2D
 Timer
 HBoxContainer
 TextureRect
@@ -10,5 +12,3 @@ ColorRect
 ShapeCast2D
 RichTextLabel
 Label
-CollisionShape2D
-StaticBody2D

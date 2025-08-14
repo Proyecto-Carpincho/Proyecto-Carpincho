@@ -16,4 +16,4 @@ func RecargaDash(TiempodeEspera:float = 0.4):
 	get_tree().create_tween().tween_property(IconoMaterial,"shader_parameter/Tiempo",1.0,TiempodeEspera)
 
 func SetState(state:String)->void:
-	get_node("Control/Panel/RichTextLabel").text=state
+	get_node("Control/Panel/RichTextLabel").text=" Estado actual: "+state

@@ -49,9 +49,10 @@ mouse_filter = 2
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 offset_top = -549.0
-offset_right = 267.0
+offset_right = 697.0
 offset_bottom = -472.0
 theme_override_font_sizes/normal_font_size = 30
+text = " Estado actual: "
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel"]

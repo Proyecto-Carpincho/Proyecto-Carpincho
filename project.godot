@@ -20,6 +20,11 @@ config/icon="res://icon.svg"
 EfectosVisuales="*res://Scenes/Efectos Visuales.tscn"
 Ui="*res://Scenes/UI.tscn"
 
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/State Machine Ultimate/plugin.cfg")
