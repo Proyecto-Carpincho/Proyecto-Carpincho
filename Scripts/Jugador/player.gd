@@ -48,7 +48,7 @@ func inputIsJumping()->bool:
 	return Input.is_action_pressed("Jump")
 
 func setShapeRotation(OtherRotation:int=0)->void:
-	var auxDirection:int=inputWalk() if OtherRotation == 0 else OtherRotation
+	var auxDirection:int= int(inputWalk()) if OtherRotation == 0 else OtherRotation
 	if auxDirection!=0:
 		auxDirection= 0 if auxDirection == 1 else 180
 		get_node("Shape Pared").set_rotation_degrees(auxDirection)

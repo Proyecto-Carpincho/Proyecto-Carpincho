@@ -6,7 +6,7 @@ func RelentizarTiempo(Tiempo:float,DetenerTiempo:bool=true,ColorBorde:Color=Colo
 	var ShaderTiem:ShaderMaterial = RelTiemp.material
 	ShaderTiem.set_shader_parameter("ColorDelBorde",ColorBorde)
 	get_tree().create_tween().tween_property(ShaderTiem,"shader_parameter/ColorDelFondo",ColorFondo,Tiempo)
-	var Relentiza:float = 0.3 if DetenerTiempo else 1
+	var Relentiza:float = 0.3 if DetenerTiempo else 1.0
 	get_tree().create_tween().tween_property(ShaderTiem,"shader_parameter/Bordeado",Relentiza,Tiempo)
 	if not DetenerTiempo:
 		get_tree().create_tween().tween_property(ShaderTiem,"shader_parameter/ColorDelFondo",Color(0.0, 0.0, 0.0, 0.0),Tiempo)
