@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh5jliaeyj4fu"]
+
+[ext_resource type="Script" uid="uid://bu8rwuldekqp" path="res://Scripts/Em/Enemigo.gd" id="1_ca2nf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7adxk"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"block",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"counter",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"placaje",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"stun",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"turn",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ca2nf"]
+
+[node name="HeavyCop" type="CharacterBody2D"]
+script = ExtResource("1_ca2nf")
+metadata/_custom_type_script = "uid://bu8rwuldekqp"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7adxk")
+animation = &"stun"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ca2nf")
