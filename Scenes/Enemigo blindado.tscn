@@ -13,25 +13,25 @@ height = 56.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8s8li"]
 radius = 341.119
 
-[node name="Enemigo" type="CharacterBody2D"]
+[node name="EnemigoBlindado" type="CharacterBody2D"]
 collision_layer = 4
 wall_min_slide_angle = 0.0
+floor_block_on_wall = false
 script = ExtResource("1_p2sjk")
 
 [node name="Escudo" type="StaticBody2D" parent="."]
-position = Vector2(0, -26)
+position = Vector2(30, -25)
 scale = Vector2(0.251518, 0.394352)
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Escudo"]
-position = Vector2(180, 0)
+[node name="escudoColl" type="CollisionShape2D" parent="Escudo"]
+position = Vector2(-0.901627, 1.2679)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_4qtsd")
-one_way_collision = true
 
 [node name="Icon2" type="Sprite2D" parent="Escudo"]
-position = Vector2(198.793, 0)
+position = Vector2(17.8914, 1.2679)
 scale = Vector2(0.776535, 1.01036)
 texture = ExtResource("2_qws2e")
 
@@ -41,7 +41,7 @@ position = Vector2(0, -26)
 scale = Vector2(0.251518, 0.394352)
 texture = ExtResource("2_qws2e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="enemyColl" type="CollisionShape2D" parent="."]
 position = Vector2(0, -26)
 rotation = 3.14159
 shape = SubResource("CapsuleShape2D_4qtsd")
