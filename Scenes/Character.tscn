@@ -1,85 +1,67 @@
-[gd_scene load_steps=10 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=7 format=3 uid="uid://cjmre3cjowgo6"]
 
-[ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/player.gd" id="1_7ig0a"]
-[ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_lcuhw"]
-[ext_resource type="Script" uid="uid://btvsu1trjovfw" path="res://Scripts/dash Node.gd" id="3_atbvg"]
-[ext_resource type="Script" uid="uid://i3yr45r3cjl7" path="res://Scripts/Daño.gd" id="4_atbvg"]
-[ext_resource type="Script" uid="uid://c7sgyctyy5jgk" path="res://Scripts/ataque Node.gd" id="5_vdqda"]
+[ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/Jugador/player.gd" id="1_7ig0a"]
+[ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_677pu"]
+[ext_resource type="Script" uid="uid://ds1vj1qx7bbci" path="res://Scripts/Jugador/Estados Basicos Jugador.gd" id="2_jo2ib"]
+[ext_resource type="PackedScene" uid="uid://q80g1s5p6aln" path="res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn" id="4_v7dgu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_atbvg"]
-radius = 15.72
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
+size = Vector2(30, 43)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcuhw"]
-size = Vector2(2, 15)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_cxxw8"]
-radius = 18.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xloa1"]
-height = 58.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_677pu"]
+size = Vector2(20, 40)
 
 [node name="Jugador" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 7
+z_index = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 3.14159
+safe_margin = 2.0
 script = ExtResource("1_7ig0a")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.999978, 0)
-scale = Vector2(0.242187, 0.253906)
-texture = ExtResource("2_lcuhw")
+gravityMultiplyWall = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_atbvg")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_xloa1")
+debug_color = Color(0, 0.6, 0.701961, 1)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -1.90735e-06)
+scale = Vector2(0.25, 0.35)
+texture = ExtResource("2_677pu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.3, 1.3)
+zoom = Vector2(1.5, 1.5)
 
-[node name="Timer Maxima Culaso" type="Timer" parent="."]
-wait_time = 0.3
+[node name="Central State Machine" type="Node" parent="." node_paths=PackedStringArray("Player", "AtaqueNodo")]
+script = ExtResource("2_jo2ib")
+Player = NodePath("..")
+AtaqueNodo = NodePath("../Bate Beisboll")
+PhysicsStates = Dictionary[String, NodePath]({
+"Caminar": NodePath("."),
+"Colgado Pared": NodePath("."),
+"Correr": NodePath("."),
+"Deslizarse Pared": NodePath("."),
+"Estado Intermedio": NodePath("."),
+"Muerte": NodePath("."),
+"Quieto": NodePath(".")
+})
+metadata/_custom_type_script = "uid://ci1ayib00djei"
+
+[node name="Shape Pared" type="ShapeCast2D" parent="."]
+shape = SubResource("RectangleShape2D_677pu")
+target_position = Vector2(10, 0)
+
+[node name="Cooldown Bullet Time" type="Timer" parent="."]
 one_shot = true
 
-[node name="Dash" type="Node2D" parent="."]
-script = ExtResource("3_atbvg")
-
-[node name="Line2D" type="Line2D" parent="Dash"]
-points = PackedVector2Array(0, 0, 0, 0)
-
-[node name="TiempoDeDash" type="Timer" parent="Dash"]
+[node name="Timer Coyote" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
-ignore_time_scale = true
 
-[node name="TiempoRecarga" type="Timer" parent="Dash"]
-wait_time = 2.0
-one_shot = true
-ignore_time_scale = true
+[node name="Bate Beisboll" parent="." node_paths=PackedStringArray("PlayerMachine", "Player") instance=ExtResource("4_v7dgu")]
+TieneAtaqueFuerte = false
+PlayerMachine = NodePath("../Central State Machine")
+Player = NodePath("..")
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="Dash"]
-shape = SubResource("RectangleShape2D_lcuhw")
-target_position = Vector2(25, 0)
-
-[node name="Vida" type="Node2D" parent="."]
-script = ExtResource("4_atbvg")
-
-[node name="Area2D" type="Area2D" parent="Vida"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vida/Area2D"]
-shape = SubResource("CircleShape2D_cxxw8")
-
-[node name="Ataque" type="Node2D" parent="."]
-script = ExtResource("5_vdqda")
-
-[node name="Area2D" type="Area2D" parent="Ataque"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ataque/Area2D"]
-position = Vector2(39, 0)
-shape = SubResource("CapsuleShape2D_xloa1")
-debug_color = Color(0, 0.638775, 0.374586, 0.42)
-
-[connection signal="timeout" from="Timer Maxima Culaso" to="." method="_Timeout_MaximaCulaso"]
-[connection signal="timeout" from="Dash/TiempoDeDash" to="Dash" method="StopTimer"]
-[connection signal="area_entered" from="Vida/Area2D" to="Dash" method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Ataque/Area2D" to="Ataque" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Cooldown Bullet Time" to="Central State Machine" method="_on_bullet_time_timeout"]
+[connection signal="timeout" from="Timer Coyote" to="Central State Machine" method="_on_timer_coyote_timeout"]
