@@ -1,12 +1,7 @@
 res://Scenes/main.tscn
-res://Shader/Bullet Time.tres
+res://Shader/Bullet Time.gdshader
 res://Shader/Recarga.tres
-res://Shader/Linea.tres
-res://Shader/Viento Dash.tres
+res://Scripts/enemigo.gd
+res://Scenes/Enemigo blindado.tscn
 res://Scenes/Character.tscn
 res://Scenes/UI.tscn
-res://Scenes/Efectos Visuales.tscn
-res://Scenes/Habilidades Modulares/Dash/Dash Normal.tscn
-res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn
-res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Dash.gd
-res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Estado Dash.gd

@@ -7,52 +7,67 @@ const GravedadMax = 200
 @onready var Navegacion:NavigationAgent2D = $NavigationAgent2D
 
 func _physics_process(delta: float) -> void:
-
+	
 	Moviminento()
 	Gravedad(delta)
 	Escudo()
 
 	#Solo por ahora tiene esto que esta mal
-	velocity.x += VelocidadEmpuje.x
+	velocity += VelocidadEmpuje
 	move_and_slide()
 
 func Escudo():
-	if velocity.x != 0:
-		if velocity.x < 0 && $Escudo.global_position.x > 0:
-			$Escudo.position.x = -30
-		elif velocity.x > 0 && $Escudo.global_position.x < 0:
-			$Escudo.position.x = 30
-		 
-	# TODO ¿Que hace "vistaPersonaje"? 
-	
-	"""RESPUESTA: la variable VistaPersonaje la variable de rotacion de un nodo que tiene raycast que revisa si el jugador esta siendo "visto" por los raycast
-	 con eso hace que si mira hacia un lado y el jugador esta siendo visto por el enemigo revise si lo esta viendo a su izquierda o su derecha
-	y vaya hacia la direccion de su vista
-	Y la variable elEscudoVe no me acuerdo por que esta ahi y es totalmente inutil ahora"""
-	
-	#var elEscudoVe:int = 1 if get_node("Escudo").rotation == 0 else -1
-	#var VistaPersonaje:int =1 if abs(get_node("VisionPersonaje").rotation) < 1.5 else -1
-	#if velocity.normalized().x !=0:
-		#if velocity.normalized().x < 0 and VistaPersonaje < 0:
-			#$Escudo.position.x *= -1
-		#elif VistaPersonaje > 0:
-			#get_node("Escudo").rotation_degrees = 0
+	var elEscudoVe:int = 1 if get_node("Escudo").rotation == 0 else -1
+	var VistaPersonaje:int =1 if abs(get_node("VisionPersonaje").rotation) < 1.5 else -1
+	if velocity.normalized().x !=0:
+		if velocity.normalized().x < 0 and VistaPersonaje < 0:
+			get_node("Escudo").rotation_degrees = 180
+		elif VistaPersonaje > 0:
+			get_node("Escudo").rotation_degrees = 0
 
 func Moviminento():
-	
+	var auxPathPosicion:Vector2=Navegacion.get_next_path_position()
 	var DistanciaAlJugador:float = Jugador.global_position.distance_to(global_position)
-	Navegacion.target_position = Jugador.global_position
-	var direccion:Vector2 = (Navegacion.get_next_path_position() - global_position).normalized()
 	#Comprobacion Si esta o muy cerca o muy lejos del jugaodor para moverse (para que no paresca que este hujendole pues)
-	if (DistanciaAlJugador < 78 or DistanciaAlJugador > 100) or get_node("Tiempo Recalcular Movimiento").is_stopped():
-		velocity = direccion * SPEED
+	if (DistanciaAlJugador < 80 or DistanciaAlJugador > 100) or get_node("Tiempo Recalcular Movimiento").is_stopped():
+		velocity.x = global_position.direction_to(auxPathPosicion).normalized().x * SPEED
 	else:
 		velocity.x = 0.0
 	if is_on_wall():
-		#TODO agregar escalar muros
-		velocity.y = 100
-	else: 
-		velocity.y = 0
+		var VelocidadEscalar = global_position.direction_to(auxPathPosicion).normalized().y * SPEED 
+		VelocidadEscalar = VelocidadEscalar if abs(VelocidadEscalar) > 50 else 50 * VelocidadEscalar/abs(VelocidadEscalar)
+		velocity.y = VelocidadEscalar
 
 func Gravedad(delta):
 	var auxGravedad = get_gravity()
+	if not is_on_floor() and not is_on_wall():
+		if velocity.y + auxGravedad.y < GravedadMax:
+			velocity.y += auxGravedad.y * delta
+		else:
+			velocity.y = GravedadMax
+
+
+
+func _process(_delta: float) -> void:
+	if ComprobacionJugador() and EstaEnVision():
+		if get_node("Tiempo Recalcular Movimiento").is_stopped():
+			get_node("Tiempo Recalcular Movimiento").start()
+	elif get_node("Tiempo Perderlo de vista").is_stopped():
+		get_node("Tiempo Perderlo de vista").start()
+
+func ComprobacionJugador() -> bool:
+	var Deteccion:Area2D = get_node("AreaDeteccion")
+	return Deteccion.get_overlapping_bodies().find(Jugador) != -1
+
+
+
+func _Timeout() -> void:
+	
+	var Posicion = Jugador.global_position
+	if not (abs(Posicion.y - position.y) > 20):
+		Posicion.x += -100 if Jugador.position.x - position.x > 0 else 100 
+	Navegacion.target_position  = Posicion
+
+
+func _Timout_PerderloVista() -> void:
+	get_node("Tiempo Recalcular Movimiento").stop()
