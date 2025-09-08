@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://c2sirg4no04bb"]
 
-[ext_resource type="Script" uid="uid://bnn4cdijx1ixg" path="res://Scripts/Jugador/Habilidades Modulares/Dash/Dash.gd" id="1_hfd5j"]
-[ext_resource type="Shader" uid="uid://bq45bc81yb4sr" path="res://Shader/Linea.tres" id="1_p2jnp"]
-[ext_resource type="Texture2D" uid="uid://bwy0wlcn0e62w" path="res://Sprites/Flecha.png" id="2_hfd5j"]
-[ext_resource type="Script" uid="uid://c76pnj52yjy3k" path="res://Scripts/Jugador/Habilidades Modulares/Dash/Estado Dash.gd" id="3_k46e4"]
-[ext_resource type="Shader" uid="uid://debvgkj4sm887" path="res://Shader/Viento Dash.tres" id="4_k46e4"]
+[ext_resource type="Script" uid="uid://bnn4cdijx1ixg" path="res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Dash.gd" id="1_ynpgg"]
+[ext_resource type="Shader" uid="uid://bq45bc81yb4sr" path="res://Shader/Linea.tres" id="2_g52h7"]
+[ext_resource type="Texture2D" uid="uid://bwy0wlcn0e62w" path="res://Sprites/Flecha.png" id="3_8y2wp"]
+[ext_resource type="Shader" uid="uid://debvgkj4sm887" path="res://Shader/Viento Dash.tres" id="4_mndbs"]
+[ext_resource type="Script" uid="uid://c76pnj52yjy3k" path="res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Estado Dash.gd" id="5_o4aw0"]
 
 [sub_resource type="Gradient" id="Gradient_rwvdt"]
 interpolation_mode = 1
@@ -22,8 +22,8 @@ color_ramp = SubResource("Gradient_rwvdt")
 noise = SubResource("FastNoiseLite_wkmx2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lcsl6"]
-shader = ExtResource("1_p2jnp")
-shader_parameter/Frente = ExtResource("2_hfd5j")
+shader = ExtResource("2_g52h7")
+shader_parameter/Frente = ExtResource("3_8y2wp")
 shader_parameter/Fondo = SubResource("NoiseTexture2D_omicx")
 
 [sub_resource type="Gradient" id="Gradient_1cjf1"]
@@ -51,7 +51,7 @@ color_ramp = SubResource("Gradient_k46e4")
 noise = SubResource("FastNoiseLite_rwvdt")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwvdt"]
-shader = ExtResource("4_k46e4")
+shader = ExtResource("4_mndbs")
 shader_parameter/VientoTextura = SubResource("NoiseTexture2D_wkmx2")
 shader_parameter/Reduccion = 0.37
 shader_parameter/Alpha = 1.0
@@ -62,8 +62,11 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="Dash" type="Node2D" node_paths=PackedStringArray("DashNode")]
-script = ExtResource("1_hfd5j")
+script = ExtResource("1_ynpgg")
 DashNode = NodePath("State Dash")
+TiempoDeRecarga = 1.0
+TiempoDeDash = 0.5
+DistanciaMaxima = 150.0
 
 [node name="Line2D" type="Line2D" parent="."]
 z_index = -1
@@ -84,7 +87,7 @@ width_curve = SubResource("Curve_k46e4")
 texture_mode = 2
 
 [node name="State Dash" type="Node" parent="."]
-script = ExtResource("3_k46e4")
+script = ExtResource("5_o4aw0")
 PhysicsStates = Dictionary[String, NodePath]({
 "Dash": NodePath("."),
 "SinDash": NodePath(".")

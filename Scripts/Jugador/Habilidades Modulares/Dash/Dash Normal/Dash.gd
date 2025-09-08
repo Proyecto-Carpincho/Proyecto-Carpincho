@@ -14,12 +14,24 @@ Nodo Dash:
 #region === Export variables ===
 @export var DashNode:StateMachine          ## Referencia a la máquina de estados específica del Dash
 @export var Player:CharacterBody2D         ## Referencia al jugador
-@export var CentralStateMachine:StateMachine ## Referencia a la máquina de estados central del personaje
+@export var PlayerMachine:StateMachine ## Referencia a la máquina de estados central del personaje
 
 @export var TiempoDeRecarga:float:         ## Tiempo de recarga del dash
 	set(Var):
 		TiempoDeRecarga = Var
-		DashNode.TiempoDeRecarga = Var      ## Se propaga el valor hacia el nodo Dash interno
+		if not is_node_ready():
+			await ready
+		get_node("Timer Recarga").wait_time = Var
+
+@export var TiempoDeDash:float:
+	set(Var):
+		TiempoDeDash = Var
+		if not is_node_ready():
+			await ready
+		get_node("Timer Dash").wait_time = Var
+@export var DistanciaMaxima:float
+@export var Velocidad:float
+
 #endregion
 
 

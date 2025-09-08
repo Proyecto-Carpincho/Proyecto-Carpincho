@@ -1,7 +1,6 @@
 extends StateMachine
 
 #region === Referencias a nodos del padre ===
-@onready var Player:CharacterBody2D = get_parent().Player   ## Personaje principal controlado por el estado 
 @onready var Line2d:Line2D = get_parent().get_node("Line2D") ## Línea que indica dirección del dash 
 @onready var Viento:Line2D = get_parent().get_node("Line2D2") ## Línea que simula el efecto de viento durante el dash 
 @onready var timerDash:Timer = get_parent().get_node("Timer Dash") ## Timer que controla la duración del dash 
@@ -17,10 +16,9 @@ var velocidadPostion:Vector2   ## (No usada aún, parece reservada para cálculo
 var EnDash:bool                 ## Indica si el jugador está actualmente en un dash |
 var InicioEstado:bool           ## Marca si es el inicio del estado (primer frame en Dash) |
 var PrimerFrameEnDash:bool      ## True solo en el primer frame del dash |
-var TiempoDeRecarga:float       ## Tiempo de recarga antes de poder volver a usar dash |
 var CambioStado:bool            ## Marca si hubo un cambio de estado entre Dash/SinDash |
 var EstadoAnterior:String       ## Guarda el estado anterior antes de entrar en Dash |
-var ActivarViento:bool                   ## Flag usado para inicializar animación del viento |
+var ActivarViento:bool          ## Flag usado para inicializar animación del viento |
 #endregion
 
 
@@ -55,16 +53,16 @@ func _PhysicsMatch(_delta: float, State: String) -> void:
 				# Actualizar la línea de dirección hacia el mouse
 				if Line2d.is_visible():
 					MousePosition = get_parent().get_local_mouse_position()
-					MousePosition = MousePosition if MousePosition.length() < 150 else MousePosition.normalized() * 150
+					MousePosition = MousePosition if MousePosition.length() < get_parent().DistanciaMaxima else MousePosition.normalized() * get_parent().DistanciaMaxima
 					GlobalMouse = get_parent().to_global(MousePosition)
 					Line2d.set_point_position(1, MousePosition)
 
 				# Inicio del dash al presionar la tecla
 				if Input.is_action_just_pressed("Dash") and not InicioEstado:
-					# Asegura que el CentralStateMachine cambie a un estado intermedio
-					if get_parent().CentralStateMachine.ActualState[0] != "Estado Intermedio":
-						EstadoAnterior = get_parent().CentralStateMachine.ActualState[0]
-						get_parent().CentralStateMachine.SetActualState("Estado Intermedio")
+					# Asegura que el PlayerMachine cambie a un estado intermedio
+					if get_parent().PlayerMachine.ActualState[0] != "Estado Intermedio":
+						EstadoAnterior = get_parent().PlayerMachine.ActualState[0]
+						get_parent().PlayerMachine.SetActualState("Estado Intermedio")
 					ActivarViento = true
 					Line2d.set_visible(false)
 					EnDash = true
@@ -75,7 +73,7 @@ func _PhysicsMatch(_delta: float, State: String) -> void:
 				# Mientras esté en dash
 				if EnDash:
 					# Rotación según dirección X
-					Player.setShapeRotation(1 if MousePosition.normalized().x > 0 else -1)
+					get_parent().Player.setShapeRotation(1 if MousePosition.normalized().x > 0 else -1)
 
 					# Dirección hacia el mouse (limitada en Y para evitar dash muy verticales)
 					var dir = MousePosition.normalized()
@@ -83,11 +81,11 @@ func _PhysicsMatch(_delta: float, State: String) -> void:
 					dir = dir.normalized()
 
 					# Velocidad objetivo del dash
-					var target_velocity = dir * 1250  
+					var target_velocity = dir * get_parent().Velocidad  
 
 					# Movimiento interpolado hacia la velocidad objetivo
 					var acceleration_factor = 0.2
-					Player.velocity = Player.velocity.lerp(target_velocity, acceleration_factor)
+					get_parent().Player.velocity = get_parent().Player.velocity.lerp(target_velocity, acceleration_factor)
 
 					# Animación visual del viento
 					MovimientoViento()
@@ -95,16 +93,16 @@ func _PhysicsMatch(_delta: float, State: String) -> void:
 					# Condiciones de salida del dash
 					if not PrimerFrameEnDash and (
 						timerDash.is_stopped() 
-						or Player.global_position.distance_to(GlobalMouse) < 10 
-						or Player.global_position.distance_to(GlobalMouse) > 200 
+						or get_parent().Player.global_position.distance_to(GlobalMouse) < 10 
+						or get_parent().Player.global_position.distance_to(GlobalMouse) > get_parent().DistanciaMaxima * 1.3 
 						or Input.is_action_pressed("Jump") 
-						or Player.isOnWall()
+						or get_parent().Player.isOnWall()
 					):
-						Player.velocity *= 0.3  # Frenar al salir
+						get_parent().Player.velocity *= 0.3  # Frenar al salir
 						EnDash = false
-						timerRecarga.wait_time = TiempoDeRecarga
+						
 						timerRecarga.start()
-						Ui.RecargaDash(TiempoDeRecarga)  # Llamada a UI
+						Ui.RecargaDash(timerRecarga.wait_time)  # Llamada a UI
 						SetActualState("SinDash")
 
 				# Reset de banderas
@@ -118,7 +116,7 @@ func _PhysicsMatch(_delta: float, State: String) -> void:
 			# Al salir del dash, restaurar el estado anterior
 			if CambioStado:
 				CambioStado = false
-				get_parent().CentralStateMachine.SetActualState(EstadoAnterior)
+				get_parent().PlayerMachine.SetActualState(EstadoAnterior)
 		#endregion
 #endregion
 
@@ -129,7 +127,7 @@ func MovimientoViento():
 	Actualiza la posición de las líneas del viento y 
 	ejecuta animaciones de opacidad en el shader para dar efecto visual.
 	"""
-	const Tamaño:float = 150
+	var Tamaño:float = get_parent().DistanciaMaxima
 	Viento.set_point_position(1, MousePosition.normalized() * Tamaño)
 	Viento.set_point_position(0, (MousePosition * -1).normalized() * Tamaño)
 

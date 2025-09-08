@@ -14,7 +14,7 @@ Estados Básicos del Jugador:
 
 #region === Variables principales ===
 @export var Player:CharacterBody2D = get_parent()   ## Nodo jugador
-@export var DashNode:Node2D                        ## Nodo intermediario que conecta con la StateMachine del Dash
+@export var AtaqueNodo:ArmaMelee
 
 var CountJump:int                                  ## Saltos restantes (para double-jump o más)
 var inWall:bool                                    ## True si el jugador está en la pared
@@ -142,7 +142,7 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 
 #region === Lógica común para todos los estados ===
 	# Variables del dash
-	var EnDash:bool = DashNode.EnDash if DashNode else false
+	var EnDash:bool = AtaqueNodo.DashNode.EnDash if AtaqueNodo.DashNode else false
 
 	# Gravedad (si no está en suelo, no hay coyote time y no está en dash)
 	if (not Player.is_on_floor() and TimerCoyote.is_stopped()) and not EnDash:
@@ -168,12 +168,16 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 		TimerBulletTime.wait_time = Player.Cooldown
 		TimerBulletTime.start()
 		Ui.RecargaBulletTime(Player.Cooldown)
+	
+	if Input.is_action_just_pressed("Ataque"):
+		AtaqueNodo.SetArmaState("Manteniendo Ataque")
+	
 	#endregion
 
 	# Input Dash
-	if Input.is_action_just_pressed("Dash") and (DashNode.ActualState.find("Dash") == -1):
-		DashNode.InicioEstado = true
-		DashNode.SetEstadoActual("Dash")
+	if Input.is_action_just_pressed("Dash") and (AtaqueNodo.DashNode.ActualState.find("Dash") == -1):
+		AtaqueNodo.DashNode.InicioEstado = true
+		AtaqueNodo.SetDashState("Dash")
 
 	# Coyote Time + movimiento base
 	CoyoteTime()
