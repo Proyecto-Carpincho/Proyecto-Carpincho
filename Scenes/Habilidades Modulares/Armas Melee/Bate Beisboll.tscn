@@ -13,22 +13,23 @@ size = Vector2(48, 40)
 [node name="Bate Beisboll" type="Node2D" node_paths=PackedStringArray("ArmaStateMachine", "DashNode")]
 script = ExtResource("1_0yxwd")
 Fuerza = 75.0
-Cooldown = 0.5
+cooldown = 0.01
 TiempoGolpe = 0.4
 TieneAtaqueFuerte = true
 MultiplicadorFuerza = 2.0
-TiempoAtaqueFuerte = 1.0
+tiempo_ataque_fuerte = 0.2
 Congela = true
-TiempoDeCongelacion = 0.2
+tiempo_congelacion = 0.2
 TiempoGolpeFuerte = 1.0
 ArmaStateMachine = NodePath("StateMachine")
 DashNode = NodePath("Dash")
 metadata/_custom_type_script = "uid://cw1nwm06uvyrq"
 
 [node name="Dash" parent="." instance=ExtResource("2_77l2q")]
-TiempoDeRecarga = 2.0
-DistanciaMaxima = 100.0
-Velocidad = 2000.0
+TiempoDeRecarga = 6.0
+TiempoDeDash = 0.2
+distancia_maxima = 130.0
+Velocidad = 1500.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_77l2q")
@@ -56,14 +57,14 @@ one_shot = true
 [node name="Pivot Bate" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot Bate"]
-position = Vector2(20, -1)
+position = Vector2(40, 1)
 scale = Vector2(23, 19)
 texture = SubResource("PlaceholderTexture2D_0yxwd")
-metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="Pivot Bate"]
-position = Vector2(21, -1)
-metadata/_edit_group_ = true
+position = Vector2(41, 1)
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot Bate/Area2D"]
 shape = SubResource("RectangleShape2D_77l2q")
@@ -71,3 +72,4 @@ disabled = true
 
 [connection signal="timeout" from="Timer Fuerza" to="StateMachine" method="_TimerFuerza_Timeout"]
 [connection signal="timeout" from="Timer Congelacion" to="StateMachine" method="_TimerCongelacion_Timeout"]
+[connection signal="body_entered" from="Pivot Bate/Area2D" to="StateMachine" method="_Area2D_bodyEntered"]

@@ -5,7 +5,7 @@ class_name ArmaMelee
 @export var Mata:bool
 ##Cantidad de daño que hace
 @export var Fuerza:float
-@export var Cooldown:float
+@export var cooldown:float
 ##La duracion del golpe
 @export var TiempoGolpe:float
 
@@ -13,10 +13,11 @@ class_name ArmaMelee
 @export var TieneAtaqueFuerte:bool
 ##El ataque fuerte es la fuerza del ataque normal multiplicado por un numero x
 @export var MultiplicadorFuerza:float
-@export var TiempoAtaqueFuerte:float
+##El tiempo que tiene que esperar para hacer un ataque fuerte
+@export var tiempo_ataque_fuerte:float
 ##Congela el tiempo el ataque fuerte cuando golpeas a alguien
 @export var Congela:bool
-@export var TiempoDeCongelacion:float
+@export var tiempo_congelacion:float
 @export var TiempoGolpeFuerte:float
 
 @export_group("Nodes")

@@ -13,6 +13,8 @@ size = Vector2(20, 40)
 
 [node name="Jugador" type="CharacterBody2D"]
 z_index = 1
+collision_layer = 8
+collision_mask = 9
 slide_on_ceiling = false
 wall_min_slide_angle = 3.14159
 safe_margin = 2.0
@@ -31,6 +33,10 @@ texture = ExtResource("2_677pu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="Central State Machine" type="Node" parent="." node_paths=PackedStringArray("Player", "AtaqueNodo")]
 script = ExtResource("2_jo2ib")

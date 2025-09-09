@@ -1,12 +1,16 @@
-res://Scenes/main.tscn
+res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn
 res://Shader/Bullet Time.tres
 res://Shader/Recarga.tres
 res://Shader/Linea.tres
 res://Shader/Viento Dash.tres
+res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/Maquina Bate.gd
+res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Arma Melee.gd
+res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/Bate Beisboll.gd
+res://Scenes/main.tscn
+res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Estado Dash.gd
 res://Scenes/Character.tscn
 res://Scenes/UI.tscn
 res://Scenes/Efectos Visuales.tscn
 res://Scenes/Habilidades Modulares/Dash/Dash Normal.tscn
-res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn
-res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Dash.gd
-res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Estado Dash.gd
+res://Scripts/Muñeco.gd
+res://Scripts/Efectos Visuales.gd

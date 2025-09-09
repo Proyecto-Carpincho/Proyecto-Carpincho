@@ -29,7 +29,7 @@ Nodo Dash:
 		if not is_node_ready():
 			await ready
 		get_node("Timer Dash").wait_time = Var
-@export var DistanciaMaxima:float
+@export var distancia_maxima:float
 @export var Velocidad:float
 
 #endregion
@@ -39,11 +39,11 @@ Nodo Dash:
 ## Estas propiedades son "espejos" de las variables internas de DashNode
 ## Permiten acceder/modificar su valor desde este nodo intermediario.
 
-var EnDash:bool:
+var dasheando:bool:
 	get():
-		return DashNode.EnDash
+		return DashNode.dasheando
 	set(Var):
-		DashNode.EnDash = Var
+		DashNode.dasheando = Var
 
 var ActualState:Array:
 	get:
@@ -51,11 +51,11 @@ var ActualState:Array:
 	set(Var):
 		DashNode.ActualState = Var
 
-var InicioEstado:bool:
+var inicio_estado:bool:
 	get:
-		return DashNode.InicioEstado
+		return DashNode.inicio_estado
 	set(Var):
-		DashNode.InicioEstado = Var
+		DashNode.inicio_estado = Var
 #endregion
 
 

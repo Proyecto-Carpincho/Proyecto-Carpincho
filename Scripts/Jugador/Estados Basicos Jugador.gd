@@ -18,9 +18,9 @@ Estados Básicos del Jugador:
 
 var CountJump:int                                  ## Saltos restantes (para double-jump o más)
 var inWall:bool                                    ## True si el jugador está en la pared
-var Cooldown:bool = true                           ## Control del tiempo de recarga (Bullet Time)
+var cooldown:bool = true                           ## Control del tiempo de recarga (Bullet Time)
 var Jumping:bool                                   ## True mientras se mantiene un salto activo
-var ExtraJump:bool                                 ## True si se ejecuta un salto extra
+var extra_jump:bool                                 ## True si se ejecuta un salto extra
 var IsInCoyoteTime:bool                            ## True si el jugador puede saltar después de salir del suelo
 var a:bool                                         ## Flag auxiliar para control de saltos
 var wallDirection:int                              ## Dirección de la pared (-1 izquierda, 1 derecha)
@@ -39,6 +39,7 @@ func _ready() -> void:
 	SetActualState("Quieto")
 
 func _physics_process(delta: float) -> void:
+	#esta hecho para que el bullet time no afecte, osea si afecta pero en aparieza, realmente hace que valla a la misma velocidad con y sin bullet time
 	ExecutePhysics(delta)
 #endregion
 
@@ -102,7 +103,7 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 				SetActualState("Caminar")
 
 			InputToWall()
-			jump(Player.jumpMultiplyBoosted)
+			jump(Player.jump_multiply_boosted)
 
 		"Colgado Pared":
 			inWall = true
@@ -121,7 +122,7 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 
 		"Deslizarse Pared":
 			inWall = true
-			Player.velocity.y = Player.wallVelocity * 1.5 * Player.inputWall() * delta
+			Player.velocity.y = Player.wall_velocity* Player.inputWall() * delta * 4 
 			if (Player.is_on_floor() and Player.inputWall() == 0) or (not Player.isOnWall() and not Player.is_on_floor()):
 				SetActualState("Quieto")
 				inWall = false
@@ -142,10 +143,10 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 
 #region === Lógica común para todos los estados ===
 	# Variables del dash
-	var EnDash:bool = AtaqueNodo.DashNode.EnDash if AtaqueNodo.DashNode else false
+	var dasheando:bool = AtaqueNodo.DashNode.dasheando if AtaqueNodo.DashNode else false
 
 	# Gravedad (si no está en suelo, no hay coyote time y no está en dash)
-	if (not Player.is_on_floor() and TimerCoyote.is_stopped()) and not EnDash:
+	if (not Player.is_on_floor() and TimerCoyote.is_stopped()) and not dasheando:
 		var multiplyGravity:float = 1 if not inWall else Player.gravityMultiplyWall
 		if Player.velocity.y < (Player.maxGravity * multiplyGravity) or State=="Deslizarse Pared":
 			Player.velocity.y += Player.gravity * multiplyGravity * delta
@@ -157,17 +158,17 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 		SetActualState("Muerte")
 
 	#region Bullet Time
-	if Input.is_action_just_pressed("Bullet Time") and Cooldown and Player.buTimeIsActive:
-		Cooldown = false
+	if Input.is_action_just_pressed("Bullet Time") and cooldown and Player.bullet_time_active:
+		cooldown = false
 		EfectosVisuales.RelentizarTiempo(0.3)
 		await get_tree().create_timer(0.15).timeout
 		Engine.time_scale = 0.35
-		await get_tree().create_timer(Player.bulletTimesec).timeout
+		await get_tree().create_timer(Player.bullet_time_sec).timeout
 		EfectosVisuales.RelentizarTiempo(1, false)
 		Engine.time_scale = 1
-		TimerBulletTime.wait_time = Player.Cooldown
+		TimerBulletTime.wait_time = Player.cooldown
 		TimerBulletTime.start()
-		Ui.RecargaBulletTime(Player.Cooldown)
+		Ui.RecargaBulletTime(Player.cooldown)
 	
 	if Input.is_action_just_pressed("Ataque"):
 		AtaqueNodo.SetArmaState("Manteniendo Ataque")
@@ -176,7 +177,7 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 
 	# Input Dash
 	if Input.is_action_just_pressed("Dash") and (AtaqueNodo.DashNode.ActualState.find("Dash") == -1):
-		AtaqueNodo.DashNode.InicioEstado = true
+		AtaqueNodo.DashNode.inicio_estado = true
 		AtaqueNodo.SetDashState("Dash")
 
 	# Coyote Time + movimiento base
@@ -203,7 +204,7 @@ func jump(Multiply:float=1.0) -> void:
 	if Player.inputJump():
 		if Player.is_on_floor() or (IsInCoyoteTime and a):
 			a = false
-			CountJump = Player.extraJump
+			CountJump = Player.extra_jump
 			Jumping = true
 			if IsInCoyoteTime:
 				Player.velocity.y = 0 
@@ -214,20 +215,20 @@ func jump(Multiply:float=1.0) -> void:
 				Player.velocity.y = 0
 			CountJump -= 1
 			Jumping = true
-			ExtraJump = true
+			extra_jump = true
 
 	if Player.is_on_floor():
-		CountJump = Player.extraJump
+		CountJump = Player.extra_jump
 	
 	# Controla la fuerza del salto (según cuánto se mantiene pulsado)
 	if Jumping:
-		if not ExtraJump:
-			Player.velocity.y += Player.velocityJump * Multiply * 0.25
-			if Player.velocity.y < Player.velocityJump * Multiply or not Player.inputIsJumping():
+		if not extra_jump:
+			Player.velocity.y += Player.velocity_jump * Multiply * 0.25
+			if Player.velocity.y < Player.velocity_jump * Multiply or not Player.inputIsJumping():
 				Jumping = false
 		else:
-			ExtraJump = false
-			Player.velocity.y = Player.velocityJump * Multiply * Player.extraJumpBoost
+			extra_jump = false
+			Player.velocity.y = Player.velocity_jump * Multiply * Player.extra_jump_boost
 
 
 func wallJump() -> void:
@@ -238,7 +239,7 @@ func wallJump() -> void:
 	"""
 	if Player.inputJump():
 		if Player.isOnWall():
-			CountJump = Player.extraJump
+			CountJump = Player.extra_jump
 			Jumping = true
 			wallDirection = Player.getShapeDireccion()
 			Player.velocity.y = 0
@@ -247,14 +248,14 @@ func wallJump() -> void:
 			wallDirection = Player.getShapeDireccion()
 		Player.setShapeRotation(-1 * wallDirection)
 		if not Player.isOnWall():
-			Player.velocity.y += Player.wallJumpVelocity
+			Player.velocity.y += Player.wall_jump_velocity
 			Player.velocity.x = -1 * wallDirection * Player.runVelocity * 1.5
 	else:
 		wallDirection = 0
 
 
 func _on_bullet_time_timeout() -> void:
-	Cooldown = true
+	cooldown = true
 
 
 func CoyoteTime():
