@@ -5,6 +5,7 @@ extends StateMachine
 @onready var timer_fuerza:Timer = get_parent().get_node("Timer Fuerza")
 @onready var timer_golpe:Timer = get_parent().get_node("Timer Golpe")
 @onready var timer_congelacion:Timer = get_parent().get_node("Timer Congelacion")
+@onready var timer_cooldown:Timer = get_parent().get_node("Timer Cooldown")
 @onready var pivot_bate:Node2D = get_parent().get_node("Pivot Bate")
 
 var position_mouse:Vector2
@@ -16,7 +17,7 @@ func _ready() -> void:
 	SetActualState("Sin Ataque")
 
 var FristFrame:bool
-func _PhysicsMatch(delta:float, State:String) -> void:
+func _PhysicsMatch(_delta:float, State:String) -> void:
 	match State:
 		"Ataque":
 			inicio_ataque()
@@ -32,7 +33,8 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 			sprite.scale = Vector2(23,19) * 1.4
 			pivot_bate.rotation = position_mouse.angle()
 		"Manteniendo Ataque":
-			if get_parent().get_node("Timer Cooldown").is_stopped():
+			
+			if not cooldown_active:
 				
 				if timer_fuerza.is_stopped():
 					timer_fuerza.start()
@@ -70,7 +72,8 @@ func inicio_ataque() ->void:
 	
 	if timer_golpe.is_stopped():
 		SetActualState("Sin Ataque")
-		get_parent().get_node("Timer Cooldown").start()
+		timer_cooldown.start()
+		cooldown_active = true
 	FristFrame = false
 	hitbox.disabled = false
 	sprite.visible = true
@@ -86,9 +89,15 @@ func _Area2D_bodyEntered(body: Node2D) -> void:
 		# Si es un ataque fuerte entonces la fuerza es Fuerza * MultiplicadorFuerza o sea (Multi ataque fuerte) 
 		# pero si no es un ataque fuerte entonces es solo Fuerza
 		var Fuerza = get_parent().Fuerza if not EsAtaqueFuerte else get_parent().Fuerza * get_parent().MultiplicadorFuerza
-		body.call("Golpeado", Fuerza , get_parent().Mata)
+		body.call("Golpeado", Fuerza , get_parent().Mata,pivot_bate.rotation_degrees)
 		if EsAtaqueFuerte:
 			EfectosVisuales.CongelarTiempo()
 			timer_congelacion.start()
 			Engine.time_scale = 0
 		SetActualState("Sin Ataque")
+		timer_cooldown.start()
+		cooldown_active = true
+
+var cooldown_active:bool
+func _TimerCooldown_Timeout() -> void:
+	cooldown_active = false

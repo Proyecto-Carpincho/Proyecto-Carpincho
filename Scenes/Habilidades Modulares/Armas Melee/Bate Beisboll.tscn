@@ -13,11 +13,11 @@ size = Vector2(48, 40)
 [node name="Bate Beisboll" type="Node2D" node_paths=PackedStringArray("ArmaStateMachine", "DashNode")]
 script = ExtResource("1_0yxwd")
 Fuerza = 75.0
-cooldown = 0.01
-TiempoGolpe = 0.4
+cooldown = 0.5
+TiempoGolpe = 0.2
 TieneAtaqueFuerte = true
 MultiplicadorFuerza = 2.0
-tiempo_ataque_fuerte = 0.2
+tiempo_ataque_fuerte = 2.0
 Congela = true
 tiempo_congelacion = 0.2
 TiempoGolpeFuerte = 1.0
@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://cw1nwm06uvyrq"
 
 [node name="Dash" parent="." instance=ExtResource("2_77l2q")]
 TiempoDeRecarga = 6.0
-TiempoDeDash = 0.2
+TiempoDeDash = 0.4
 distancia_maxima = 130.0
 Velocidad = 1500.0
 
@@ -71,5 +71,6 @@ shape = SubResource("RectangleShape2D_77l2q")
 disabled = true
 
 [connection signal="timeout" from="Timer Fuerza" to="StateMachine" method="_TimerFuerza_Timeout"]
+[connection signal="timeout" from="Timer Cooldown" to="StateMachine" method="_TimerCooldown_Timeout"]
 [connection signal="timeout" from="Timer Congelacion" to="StateMachine" method="_TimerCongelacion_Timeout"]
 [connection signal="body_entered" from="Pivot Bate/Area2D" to="StateMachine" method="_Area2D_bodyEntered"]

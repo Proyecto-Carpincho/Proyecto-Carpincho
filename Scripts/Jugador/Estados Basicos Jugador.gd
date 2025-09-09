@@ -206,8 +206,8 @@ func jump(Multiply:float=1.0) -> void:
 			a = false
 			CountJump = Player.extra_jump
 			Jumping = true
+			Player.velocity.y = 0
 			if IsInCoyoteTime:
-				Player.velocity.y = 0 
 				IsInCoyoteTime = false
 				TimerCoyote.stop()
 		elif CountJump != 0:
@@ -223,7 +223,7 @@ func jump(Multiply:float=1.0) -> void:
 	# Controla la fuerza del salto (según cuánto se mantiene pulsado)
 	if Jumping:
 		if not extra_jump:
-			Player.velocity.y += Player.velocity_jump * Multiply * 0.25
+			Player.velocity.y += Player.velocity_jump * Multiply * 0.15
 			if Player.velocity.y < Player.velocity_jump * Multiply or not Player.inputIsJumping():
 				Jumping = false
 		else:
@@ -235,7 +235,7 @@ func wallJump() -> void:
 	"""
 	Maneja el salto en pared (wall jump).
 	⚠️ Existe un bug:
-		Si el jugador salta al lado de la pared pero estando en el piso, primero hace salto normal y despues hace salto en pared
+		Si el jugador salta al lado de la pared pero estando en el piso, se suma la potencia de los dos saltos
 	"""
 	if Player.inputJump():
 		if Player.isOnWall():

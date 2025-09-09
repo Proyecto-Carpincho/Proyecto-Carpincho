@@ -108,6 +108,8 @@ func _PhysicsMatch(_delta: float, State: String) -> void:
 				# Reset de banderas
 				inicio_estado = false
 				primer_frame_dash = false
+			else:
+				SetActualState("SinDash")
 		#endregion
 
 
