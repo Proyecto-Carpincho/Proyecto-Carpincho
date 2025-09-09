@@ -27,10 +27,6 @@ extends CharacterBody2D
 @export var wall_velocity:float
 @export var wall_jump_velocity:float
 
-@export_group("Bullet Time")
-@export var bullet_time_active:bool
-@export var bullet_time_sec:float
-@export var cooldown:float
 
 func inputWalk()->float:
 	return Input.get_axis("Move Left","Move Right")
@@ -50,7 +46,9 @@ func inputIsJumping()->bool:
 func setShapeRotation(other_rotation:int=0)->void:
 	var aux_direction:int= int(inputWalk()) if other_rotation == 0 else other_rotation
 	if aux_direction!=0:
+		
 		aux_direction= 0 if aux_direction == 1 else 180
+		print(aux_direction)
 		get_node("Shape Pared").set_rotation_degrees(aux_direction)
 
 func isOnWall()->bool:

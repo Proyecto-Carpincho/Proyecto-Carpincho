@@ -278,9 +278,6 @@ velocity_jump = -190.0
 jump_multiply_boosted = 1.1
 wall_velocity = -2000.0
 wall_jump_velocity = -350.0
-bullet_time_active = true
-bullet_time_sec = 1.0
-cooldown = 1.0
 
 [node name="Muros Infinitos" type="StaticBody2D" parent="."]
 

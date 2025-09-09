@@ -1,7 +1,6 @@
 extends ArmaMelee
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SetDataDash()
 	get_node("Timer Congelacion").wait_time = tiempo_congelacion

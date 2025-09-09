@@ -13,8 +13,8 @@ shader_parameter/Altura = 0.136
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tpqwk"]
 shader = ExtResource("2_tpqwk")
-shader_parameter/ColorDelBorde = Color(1, 1, 1, 0.117647)
-shader_parameter/ColorDelFondo = Color(1, 1, 1, 0.0745098)
+shader_parameter/ColorDelBorde = Color(1, 1, 1, 0.129412)
+shader_parameter/ColorDelFondo = Color(1, 1, 1, 0.0470588)
 shader_parameter/Bordeado = 0.304
 shader_parameter/Frecuencia = 0.0
 shader_parameter/Altura = 0.0
@@ -35,6 +35,7 @@ grow_vertical = 2
 
 [node name="Congelar tiempo" type="ColorRect" parent="."]
 visible = false
+z_index = 1
 material = SubResource("ShaderMaterial_tpqwk")
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 15

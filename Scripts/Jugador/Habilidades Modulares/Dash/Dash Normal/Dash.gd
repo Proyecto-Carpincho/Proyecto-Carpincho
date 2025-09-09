@@ -15,6 +15,7 @@ Nodo Dash:
 @export var DashNode:StateMachine          ## Referencia a la máquina de estados específica del Dash
 @export var Player:CharacterBody2D         ## Referencia al jugador
 @export var PlayerMachine:StateMachine ## Referencia a la máquina de estados central del personaje
+@export var BulletTime:Node
 
 @export var TiempoDeRecarga:float:         ## Tiempo de recarga del dash
 	set(Var):

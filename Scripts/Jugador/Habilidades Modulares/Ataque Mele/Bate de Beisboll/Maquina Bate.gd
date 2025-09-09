@@ -21,17 +21,15 @@ func _PhysicsMatch(_delta:float, State:String) -> void:
 	match State:
 		"Ataque":
 			inicio_ataque()
-			print("ataque normal")
 			hitbox.scale = Vector2.ONE 
 			sprite.scale = Vector2(23,19)
-			pivot_bate.rotation = position_mouse.angle()
+			pivot_bate.rotation = AnguloAtaque((position_mouse.angle()))
 		"Ataque Fuerte":
 			inicio_ataque()
-			print("ataque fuerte")
 			
 			hitbox.scale = Vector2.ONE * 1.4
 			sprite.scale = Vector2(23,19) * 1.4
-			pivot_bate.rotation = position_mouse.angle()
+			pivot_bate.rotation = AnguloAtaque(position_mouse.angle())
 		"Manteniendo Ataque":
 			
 			if not cooldown_active:
@@ -46,7 +44,6 @@ func _PhysicsMatch(_delta:float, State:String) -> void:
 					
 					var mouse_pos = pivot_bate.get_global_mouse_position()
 					position_mouse = mouse_pos - pivot_bate.global_position
-					
 					if EsAtaqueFuerte:
 						timer_golpe.wait_time = get_parent().TiempoGolpeFuerte
 						SetActualState("Ataque Fuerte")
@@ -59,6 +56,10 @@ func _PhysicsMatch(_delta:float, State:String) -> void:
 			EsAtaqueFuerte = false
 			hitbox.disabled = true
 			sprite.visible = false
+			##Por ahora esta aca para que en el debug se pueda ver si esta funcionando la angulacion, quitar a posteriori
+			var mouse_pos = pivot_bate.get_global_mouse_position()
+			position_mouse = mouse_pos - pivot_bate.global_position
+			pivot_bate.rotation = AnguloAtaque(position_mouse.angle())
 
 
 var EsAtaqueFuerte:bool
@@ -69,6 +70,12 @@ func _TimerFuerza_Timeout() -> void:
 func inicio_ataque() ->void:
 	if FristFrame:
 		timer_golpe.start()
+	
+	if not get_parent().Player.isOnWall():
+		#cuidado perro bravo, muerde
+		var vectorGolpe:Vector2 = Vector2.from_angle(AnguloAtaque(position_mouse.angle()))
+		
+		get_parent().Player.setShapeRotation(1 if vectorGolpe.normalized().x > 0 else -1)
 	
 	if timer_golpe.is_stopped():
 		SetActualState("Sin Ataque")
@@ -101,3 +108,19 @@ func _Area2D_bodyEntered(body: Node2D) -> void:
 var cooldown_active:bool
 func _TimerCooldown_Timeout() -> void:
 	cooldown_active = false
+
+func AnguloAtaque(angulo:float) -> float:
+	angulo = rad_to_deg(angulo)
+	var x = 40
+	var y = 130
+	if angulo > x and angulo < y:
+
+		var a = angulo - x
+		var b = angulo - y
+
+		if a == min(abs(a),abs(b)):
+			angulo = x
+		else:
+			angulo = y
+	angulo = deg_to_rad(angulo)
+	return angulo

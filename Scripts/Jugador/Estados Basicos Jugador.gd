@@ -18,7 +18,6 @@ Estados Básicos del Jugador:
 
 var CountJump:int                                  ## Saltos restantes (para double-jump o más)
 var inWall:bool                                    ## True si el jugador está en la pared
-var cooldown:bool = true                           ## Control del tiempo de recarga (Bullet Time)
 var Jumping:bool                                   ## True mientras se mantiene un salto activo
 var extra_jump:bool                                 ## True si se ejecuta un salto extra
 var IsInCoyoteTime:bool                            ## True si el jugador puede saltar después de salir del suelo
@@ -29,7 +28,6 @@ var InFloor:bool                                   ## True si estaba en el piso 
 
 
 #region === Timers ===
-@onready var TimerBulletTime:Timer = Player.get_node("Cooldown Bullet Time")
 @onready var TimerCoyote:Timer = Player.get_node("Timer Coyote")
 #endregion
 
@@ -67,7 +65,7 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 			Player.velocity.x += Player.inputWalk() * Player.walkVelocity * delta
 			
 			# Limitar velocidad máxima
-			if abs(Player.velocity.x) > Player.maxWalkVelocity:
+			if abs(Player.velocity.x) > Player.maxWalkVelocity and Player.is_on_floor():
 				Player.velocity.x = Player.inputWalk() * Player.maxWalkVelocity
 			
 			# Transiciones de estado
@@ -89,12 +87,12 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 				Player.velocity.x += Player.inputWalk() * Player.runVelocity * delta
 				
 				# Limitar velocidad máxima
-				if abs(Player.velocity.x) > Player.maxRunVelocity:
+				if abs(Player.velocity.x) > Player.maxRunVelocity and Player.is_on_floor():
 					Player.velocity.x = Player.inputWalk() * Player.maxRunVelocity
 				
 				var Direccion = -1 if Player.velocity.x < 0 else 1
 				if Direccion != Player.inputWalk():
-					Player.velocity.x *= 0.9
+					Player.velocity.x *= 0.75
 			
 			# Transiciones de estado
 			if Player.inputWalk() == 0 and not Player.inputRun():
@@ -134,15 +132,19 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 			wallJump()
 
 		"Muerte":
+			#*no hace nada*
 			pass
 
 		"Estado Intermedio":
+			# este estado aproposito no hace nada, es un estado que es para las habilidades modulares
+			# es como un estado hueco para lo rellene quien lo necesite (eso sonaba mejor en mi cabeza)
 			pass
 #endregion
 
 
 #region === Lógica común para todos los estados ===
 	# Variables del dash
+	# variable bien xd. Pero bueno prefiero que este asi a que sean 5 linas mas de porquria. 1 linea de mierda es mejor que 5 de porqueria
 	var dasheando:bool = AtaqueNodo.DashNode.dasheando if AtaqueNodo.DashNode else false
 
 	# Gravedad (si no está en suelo, no hay coyote time y no está en dash)
@@ -154,21 +156,9 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 			Player.velocity.y = Player.maxGravity * multiplyGravity
 
 	# Estado de muerte
+	#literal no hace nada, es el meme de *no hace nada* como digo, *no hace nada* y no hara nada hasta dentro de un buen rato
 	if Player.life == 0:
 		SetActualState("Muerte")
-
-	#region Bullet Time
-	if Input.is_action_just_pressed("Bullet Time") and cooldown and Player.bullet_time_active:
-		cooldown = false
-		EfectosVisuales.RelentizarTiempo(0.3)
-		await get_tree().create_timer(0.15).timeout
-		Engine.time_scale = 0.35
-		await get_tree().create_timer(Player.bullet_time_sec).timeout
-		EfectosVisuales.RelentizarTiempo(1, false)
-		Engine.time_scale = 1
-		TimerBulletTime.wait_time = Player.cooldown
-		TimerBulletTime.start()
-		Ui.RecargaBulletTime(Player.cooldown)
 	
 	if Input.is_action_just_pressed("Ataque"):
 		AtaqueNodo.SetArmaState("Manteniendo Ataque")
@@ -252,11 +242,6 @@ func wallJump() -> void:
 			Player.velocity.x = -1 * wallDirection * Player.runVelocity * 1.5
 	else:
 		wallDirection = 0
-
-
-func _on_bullet_time_timeout() -> void:
-	cooldown = true
-
 
 func CoyoteTime():
 	## Maneja el tiempo de "coyote" (puede saltar poco después de dejar el suelo)

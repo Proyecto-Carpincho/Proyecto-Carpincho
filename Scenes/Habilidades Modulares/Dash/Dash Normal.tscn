@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2sirg4no04bb"]
+[gd_scene load_steps=17 format=3 uid="uid://c2sirg4no04bb"]
 
 [ext_resource type="Script" uid="uid://bnn4cdijx1ixg" path="res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Dash.gd" id="1_ynpgg"]
 [ext_resource type="Shader" uid="uid://bq45bc81yb4sr" path="res://Shader/Linea.tres" id="2_g52h7"]
 [ext_resource type="Texture2D" uid="uid://bwy0wlcn0e62w" path="res://Sprites/Flecha.png" id="3_8y2wp"]
 [ext_resource type="Shader" uid="uid://debvgkj4sm887" path="res://Shader/Viento Dash.tres" id="4_mndbs"]
 [ext_resource type="Script" uid="uid://c76pnj52yjy3k" path="res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Estado Dash.gd" id="5_o4aw0"]
+[ext_resource type="PackedScene" uid="uid://bjx0val8vkyye" path="res://Scenes/Habilidades Modulares/Bullet Time.tscn" id="6_g52h7"]
 
 [sub_resource type="Gradient" id="Gradient_rwvdt"]
 interpolation_mode = 1
@@ -94,6 +95,13 @@ PhysicsStates = Dictionary[String, NodePath]({
 "SinDash": NodePath(".")
 })
 metadata/_custom_type_script = "uid://ci1ayib00djei"
+
+[node name="Bullet Time" parent="." instance=ExtResource("6_g52h7")]
+bullet_time_active = true
+bullet_time_sec = 2.0
+cooldown = 1.0
+scale_timer = 0.3
+active_for_input = true
 
 [node name="Timer Dash" type="Timer" parent="."]
 wait_time = 0.5
