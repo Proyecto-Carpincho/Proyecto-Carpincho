@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	Loop principal de física.
 	Se delega a ExecutePhysics (definido en la clase base StateMachine). 
 	"""
-	ExecutePhysics(delta / Engine.time_scale)
+	ExecutePhysics(delta)
 #endregion
 
 

@@ -32,6 +32,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="Control"]
@@ -39,18 +41,19 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -99.0
+offset_top = -596.0
 offset_right = 600.0
-offset_bottom = 1.0
+offset_bottom = -496.0
 grow_vertical = 0
+scale = Vector2(6.5, 6.5)
 mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_top = -549.0
+offset_top = -503.385
 offset_right = 697.0
-offset_bottom = -472.0
+offset_bottom = -426.385
 theme_override_font_sizes/normal_font_size = 30
 text = " Estado actual: "
 vertical_alignment = 1

@@ -22,6 +22,8 @@ Ui="*res://Scenes/UI.tscn"
 
 [display]
 
+window/size/viewport_width=6912
+window/size/viewport_height=3888
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
