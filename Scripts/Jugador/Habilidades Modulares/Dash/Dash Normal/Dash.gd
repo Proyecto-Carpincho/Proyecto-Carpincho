@@ -1,4 +1,5 @@
 extends Node2D
+class_name NormalDash
 
 """
 Nodo Dash:
@@ -15,6 +16,7 @@ Nodo Dash:
 @export var DashNode:StateMachine          ## Referencia a la máquina de estados específica del Dash
 @export var Player:CharacterBody2D         ## Referencia al jugador
 @export var PlayerMachine:StateMachine ## Referencia a la máquina de estados central del personaje
+
 @export var BulletTime:Node
 
 @export var TiempoDeRecarga:float:         ## Tiempo de recarga del dash
@@ -32,6 +34,10 @@ Nodo Dash:
 		get_node("Timer Dash").wait_time = Var
 @export var distancia_maxima:float
 @export var Velocidad:float
+@export_range(0,1) var MultFrenado:float
+@export var factor_aceleracion:float
+
+
 
 #endregion
 
@@ -67,4 +73,11 @@ func SetEstadoActual(Estado:String) -> void:
 	En vez de llamar directamente al DashNode, se pasa por este nodo intermediario.
 	"""
 	DashNode.SetActualState(Estado)
+
+func TerminarCooldown()->void:
+	#funcion de mierda para probar el bate
+	var timer:Timer=get_node("Timer Recarga")
+	timer.stop()
+	timer.emit_signal("timeout")
+	Ui.RecargaDash(0)
 #endregion

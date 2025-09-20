@@ -4,12 +4,12 @@ extends StateMachine
 Estados Básicos del Jugador:
 	# Función:
 		Esta es la máquina de estados principal del jugador.
-		Maneja locomoción, salto, wall jump, wall slide, dash y bullet time.
+		Maneja el movimento, salto, wall jump, wall slide, dash y bullet time.
 		
 	# Notas:
 		⚠️ Todavía en desarrollo → algunos nombres de funciones/variables no están bien pulidos.
-		Tiende a crecer mucho (248+ líneas 👀). 
-		Mejorar modularización puede ayudar a reducir tamaño.
+		Esta un poquito mal organizado pero un poquito no ma (280+ líneas 👀). 
+		En una futura actualizacion mejorare esto, o sea cuando me explote en la cara
 """
 
 #region === Variables principales ===
@@ -48,33 +48,33 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 	Ui.SetState(State)
 
 	## Reset de rotación en estados básicos
-	if State in ["Correr","Quieto","Caminar"]:
+	if State in ["Correr","Quieto","Caminar","Caida"]:
 		Player.setShapeRotation()
+		InputToWall()
 
 	# --- Lógica de estados individuales ---
 	match State:
 
 		"Quieto":
-			Player.velocity.x = move_toward(Player.velocity.x, 0, delta*250)
+			Player.velocity.x = move_toward(Player.velocity.x, 0, delta*150)
 			if Player.inputWalk() != 0:
 				SetActualState("Caminar")
 			jump()
-			InputToWall()
+			if not Player.is_on_floor() and not Jumping:
+				SetActualState("Caida")
 
 		"Caminar":
-			Player.velocity.x += Player.inputWalk() * Player.walkVelocity * delta
-			
-			# Limitar velocidad máxima
-			if abs(Player.velocity.x) > Player.maxWalkVelocity and Player.is_on_floor():
-				Player.velocity.x = Player.inputWalk() * Player.maxWalkVelocity
+			MovimientoX(Player.walkVelocity,Player.maxWalkVelocity,delta)
 			
 			# Transiciones de estado
 			if Player.inputWalk() == 0:
 				SetActualState("Quieto")
 			if Player.inputRun():
 				SetActualState("Correr")
+			if not Player.is_on_floor() and not Jumping:
+				SetActualState("Caida")
 
-			InputToWall()
+			
 			jump()
 			
 			# Cambio de dirección → aplicar freno
@@ -83,24 +83,19 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 				Player.velocity.x *= 0.9
 
 		"Correr":
-			if Player.inputWalk() != 0:
-				Player.velocity.x += Player.inputWalk() * Player.runVelocity * delta
-				
-				# Limitar velocidad máxima
-				if abs(Player.velocity.x) > Player.maxRunVelocity and Player.is_on_floor():
-					Player.velocity.x = Player.inputWalk() * Player.maxRunVelocity
-				
-				var Direccion = -1 if Player.velocity.x < 0 else 1
-				if Direccion != Player.inputWalk():
-					Player.velocity.x *= 0.75
+			
+			MovimientoX(Player.runVelocity ,Player.maxRunVelocity,delta)
 			
 			# Transiciones de estado
 			if Player.inputWalk() == 0 and not Player.inputRun():
 				SetActualState("Quieto")
 			if not Player.inputRun():
 				SetActualState("Caminar")
-
-			InputToWall()
+			if not Player.is_on_floor() and not Jumping:
+				SetActualState("Caida")
+			
+			
+			
 			jump(Player.jump_multiply_boosted)
 
 		"Colgado Pared":
@@ -131,6 +126,21 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 				
 			wallJump()
 
+		"Caida":
+			MovimientoX(Player.walkVelocity,Player.maxWalkVelocity,delta,true,-0.2)
+			jump()
+			if Player.is_on_floor():
+				if Player.inputWalk() == 0 and not Player.inputRun():
+					SetActualState("Quieto")
+				if Player.inputRun():
+					SetActualState("Correr")
+				if Player.inputWalk() != 0:
+					SetActualState("Caminar")
+			
+			if not Player.is_on_floor() and Player.isOnWall():
+				Player.velocity.y = 0
+				SetActualState("Colgado Pared")
+			
 		"Muerte":
 			#*no hace nada*
 			pass
@@ -139,10 +149,11 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 			# este estado aproposito no hace nada, es un estado que es para las habilidades modulares
 			# es como un estado hueco para lo rellene quien lo necesite (eso sonaba mejor en mi cabeza)
 			pass
-#endregion
+	#endregion
 
 
-#region === Lógica común para todos los estados ===
+
+	#region === Lógica común para todos los estados ===
 	# Variables del dash
 	# variable bien xd. Pero bueno prefiero que este asi a que sean 5 linas mas de porquria. 1 linea de mierda es mejor que 5 de porqueria
 	var dasheando:bool = AtaqueNodo.DashNode.dasheando if AtaqueNodo.DashNode else false
@@ -172,8 +183,37 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 
 	# Coyote Time + movimiento base
 	CoyoteTime()
+	
 	Player.move_and_slide()
 #endregion
+func MovimientoX(velocidad,velocidad_Max,delta, caida:bool=false,velocidad_cambio_dirreccion:float = 0.75) -> void:
+	var direccion = sign(Player.velocity.x)
+	
+	if Player.is_on_floor() or caida:
+		var velocidad_maxima_alcanzada:bool = abs(Player.velocity.x) >= velocidad_Max and not caida
+		if Player.inputWalk() != 0:
+			if not velocidad_maxima_alcanzada:
+				# Acelerar
+				Player.velocity.x += Player.inputWalk() * velocidad * delta
+
+
+			if direccion != sign(Player.inputWalk()) and direccion != 0:
+				Player.velocity.x *= velocidad_cambio_dirreccion
+				
+
+		# Limitar velocidad máxima usando el signo actual
+		if velocidad_maxima_alcanzada:
+			var Ns:int = Player.inputWalk() if Player.inputWalk() != 0 else direccion
+			const reduccion_velocidad:float = 150
+			Player.velocity.x = move_toward(Player.velocity.x,velocidad_Max*Ns,delta * reduccion_velocidad)
+			if abs(Player.velocity.x) > 1.5 * velocidad_Max:
+				Player.velocity.x = move_toward(Player.velocity.x,velocidad_Max*Ns,delta * reduccion_velocidad * 10)
+		
+		var dasheando:bool = AtaqueNodo.DashNode.dasheando if AtaqueNodo.DashNode else false
+		if abs(Player.velocity.x) > 1.8 * velocidad_Max and not dasheando:
+			var Ns:int = Player.inputWalk() if Player.inputWalk() != 0 else direccion
+			Player.velocity.x = move_toward(Player.velocity.x,velocidad_Max*Ns,delta * 150 * 35)
+
 
 
 #region === Funciones auxiliares ===
@@ -219,6 +259,8 @@ func jump(Multiply:float=1.0) -> void:
 		else:
 			extra_jump = false
 			Player.velocity.y = Player.velocity_jump * Multiply * Player.extra_jump_boost
+		if Player.is_on_ceiling():
+			Jumping = false
 
 
 func wallJump() -> void:

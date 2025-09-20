@@ -62,16 +62,18 @@ bake_resolution = 1000
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Dash" type="Node2D" node_paths=PackedStringArray("DashNode")]
+[node name="Dash" type="Node2D" node_paths=PackedStringArray("DashNode", "BulletTime")]
 script = ExtResource("1_ynpgg")
 DashNode = NodePath("State Dash")
+BulletTime = NodePath("Bullet Time")
 TiempoDeRecarga = 1.0
 TiempoDeDash = 0.5
 distancia_maxima = 150.0
 Velocidad = 2000.0
+MultFrenado = 0.3
+factor_aceleracion = 0.2
 
 [node name="Line2D" type="Line2D" parent="."]
-z_index = -1
 texture_filter = 1
 material = SubResource("ShaderMaterial_lcsl6")
 points = PackedVector2Array(0, 0, 0, 0)

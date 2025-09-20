@@ -1,4 +1,6 @@
 Node2D
+SubViewport
+SubViewportContainer
 TileMapLayer
 Sprite2D
 TileMap
@@ -10,5 +12,3 @@ Label
 Marker2D
 Area2D
 StateMachine
-ArmaMelee
-Line2D

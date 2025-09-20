@@ -1,0 +1,27 @@
+res://Scenes/Em/heavyCop.tscn::8ebd4f2ef0458258c2eb047e7c61faad::1757296390::res://.godot/exported/133200997/export-76e00dfb4d215143bafb5c094e5c5e97-heavyCop.scn
+res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn::aad084d41d55c37130af06aa27944c3c::1758398924::res://.godot/exported/133200997/export-1768b5198a0ad48185d484a2203b90d8-Bate Beisboll.scn
+res://Scenes/Habilidades Modulares/Dash/Dash Normal.tscn::e4d5adc33138c1c6fe03812eb3f2da94::1758398923::res://.godot/exported/133200997/export-8aec73675c4bb7504aa9be59791d64e3-Dash Normal.scn
+res://Scenes/Habilidades Modulares/Bullet Time.tscn::1af9411cc695edd06ac39c7f0408a873::1757700186::res://.godot/exported/133200997/export-f0223a3e288dff42cefd9cf924274fc1-Bullet Time.scn
+res://Scenes/Character.tscn::6352d5d13a9795dd418e22d1a3c9c83f::1758398923::res://.godot/exported/133200997/export-c870f3e3eba97a833a8353de4902fd76-Character.scn
+res://Scenes/Efectos Visuales.tscn::d2bbe4635aeae77d378d86f3e10aaa81::1757700186::res://.godot/exported/133200997/export-c90d23d49c0bf3191a79ab4ad2ee6d90-Efectos Visuales.scn
+res://Scenes/Enemigo blindado.tscn::e7570b6cee9d47ed5f0a2a7373e649e1::1757296334::res://.godot/exported/133200997/export-80bdcf7e9c924b4151f1a8106a0cfe7a-Enemigo blindado.scn
+res://Scenes/main.tscn::96e0e17f62191a79efa04669ca2c907a::1758399190::res://.godot/exported/133200997/export-2ddd04d543d5858e7f20c9299a8b5096-main.scn
+res://Scenes/Muñeco Pruebas.tscn::d353eba781f5abcae897134a5bb16083::1758398924::res://.godot/exported/133200997/export-e187e36e2b582b098f8160e855dc14a0-Muñeco Pruebas.scn
+res://Scenes/testEm.tscn::ae280c4010eda18ca38d45a753f7be04::1757296334::res://.godot/exported/133200997/export-ecb782b82585ebbb68c750c3d1771800-testEm.scn
+res://Scenes/UI.tscn::b87c75b3da3ebd39114e16cff6e9324e::1758398923::res://.godot/exported/133200997/export-4f62ab20f4ccf50badf9090e15390996-UI.scn
+res://Shader/Bullet Time.tres::e79d0e996954604b07ab3cbf9aba17cd::1758399190::res://.godot/exported/133200997/export-aa060e563087acb10ed9603769f6c1ac-Bullet Time.res
+res://Shader/Linea.tres::5b19742afc97bf1ce07095f16964717a::1758399190::res://.godot/exported/133200997/export-582d3a8a47c5c78c8fde7a9a5d9102f3-Linea.res
+res://Shader/Recarga.tres::4ea22ba07feebe7e067c9df258ff13a7::1758399190::res://.godot/exported/133200997/export-8991c3bedd9870f3edb72368ad63c123-Recarga.res
+res://Shader/Viento Dash.tres::8769022ef5deae54e705389e428a09d7::1758399190::res://.godot/exported/133200997/export-3726ee321f17fef30cde917268b989aa-Viento Dash.res
+res://Materials/Prueba/capa 0/Aire.tres::b664bb83433af0c03336442b93449359::1758396987::res://.godot/exported/133200997/export-f8ad1daaf43c3d6a2c7c0102ea0f0f2d-Aire.res
+res://Materials/Prueba/capa 0/Muros.tres::22f6ef185cde5071de181289cb477342::1758396987::res://.godot/exported/133200997/export-e194d0ecd7210be5b1cbdd3c60d1b6a5-Muros.res
+res://Materials/Prueba/capa 0/Tuberias.tres::7bb92a8448d62bc610ffeca1d3ebf37b::1758396987::res://.godot/exported/133200997/export-51659e74071087aee38215bc9b867110-Tuberias.res
+res://Materials/Prueba/capa 0/Ventanas.tres::c71a2bce25643be4d4032d0538f6eb72::1758396987::res://.godot/exported/133200997/export-beb1d0f94021af39bb16ed305b45501f-Ventanas.res
+res://Materials/Prueba/capa 1/Aire.tres::da0767c00d66703b6dfad19d800d1a93::1758396987::res://.godot/exported/133200997/export-fa5247a2a14a1b5a54fbf2c3700e0681-Aire.res
+res://Materials/Prueba/capa 1/Muros.tres::7644d6ec7b50317251495ff2c55295b0::1758396987::res://.godot/exported/133200997/export-e8a5d3efda4418e96257ba305202790e-Muros.res
+res://Materials/Prueba/capa 1/Tuberias.tres::596f45086f0e32d5fc83e6410c0dfcca::1758396987::res://.godot/exported/133200997/export-feb32a882818ec99368c1d173e98825a-Tuberias.res
+res://Materials/Prueba/capa 1/Ventanas.tres::28024bf78347cc21fceec1dbfc920881::1758396987::res://.godot/exported/133200997/export-78209cfaafc2361520b36492cd9706c5-Ventanas.res
+res://Materials/Prueba/capa -1/Aire.tres::1b9b9c45e0589ce1340dcf6f6a70fd4c::1758396987::res://.godot/exported/133200997/export-0d512edcaa81c5e94b66e5bec99654ba-Aire.res
+res://Materials/Prueba/capa -1/Muros.tres::6e0f117faae81ff0851dffbf9c545df2::1758396987::res://.godot/exported/133200997/export-8737fe8c741ef19de3f1fb472f245082-Muros.res
+res://Materials/Prueba/capa -1/Tuberias.tres::54f79b9100a07c45c16425245d9f02c8::1758396987::res://.godot/exported/133200997/export-3749c5aa49e6df2bb28962c059419e3e-Tuberias.res
+res://Materials/Prueba/capa -1/Ventanas.tres::d899ca69a721b966007227d22781e27e::1758396987::res://.godot/exported/133200997/export-2691c51c0817e1c9d758e1483082edd1-Ventanas.res

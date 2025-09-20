@@ -26,14 +26,14 @@ shape = SubResource("RectangleShape2D_xloa1")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Icon" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -1.90735e-06)
 scale = Vector2(0.25, 0.35)
 texture = ExtResource("2_677pu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(7.5, 7.5)
 position_smoothing_enabled = true
-position_smoothing_speed = 20.0
+position_smoothing_speed = 10.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
@@ -42,6 +42,7 @@ script = ExtResource("2_jo2ib")
 Player = NodePath("..")
 AtaqueNodo = NodePath("../Bate Beisboll")
 PhysicsStates = Dictionary[String, NodePath]({
+"Caida": NodePath("."),
 "Caminar": NodePath("."),
 "Colgado Pared": NodePath("."),
 "Correr": NodePath("."),

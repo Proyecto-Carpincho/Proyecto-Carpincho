@@ -1,8 +1,0 @@
-res://Scenes/main.tscn
-res://Shader/Bullet Time.tres
-res://Shader/Recarga.tres
-res://Shader/Linea.tres
-res://Shader/Viento Dash.tres
-res://Shader/Cambio de Color.gdshader
-res://Scenes/Character.tscn
-res://Scenes/UI.tscn

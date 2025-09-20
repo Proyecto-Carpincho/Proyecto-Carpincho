@@ -77,7 +77,8 @@ func inicio_ataque() ->void:
 		
 		get_parent().Player.setShapeRotation(1 if vectorGolpe.normalized().x > 0 else -1)
 	
-	if timer_golpe.is_stopped():
+	
+		
 		SetActualState("Sin Ataque")
 		timer_cooldown.start()
 		cooldown_active = true
@@ -101,6 +102,9 @@ func _Area2D_bodyEntered(body: Node2D) -> void:
 			EfectosVisuales.CongelarTiempo()
 			timer_congelacion.start()
 			Engine.time_scale = 0
+			var Arma:ArmaMelee =get_parent()
+			Arma.DashNode.TerminarCooldown()
+			Ui.RecargaDash(0)
 		SetActualState("Sin Ataque")
 		timer_cooldown.start()
 		cooldown_active = true
