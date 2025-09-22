@@ -9,11 +9,28 @@ class_name Entidad
 @export var max_stun_resistance:int
 
 var life:int = max_life
-var stun_resistance:int = max_stun_resistance
 var iframes:int = 0
+var A:Array[Label]
 
-func _on_hit(damage:int, direction:float):
-	if iframes == 0:
-		life -= damage
-		# TODO stun
+func _process(delta: float) -> void:
+	for label:Label in A:
+		label.rotation = -rotation
+
+func Golpeado(fuerza,mata) -> void:
+	life -= fuerza
+	text(fuerza)
 	
+func text(fuerza):
+	var labelDaño:Label = get_node("Label").duplicate()
+	add_child(labelDaño)
+	A.append(labelDaño)
+	labelDaño.set_visible(true)
+	labelDaño.text = str(fuerza)
+	var time =0.9
+	labelDaño.rotation = -rotation
+	var final_position = Vector2(20,0) * randf_range(-1,1) - Vector2(25,10)
+	get_tree().create_tween().tween_property(labelDaño,"position",final_position ,time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	get_tree().create_tween().tween_property(labelDaño,"scale",Vector2.ONE * 0.6,time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	await  get_tree().create_timer(time).timeout
+	A.erase(labelDaño)
+	labelDaño.queue_free()
