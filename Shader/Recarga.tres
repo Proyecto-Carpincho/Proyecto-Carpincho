@@ -125,6 +125,9 @@ void fragment() {
 "
 mode = 1
 flags/light_only = false
+preview_params/Tiempo = "0.0"
+preview_params/Texture2DParameter = "Object(PlaceholderTexture2D,\"resource_local_to_scene\":false,\"resource_name\":\"\",\"size\":Vector2(1, 1),\"script\":null)
+"
 nodes/fragment/0/position = Vector2(1340, 260)
 nodes/fragment/2/node = SubResource("VisualShaderNodeInput_5k48x")
 nodes/fragment/2/position = Vector2(280, 260)

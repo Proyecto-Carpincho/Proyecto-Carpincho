@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhxq3p4fn06a1"]
+[gd_scene load_steps=5 format=3 uid="uid://bhxq3p4fn06a1"]
 
 [ext_resource type="Script" uid="uid://dbncsedlyj7f" path="res://Scripts/Efectos Visuales.gd" id="1_tpqwk"]
 [ext_resource type="Shader" uid="uid://bkym27wgfbqwq" path="res://Shader/Bullet Time.tres" id="2_tpqwk"]
@@ -11,11 +11,32 @@ shader_parameter/Bordeado = 1.0
 shader_parameter/Frecuencia = 8.3
 shader_parameter/Altura = 0.136
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tpqwk"]
+shader = ExtResource("2_tpqwk")
+shader_parameter/ColorDelBorde = Color(1, 1, 1, 0.129412)
+shader_parameter/ColorDelFondo = Color(1, 1, 1, 0.0470588)
+shader_parameter/Bordeado = 0.304
+shader_parameter/Frecuencia = 0.0
+shader_parameter/Altura = 0.0
+
 [node name="Efectos Visuales" type="CanvasLayer"]
 script = ExtResource("1_tpqwk")
 
 [node name="Relentizar tiempo" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_eh0ed")
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Congelar tiempo" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_tpqwk")
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = 15
 anchor_right = 1.0

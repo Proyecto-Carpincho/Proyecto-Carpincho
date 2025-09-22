@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/Jugador/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_677pu"]
 [ext_resource type="Script" uid="uid://ds1vj1qx7bbci" path="res://Scripts/Jugador/Estados Basicos Jugador.gd" id="2_jo2ib"]
-[ext_resource type="PackedScene" uid="uid://c2sirg4no04bb" path="res://Scenes/Habilidades Modulares/Dash.tscn" id="4_v7dgu"]
+[ext_resource type="PackedScene" uid="uid://q80g1s5p6aln" path="res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn" id="4_v7dgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
 size = Vector2(30, 43)
@@ -13,11 +13,12 @@ size = Vector2(20, 40)
 
 [node name="Jugador" type="CharacterBody2D"]
 z_index = 1
+collision_layer = 8
+collision_mask = 9
 slide_on_ceiling = false
 wall_min_slide_angle = 3.14159
 safe_margin = 2.0
 script = ExtResource("1_7ig0a")
-gravityMultiplyWall = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -25,18 +26,23 @@ shape = SubResource("RectangleShape2D_xloa1")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Icon" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -1.90735e-06)
 scale = Vector2(0.25, 0.35)
 texture = ExtResource("2_677pu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
-[node name="Central State Machine" type="Node" parent="." node_paths=PackedStringArray("Player", "DashNode")]
+[node name="Central State Machine" type="Node" parent="." node_paths=PackedStringArray("Player", "AtaqueNodo")]
 script = ExtResource("2_jo2ib")
 Player = NodePath("..")
-DashNode = NodePath("../Dash")
+AtaqueNodo = NodePath("../Bate Beisboll")
 PhysicsStates = Dictionary[String, NodePath]({
+"Caida": NodePath("."),
 "Caminar": NodePath("."),
 "Colgado Pared": NodePath("."),
 "Correr": NodePath("."),
@@ -51,17 +57,13 @@ metadata/_custom_type_script = "uid://ci1ayib00djei"
 shape = SubResource("RectangleShape2D_677pu")
 target_position = Vector2(10, 0)
 
-[node name="Cooldown Bullet Time" type="Timer" parent="."]
-one_shot = true
-
 [node name="Timer Coyote" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
-[node name="Dash" parent="." node_paths=PackedStringArray("Player", "CentralStateMachine") instance=ExtResource("4_v7dgu")]
+[node name="Bate Beisboll" parent="." node_paths=PackedStringArray("PlayerMachine", "Player") instance=ExtResource("4_v7dgu")]
+TieneAtaqueFuerte = false
+PlayerMachine = NodePath("../Central State Machine")
 Player = NodePath("..")
-CentralStateMachine = NodePath("../Central State Machine")
-TiempoDeRecarga = 0.1
 
-[connection signal="timeout" from="Cooldown Bullet Time" to="Central State Machine" method="_on_bullet_time_timeout"]
 [connection signal="timeout" from="Timer Coyote" to="Central State Machine" method="_on_timer_coyote_timeout"]

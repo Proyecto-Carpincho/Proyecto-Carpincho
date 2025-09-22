@@ -10,3 +10,6 @@ func RelentizarTiempo(Tiempo:float,DetenerTiempo:bool=true,ColorBorde:Color=Colo
 	get_tree().create_tween().tween_property(ShaderTiem,"shader_parameter/Bordeado",Relentiza,Tiempo)
 	if not DetenerTiempo:
 		get_tree().create_tween().tween_property(ShaderTiem,"shader_parameter/ColorDelFondo",Color(0.0, 0.0, 0.0, 0.0),Tiempo)
+
+func CongelarTiempo(Congelar:bool = true) -> void:
+	get_node("Congelar tiempo").set_visible(Congelar)

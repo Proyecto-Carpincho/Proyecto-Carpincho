@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://ws714j3bdkap"]
+
+[ext_resource type="Script" uid="uid://ba3s73ac4nbj7" path="res://Scripts/Muñeco.gd" id="1_4bcy5"]
+[ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_l6oal"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bcy5"]
+size = Vector2(46, 68)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ind8n"]
+size = Vector2(26.3, 8.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlypy"]
+size = Vector2(40, 59.4)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_4bcy5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_4bcy5")
+debug_color = Color(0.971724, 0, 0.445989, 0.42)
+
+[node name="Coliciones Jugador" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Coliciones Jugador"]
+z_index = 1
+position = Vector2(-16, -9)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_ind8n")
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Coliciones Jugador"]
+z_index = 1
+position = Vector2(16, -9)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_ind8n")
+one_way_collision = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coliciones Jugador"]
+z_index = 1
+position = Vector2(-0.119994, -26.3)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_tlypy")
+one_way_collision = true
+one_way_collision_margin = 128.0
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-0.119995, -26.6)
+scale = Vector2(0.295, 0.475)
+texture = ExtResource("2_l6oal")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -50.0
+offset_right = 25.0
+pivot_offset = Vector2(25, 25)
+horizontal_alignment = 1
+vertical_alignment = 1

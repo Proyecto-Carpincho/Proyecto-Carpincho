@@ -25,66 +25,85 @@ shader_parameter/Texture2DParameter = SubResource("PlaceholderTexture2D_dewlx")
 layer = 2
 script = ExtResource("1_dewlx")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(2304, 1296)
+render_target_update_mode = 4
+
+[node name="Control" type="Control" parent="SubViewportContainer/SubViewport"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.498
+offset_right = 1152.0
+offset_bottom = 644.592
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="Panel" type="Panel" parent="SubViewportContainer/SubViewport/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -99.0
-offset_right = 600.0
-offset_bottom = 1.0
+offset_top = -158.0
+offset_right = 1021.0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel"]
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Control/Panel"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_top = -549.0
-offset_right = 697.0
-offset_bottom = -472.0
-theme_override_font_sizes/normal_font_size = 30
+offset_top = -1132.0
+offset_right = 2304.0
+offset_bottom = -999.0
+theme_override_font_sizes/normal_font_size = 70
 text = " Estado actual: "
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Control/Panel"]
 layout_mode = 0
 offset_top = 12.0
 offset_right = 1065.0
 offset_bottom = 140.0
-scale = Vector2(0.55, 0.55)
 mouse_filter = 2
 
-[node name="Relentizar Tiempo" type="HBoxContainer" parent="Control/Panel/HBoxContainer"]
+[node name="Relentizar Tiempo" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Control/Panel/HBoxContainer"]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="Control/Panel/HBoxContainer/Relentizar Tiempo"]
+[node name="VSeparator" type="VSeparator" parent="SubViewportContainer/SubViewport/Control/Panel/HBoxContainer/Relentizar Tiempo"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_dewlx")
 
-[node name="TextureRect" type="TextureRect" parent="Control/Panel/HBoxContainer/Relentizar Tiempo"]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Control/Panel/HBoxContainer/Relentizar Tiempo"]
 material = SubResource("ShaderMaterial_qwshj")
 layout_mode = 2
 texture = ExtResource("3_qwshj")
 
-[node name="Dash" type="HBoxContainer" parent="Control/Panel/HBoxContainer"]
+[node name="Dash" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Control/Panel/HBoxContainer"]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="Control/Panel/HBoxContainer/Dash"]
+[node name="VSeparator" type="VSeparator" parent="SubViewportContainer/SubViewport/Control/Panel/HBoxContainer/Dash"]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_dewlx")
 
-[node name="TextureRect" type="TextureRect" parent="Control/Panel/HBoxContainer/Dash"]
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport/Control/Panel/HBoxContainer/Dash"]
 material = SubResource("ShaderMaterial_hfhsn")
 layout_mode = 2
 texture = ExtResource("3_qwshj")
