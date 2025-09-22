@@ -20,7 +20,7 @@ MultiplicadorFuerza = 2.0
 tiempo_ataque_fuerte = 1.0
 Congela = true
 tiempo_congelacion = 0.3
-TiempoGolpeFuerte = 1.0
+TiempoGolpeFuerte = 0.2
 ArmaStateMachine = NodePath("StateMachine")
 DashNode = NodePath("Dash")
 metadata/_custom_type_script = "uid://cw1nwm06uvyrq"
@@ -73,4 +73,5 @@ disabled = true
 [connection signal="timeout" from="Timer Fuerza" to="StateMachine" method="_TimerFuerza_Timeout"]
 [connection signal="timeout" from="Timer Cooldown" to="StateMachine" method="_TimerCooldown_Timeout"]
 [connection signal="timeout" from="Timer Congelacion" to="StateMachine" method="_TimerCongelacion_Timeout"]
+[connection signal="timeout" from="Timer Golpe" to="StateMachine" method="_TimerGolpe_Timeout"]
 [connection signal="body_entered" from="Pivot Bate/Area2D" to="StateMachine" method="_Area2D_bodyEntered"]

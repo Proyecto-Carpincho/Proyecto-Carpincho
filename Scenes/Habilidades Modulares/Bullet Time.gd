@@ -9,7 +9,7 @@ extends Node
 
 var cooldown_active:bool
 var active:bool
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if active_for_input:
 		active = Input.is_action_just_pressed("Bullet Time")
 	

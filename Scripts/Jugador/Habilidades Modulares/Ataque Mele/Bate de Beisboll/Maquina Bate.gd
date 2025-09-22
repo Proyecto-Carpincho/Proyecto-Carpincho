@@ -67,9 +67,11 @@ var EsAtaqueFuerte:bool
 func _TimerFuerza_Timeout() -> void:
 	EsAtaqueFuerte  = true
 
+var enAtaque:bool
 func inicio_ataque() ->void:
 	if FristFrame:
 		timer_golpe.start()
+		enAtaque = true
 	
 	if not get_parent().Player.isOnWall():
 		#cuidado perro bravo, muerde
@@ -77,13 +79,10 @@ func inicio_ataque() ->void:
 		
 		get_parent().Player.setShapeRotation(1 if vectorGolpe.normalized().x > 0 else -1)
 	
-	
 		
-		SetActualState("Sin Ataque")
-		timer_cooldown.start()
-		cooldown_active = true
+		
 	FristFrame = false
-	hitbox.disabled = false
+	hitbox.disabled = not enAtaque
 	sprite.visible = true
 
 
@@ -99,15 +98,15 @@ func _Area2D_bodyEntered(body: Node2D) -> void:
 		var Fuerza = get_parent().Fuerza if not EsAtaqueFuerte else get_parent().Fuerza * get_parent().MultiplicadorFuerza
 		body.call("Golpeado", Fuerza , get_parent().Mata,pivot_bate.rotation_degrees)
 		if EsAtaqueFuerte:
+			enAtaque = false
+			hitbox.set_deferred("disabled",true)
 			EfectosVisuales.CongelarTiempo()
 			timer_congelacion.start()
 			Engine.time_scale = 0
 			var Arma:ArmaMelee =get_parent()
 			Arma.DashNode.TerminarCooldown()
 			Ui.RecargaDash(0)
-		SetActualState("Sin Ataque")
-		timer_cooldown.start()
-		cooldown_active = true
+		
 
 var cooldown_active:bool
 func _TimerCooldown_Timeout() -> void:
@@ -128,3 +127,9 @@ func AnguloAtaque(angulo:float) -> float:
 			angulo = y
 	angulo = deg_to_rad(angulo)
 	return angulo
+
+
+func _TimerGolpe_Timeout() -> void:
+	SetActualState("Sin Ataque")
+	timer_cooldown.start()
+	cooldown_active = true

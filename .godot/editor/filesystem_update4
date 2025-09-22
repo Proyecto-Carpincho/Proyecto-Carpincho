@@ -1,0 +1,24 @@
+res://Scenes/main.tscn
+res://Shader/Bullet Time.tres
+res://Shader/Recarga.tres
+res://Shader/main.gdshader
+res://Shader/Cambio de Color.gdshader
+res://Materials/Prueba/capa 0/Muros.tres
+res://Materials/Prueba/capa -1/Muros.tres
+res://Shader/Linea.tres
+res://Shader/Viento Dash.tres
+res://Materials/Prueba/capa -1/Aire.tres
+res://Materials/Prueba/capa 0/Aire.tres
+res://Materials/Prueba/capa 0/Tuberias.tres
+res://Materials/Prueba/capa -1/Tuberias.tres
+res://Materials/Prueba/capa -1/Ventanas.tres
+res://Materials/Prueba/capa 0/Ventanas.tres
+res://Materials/Prueba/capa 1/Muros.tres
+res://Materials/Prueba/capa 1/Aire.tres
+res://Materials/Prueba/capa 1/Tuberias.tres
+res://Materials/Prueba/capa 1/Ventanas.tres
+res://Scenes/Character.tscn
+res://Scenes/UI.tscn
+res://Scenes/Habilidades Modulares/Dash/Dash Normal.tscn
+res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn
+res://Scenes/Muñeco Pruebas.tscn
