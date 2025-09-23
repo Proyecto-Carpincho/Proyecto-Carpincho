@@ -1,14 +1,14 @@
+TileMap
+RayCast2D
+ShapeCast2D
 Node2D
 SubViewport
 SubViewportContainer
 TileMapLayer
 Sprite2D
-TileMap
 CollisionShape2D
 StaticBody2D
 Timer
 Node
 Label
 Marker2D
-Area2D
-StateMachine

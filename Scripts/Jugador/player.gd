@@ -1,8 +1,7 @@
-extends CharacterBody2D
+extends Entidad
 
 @export_group("Life")
 @export var maxLife:int
-@export var life:int
 
 @export_group("Gravity")
 @export var gravity:float

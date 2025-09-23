@@ -482,7 +482,7 @@ sources/4 = SubResource("TileSetAtlasSource_gt3je")
 sources/2 = SubResource("TileSetAtlasSource_pdsj5")
 sources/5 = SubResource("TileSetAtlasSource_3pmx8")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6iyac"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k2e45"]
 texture = ExtResource("4_ynf5e")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -500,7 +500,7 @@ texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
 0:1/0/material = ExtResource("3_fevyy")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fdnlq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_536cc"]
 texture = ExtResource("5_hptm8")
 texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
@@ -547,7 +547,7 @@ texture_region_size = Vector2i(64, 64)
 3:0/0 = 0
 3:0/0/material = ExtResource("3_fevyy")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k12tt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqgau"]
 texture = ExtResource("6_hptm8")
 texture_region_size = Vector2i(64, 64)
 0:0/animation_columns = 5
@@ -560,7 +560,7 @@ texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/material = ExtResource("6_hibaj")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h1bgf"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8cuat"]
 texture = ExtResource("7_d1ilt")
 texture_region_size = Vector2i(64, 64)
 0:1/0 = 0
@@ -609,7 +609,7 @@ texture_region_size = Vector2i(64, 64)
 0:0/0/terrains_peering_bit/right_side = 0
 0:0/0/terrains_peering_bit/bottom_side = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d1ilt"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o1aky"]
 texture = ExtResource("7_ynf5e")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -656,7 +656,7 @@ texture_region_size = Vector2i(64, 64)
 0:1/0/material = ExtResource("3_fevyy")
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, -32, -15.523, -32, -15.523, 32, 32, 32)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b3802"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kwxat"]
 texture = ExtResource("9_d1ilt")
 texture_region_size = Vector2i(64, 64)
 0:1/animation_separation = Vector2i(0, 135)
@@ -687,12 +687,12 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 2
 terrain_set_0/terrain_0/name = "Tuberias"
 terrain_set_0/terrain_0/color = Color(0.227498, 0.182477, 1, 1)
-sources/0 = SubResource("TileSetAtlasSource_6iyac")
-sources/1 = SubResource("TileSetAtlasSource_fdnlq")
-sources/3 = SubResource("TileSetAtlasSource_h1bgf")
-sources/4 = SubResource("TileSetAtlasSource_d1ilt")
-sources/2 = SubResource("TileSetAtlasSource_k12tt")
-sources/5 = SubResource("TileSetAtlasSource_b3802")
+sources/0 = SubResource("TileSetAtlasSource_k2e45")
+sources/1 = SubResource("TileSetAtlasSource_536cc")
+sources/3 = SubResource("TileSetAtlasSource_8cuat")
+sources/4 = SubResource("TileSetAtlasSource_o1aky")
+sources/2 = SubResource("TileSetAtlasSource_aqgau")
+sources/5 = SubResource("TileSetAtlasSource_kwxat")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hptm8"]
 texture = ExtResource("5_hptm8")
@@ -1074,7 +1074,6 @@ tile_set = SubResource("TileSet_k12tt")
 z_index = 0
 position = Vector2(24, -155)
 maxLife = 20
-life = 10
 gravity = 1000.0
 maxGravity = 1000.0
 gravityMultiplyWall = 0.03
@@ -1088,6 +1087,8 @@ velocity_jump = -190.0
 jump_multiply_boosted = 1.1
 wall_velocity = -2000.0
 wall_jump_velocity = -350.0
+max_life = 265
+life = 260
 
 [node name="Muñeco" parent="Entidades" instance=ExtResource("5_kry3j")]
 position = Vector2(223, -290)
