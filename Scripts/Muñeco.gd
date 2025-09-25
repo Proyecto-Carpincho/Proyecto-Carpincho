@@ -1,22 +1,16 @@
-extends StaticBody2D
+extends Entidad
 
 
 func _physics_process(delta: float) -> void:
 	for label:Label in A:
 		label.rotation = -rotation
 
-func Golpeado(Fuerza,Mata,RotacionArea) -> void:
-	var A = 1 if abs(RotacionArea) <= 90 else -1
+func Golpeado(Fuerza,Mata) -> void:
 	
 	text(Fuerza)
 	
-	get_tree().create_tween().tween_property(self,"rotation_degrees",30* A,0.2).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	await get_tree().create_timer(0.1).timeout
-	get_tree().create_tween().tween_property(self,"rotation_degrees",-30*A,0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
-	await get_tree().create_timer(0.2).timeout
 	get_tree().create_tween().tween_property(self,"rotation_degrees",0,0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	
-var A:Array[Label]
 func text(Fuerza):
 	var labelDaño:Label = get_node("Label").duplicate()
 	add_child(labelDaño)

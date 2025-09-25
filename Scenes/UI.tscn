@@ -75,6 +75,15 @@ theme_override_font_sizes/normal_font_size = 70
 text = " Estado actual: "
 vertical_alignment = 1
 
+[node name="Label" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Control/Panel"]
+layout_mode = 0
+offset_left = 1814.0
+offset_top = -1114.0
+offset_right = 2194.0
+offset_bottom = -980.0
+theme_override_font_sizes/normal_font_size = 100
+text = "0"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Control/Panel"]
 layout_mode = 0
 offset_top = 12.0

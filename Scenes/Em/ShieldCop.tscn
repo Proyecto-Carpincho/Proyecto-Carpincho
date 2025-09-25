@@ -112,9 +112,12 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ca2nf"]
 
 [node name="HeavyCop" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_ca2nf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_7adxk")
 animation = &"walk"
 frame_progress = 0.191232
@@ -124,5 +127,24 @@ shape = SubResource("CapsuleShape2D_ca2nf")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(0, 0)
+[node name="Label" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -50.0
+offset_right = 25.0
+pivot_offset = Vector2(25, 25)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vista" type="Node2D" parent="."]
+
+[node name="RayCast1" type="RayCast2D" parent="Vista"]
+target_position = Vector2(100, 0)
+collision_mask = 9
+
+[node name="RayCast2" type="RayCast2D" parent="Vista"]
+target_position = Vector2(75, 40)
+collision_mask = 9
+
+[node name="RayCast3" type="RayCast2D" parent="Vista"]
+target_position = Vector2(75, -40)
+collision_mask = 9
