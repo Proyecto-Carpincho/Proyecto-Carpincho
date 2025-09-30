@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://wlyot2qy4yvo"]
+[gd_scene load_steps=23 format=4 uid="uid://wlyot2qy4yvo"]
 
 [ext_resource type="Material" uid="uid://b6xw1kstcgqfw" path="res://Materials/Prueba/capa 0/Muros.tres" id="1_uq5mc"]
 [ext_resource type="Texture2D" uid="uid://cj88mhn4epkua" path="res://Sprites/Prueba/Columna Tile.png" id="2_r0q7f"]
@@ -227,6 +227,11 @@ sources/4 = SubResource("TileSetAtlasSource_bkqle")
 sources/2 = SubResource("TileSetAtlasSource_0g3x0")
 sources/5 = SubResource("TileSetAtlasSource_at1lk")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kw0q7"]
+vertices = PackedVector2Array(692.133, 227.906, -395.258, 218.078, -413.719, -457.188, 701.852, -478.789)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-405, 228, -424, -467, 712, -489, 702, 238)])
+
 [node name="EmTestStg00" type="Node2D"]
 
 [node name="TileMap Mapa" type="TileMapLayer" parent="."]
@@ -237,12 +242,14 @@ tile_map_data = PackedByteArray("AAADAP7/BAABAAAAAAADAP//BAABAAEAAAAEAP7/BAABAAA
 tile_set = SubResource("TileSet_l773a")
 
 [node name="HeavyCop" parent="." node_paths=PackedStringArray("objetivo", "alert_manager") groups=["Enemigos"] instance=ExtResource("12_prbge")]
-position = Vector2(297, -95)
+position = Vector2(-345, -15)
 scale = Vector2(2.19, 2.19)
-collision_layer = 12
+collision_layer = 13
+collision_mask = 5
 objetivo = NodePath("../Jugador")
 alert_manager = NodePath("../AlertManager")
 grupo = "Enemigos"
+SPEED = 100
 
 [node name="Jugador" parent="." instance=ExtResource("11_p00kn")]
 z_index = 0
@@ -265,8 +272,13 @@ max_life = 400
 life = 240
 
 [node name="StaticBody2D" parent="." instance=ExtResource("13_r0q7f")]
-position = Vector2(-124, -31)
+position = Vector2(526, -208)
 
 [node name="AlertManager" type="Node" parent="."]
 script = ExtResource("14_kw0q7")
+grupo = "Enemigos"
 metadata/_custom_type_script = "uid://cl5id8ntqh8y3"
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(-28, -31)
+navigation_polygon = SubResource("NavigationPolygon_kw0q7")
