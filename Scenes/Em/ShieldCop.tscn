@@ -1,32 +1,18 @@
 [gd_scene load_steps=13 format=3 uid="uid://bh5jliaeyj4fu"]
 
 [ext_resource type="Script" uid="uid://towybn6nxctk" path="res://Scripts/Em/Enemigo.gd" id="1_ca2nf"]
-[ext_resource type="Texture2D" uid="uid://c3kgk72rlybdk" path="res://Sprites/Prueba/Em/heavyCop/attack1WIP.png" id="2_s5w3y"]
-[ext_resource type="Texture2D" uid="uid://dg5aibwtttxge" path="res://Sprites/Prueba/Em/heavyCop/attack2WIP.png" id="3_oku1n"]
-[ext_resource type="Texture2D" uid="uid://c0vlvpu4mbilw" path="res://Sprites/Prueba/Em/heavyCop/attack3WIP.png" id="4_rrstr"]
 [ext_resource type="Texture2D" uid="uid://h2c4rqbwcdjr" path="res://Sprites/Prueba/Em/heavyCop/idleWIP.png" id="5_4a1h1"]
 [ext_resource type="Texture2D" uid="uid://b5yqbahakxytd" path="res://Sprites/Prueba/Em/heavyCop/counterWIP.png" id="6_4sh5m"]
 [ext_resource type="Texture2D" uid="uid://bcb544n4tknq4" path="res://Sprites/Prueba/Em/heavyCop/placajeWIP.png" id="7_w6tmh"]
 [ext_resource type="Texture2D" uid="uid://c8trs2t3r4bxj" path="res://Sprites/Prueba/Em/heavyCop/walkWIP1.png" id="8_gqarm"]
 [ext_resource type="Texture2D" uid="uid://bw0u0yifrac1n" path="res://Sprites/Prueba/Em/heavyCop/walkWIP2.png" id="9_xsvcp"]
 [ext_resource type="Texture2D" uid="uid://gwyuscvrlx4p" path="res://Sprites/Prueba/Em/heavyCop/turn1WIP.png" id="10_0yxdh"]
+[ext_resource type="Script" uid="uid://cxbp2sq3qmctk" path="res://Scripts/Em/ShieldCop/Atacando.gd" id="11_vrn4w"]
+[ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/ShieldCop/Perseguir.gd" id="12_3nc5l"]
+[ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/ShieldCop/Patrullar.gd" id="13_fgpuc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7adxk"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_s5w3y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_oku1n")
-}, {
-"duration": 2.0,
-"texture": ExtResource("4_rrstr")
-}],
-"loop": true,
-"name": &"attack_slash",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("5_4a1h1")
@@ -111,16 +97,17 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ca2nf"]
 
-[node name="HeavyCop" type="CharacterBody2D"]
-collision_layer = 4
-collision_mask = 4
+[node name="HeavyCop" type="CharacterBody2D" node_paths=PackedStringArray("estado_inicial")]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_ca2nf")
+SPEED = 25
+estado_inicial = NodePath("Patrullar")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_7adxk")
-animation = &"walk"
-frame_progress = 0.191232
+animation = &"idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_ca2nf")
@@ -148,3 +135,26 @@ collision_mask = 9
 [node name="RayCast2" type="RayCast2D" parent="Vista"]
 target_position = Vector2(75, 40)
 collision_mask = 9
+
+[node name="DistanciaJugador" type="RayCast2D" parent="."]
+collision_mask = 9
+
+[node name="ShieldCopAtaque" type="Node" parent="."]
+script = ExtResource("11_vrn4w")
+metadata/_custom_type_script = "uid://cxbp2sq3qmctk"
+
+[node name="ShieldCopChase" type="Node" parent="."]
+script = ExtResource("12_3nc5l")
+metadata/_custom_type_script = "uid://ds2hrjf7uairh"
+
+[node name="Patrullar" type="Node" parent="."]
+script = ExtResource("13_fgpuc")
+metadata/_custom_type_script = "uid://d2d3tvhcmf4ja"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -56.0
+offset_top = -40.0
+offset_right = 48.0
+offset_bottom = -16.0
+theme_override_font_sizes/normal_font_size = 10
+text = "sSA"

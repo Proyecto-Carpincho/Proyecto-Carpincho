@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 
 func llamar_alerta(alerta:alertStatus) -> void:
 	fuerza_alerta += alerta
-	await get_tree().create_timer(2).timeout # Esperar a que mas de un enemigo haya visto al jugador
+	await get_tree().create_timer(0).timeout # Esperar a que mas de un enemigo haya visto al jugador
 	if fuerza_alerta == 1:
 		estado_alerta = alertStatus.PRECAUCION
 		
