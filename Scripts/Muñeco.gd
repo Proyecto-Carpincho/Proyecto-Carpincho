@@ -6,11 +6,8 @@ func _physics_process(delta: float) -> void:
 		label.rotation = -rotation
 
 func Golpeado(Fuerza,Mata) -> void:
-	
 	text(Fuerza)
-	
-	get_tree().create_tween().tween_property(self,"rotation_degrees",0,0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	
+
 func text(Fuerza):
 	var labelDaño:Label = get_node("Label").duplicate()
 	add_child(labelDaño)

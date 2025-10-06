@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh5jliaeyj4fu"]
+[gd_scene load_steps=13 format=3 uid="uid://c7p5mspd0lfxc"]
 
-[ext_resource type="Script" uid="uid://towybn6nxctk" path="res://Scripts/Em/Enemigo.gd" id="1_ca2nf"]
+[ext_resource type="PackedScene" uid="uid://n1wbci6a6faw" path="res://Scenes/Em/BaseEm.tscn" id="1_5l48c"]
 [ext_resource type="Texture2D" uid="uid://h2c4rqbwcdjr" path="res://Sprites/Prueba/Em/heavyCop/idleWIP.png" id="5_4a1h1"]
 [ext_resource type="Texture2D" uid="uid://b5yqbahakxytd" path="res://Sprites/Prueba/Em/heavyCop/counterWIP.png" id="6_4sh5m"]
 [ext_resource type="Texture2D" uid="uid://bcb544n4tknq4" path="res://Sprites/Prueba/Em/heavyCop/placajeWIP.png" id="7_w6tmh"]
@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/ShieldCop/Perseguir.gd" id="12_3nc5l"]
 [ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/ShieldCop/Patrullar.gd" id="13_fgpuc"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_7adxk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_nqb0s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -73,13 +73,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_4a1h1")
-}, {
 "duration": 2.0,
 "texture": ExtResource("10_0yxdh")
 }],
-"loop": true,
+"loop": false,
 "name": &"turn",
 "speed": 5.0
 }, {
@@ -95,66 +92,31 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ca2nf"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lu3y0"]
 
-[node name="HeavyCop" type="CharacterBody2D" node_paths=PackedStringArray("estado_inicial")]
-collision_layer = 5
-collision_mask = 5
-script = ExtResource("1_ca2nf")
-SPEED = 25
-estado_inicial = NodePath("Patrullar")
+[node name="BaseEm" instance=ExtResource("1_5l48c")]
+run_speed = 20
+max_life = 100
+life = 100
+speed = 10
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(-1, 1)
-sprite_frames = SubResource("SpriteFrames_7adxk")
-animation = &"idle"
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_nqb0s")
+animation = &"turn"
+frame_progress = 1.0
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_ca2nf")
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CapsuleShape2D_lu3y0")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-
-[node name="Label" type="Label" parent="."]
-offset_left = -25.0
-offset_top = -50.0
-offset_right = 25.0
-pivot_offset = Vector2(25, 25)
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Vista" type="Node2D" parent="."]
-
-[node name="RayCast0" type="RayCast2D" parent="Vista"]
-target_position = Vector2(75, -40)
-collision_mask = 9
-
-[node name="RayCast1" type="RayCast2D" parent="Vista"]
-target_position = Vector2(100, 0)
-collision_mask = 9
-
-[node name="RayCast2" type="RayCast2D" parent="Vista"]
-target_position = Vector2(75, 40)
-collision_mask = 9
-
-[node name="DistanciaJugador" type="RayCast2D" parent="."]
-collision_mask = 9
-
-[node name="ShieldCopAtaque" type="Node" parent="."]
-script = ExtResource("11_vrn4w")
-metadata/_custom_type_script = "uid://cxbp2sq3qmctk"
-
-[node name="ShieldCopChase" type="Node" parent="."]
-script = ExtResource("12_3nc5l")
-metadata/_custom_type_script = "uid://ds2hrjf7uairh"
-
-[node name="Patrullar" type="Node" parent="."]
+[node name="PatrullarGenerico" type="Node" parent="." index="6"]
 script = ExtResource("13_fgpuc")
 metadata/_custom_type_script = "uid://d2d3tvhcmf4ja"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -56.0
-offset_top = -40.0
-offset_right = 48.0
-offset_bottom = -16.0
-theme_override_font_sizes/normal_font_size = 10
-text = "sSA"
+[node name="PerseguirGenerico" type="Node" parent="." index="7"]
+script = ExtResource("12_3nc5l")
+metadata/_custom_type_script = "uid://ds2hrjf7uairh"
+
+[node name="RangoAtaqueGenerico" type="Node" parent="." index="8"]
+script = ExtResource("11_vrn4w")
+distancia_para_perder = 600
+metadata/_custom_type_script = "uid://cxbp2sq3qmctk"

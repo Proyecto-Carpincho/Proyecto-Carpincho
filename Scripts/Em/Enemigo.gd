@@ -4,12 +4,13 @@ class_name Enemigo
 @export var objetivo:Entidad
 @export var alert_manager:AlertManager
 @export var grupo:String
-@export var SPEED:int
+@export var run_speed:int
 @export var estado_inicial:State
 @export var ruta:Path2D
 
 @onready var nav:NavigationAgent2D = $NavigationAgent2D
 @onready var dis_obj_ray:RayCast2D = $DistanciaJugador
+@onready var animated_sprite:AnimatedSprite2D = $AnimatedSprite2D
 
 var estado_alerta:AlertManager.alertStatus
 var vio_jugador:bool
@@ -52,7 +53,6 @@ func _process(delta: float) -> void:
 		vio_jugador = false
 	if state_now:
 		state_now.update(delta)
-	$RichTextLabel.text = state_now.to_string()
 
 func _physics_process(delta: float) -> void:
 	var direction:Vector2
@@ -66,12 +66,11 @@ func cambiar_alerta(estado:AlertManager.alertStatus):
 	estado_alerta = estado
 	match estado_alerta:
 		AlertManager.alertStatus.NORMAL:
-			transicion_hijo(state_now, "Patrulla")
+			transicion_hijo(state_now, "PatrullarGenerico")
 		AlertManager.alertStatus.PRECAUCION:
 			pass
 		AlertManager.alertStatus.ALERTA:
-			transicion_hijo(state_now, "ShieldCopAtaque")
-
+			transicion_hijo(state_now, "RangoAtaqueGenerico")
 
 func ver_jugador():
 	vio_jugador = true
@@ -104,3 +103,15 @@ func transicion_hijo(state:State, new_state_name:String):
 		state_now.exit()
 	new_state.enter()
 	state_now = new_state
+
+func girar(b:bool):
+	for i in 3:
+		if b == false && $Vista.get_child(i).target_position.x > 0:
+			$Vista.get_child(i).target_position.x *= -1
+			animated_sprite.play("turn")
+		elif b == true && $Vista.get_child(i).target_position.x < 0:
+			$Vista.get_child(i).target_position.x *= -1
+			animated_sprite.play("turn")
+			
+	await animated_sprite.animation_finished
+	animated_sprite.flip_h = b

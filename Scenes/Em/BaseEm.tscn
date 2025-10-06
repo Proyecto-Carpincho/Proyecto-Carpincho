@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://n1wbci6a6faw"]
+
+[ext_resource type="Script" uid="uid://towybn6nxctk" path="res://Scripts/Em/Enemigo.gd" id="1_8a2k6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_furmh"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"stun",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"turn",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="BaseEm" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_8a2k6")
+metadata/_custom_type_script = "uid://towybn6nxctk"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_furmh")
+animation = &"stun"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Vista" type="Node2D" parent="."]
+
+[node name="RayCast0" type="RayCast2D" parent="Vista"]
+target_position = Vector2(-75, -40)
+collision_mask = 9
+
+[node name="RayCast1" type="RayCast2D" parent="Vista"]
+target_position = Vector2(-100, 0)
+collision_mask = 9
+
+[node name="RayCast2" type="RayCast2D" parent="Vista"]
+target_position = Vector2(-75, 40)
+collision_mask = 9
+
+[node name="Label" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -50.0
+offset_right = 25.0
+pivot_offset = Vector2(25, 25)
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DistanciaJugador" type="RayCast2D" parent="."]
