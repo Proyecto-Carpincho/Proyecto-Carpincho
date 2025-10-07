@@ -20,4 +20,9 @@ func physics_update(delta:float) -> void:
 		if !padre.animated_sprite.is_playing():
 			padre.animated_sprite.play("run")
 	elif padre.vio_jugador == true:
-		Transiciono.emit(self, "RangoAtaqueGenerico")
+		var estado_transicionar:String
+		for i in get_child_count():
+				if get_child(i) is PatrullarGenerico:
+					estado_transicionar = get_child(i).name
+					break
+		Transiciono.emit(self, estado_transicionar)

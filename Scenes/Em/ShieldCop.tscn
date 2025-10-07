@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://n1wbci6a6faw" path="res://Scenes/Em/BaseEm.tscn" id="1_5l48c"]
 [ext_resource type="Texture2D" uid="uid://h2c4rqbwcdjr" path="res://Sprites/Prueba/Em/heavyCop/idleWIP.png" id="5_4a1h1"]
-[ext_resource type="Texture2D" uid="uid://b5yqbahakxytd" path="res://Sprites/Prueba/Em/heavyCop/counterWIP.png" id="6_4sh5m"]
 [ext_resource type="Texture2D" uid="uid://bcb544n4tknq4" path="res://Sprites/Prueba/Em/heavyCop/placajeWIP.png" id="7_w6tmh"]
 [ext_resource type="Texture2D" uid="uid://c8trs2t3r4bxj" path="res://Sprites/Prueba/Em/heavyCop/walkWIP1.png" id="8_gqarm"]
 [ext_resource type="Texture2D" uid="uid://bw0u0yifrac1n" path="res://Sprites/Prueba/Em/heavyCop/walkWIP2.png" id="9_xsvcp"]
 [ext_resource type="Texture2D" uid="uid://gwyuscvrlx4p" path="res://Sprites/Prueba/Em/heavyCop/turn1WIP.png" id="10_0yxdh"]
-[ext_resource type="Script" uid="uid://cxbp2sq3qmctk" path="res://Scripts/Em/ShieldCop/Atacando.gd" id="11_vrn4w"]
-[ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/ShieldCop/Perseguir.gd" id="12_3nc5l"]
-[ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/ShieldCop/Patrullar.gd" id="13_fgpuc"]
+[ext_resource type="Script" uid="uid://ch28gho3h2lph" path="res://Scripts/Em/ShieldCop/RangoAtaqueShieldCop.gd" id="10_cp0p1"]
+[ext_resource type="Script" uid="uid://bmdewqnsbar8q" path="res://Scripts/Em/ShieldCop/PlacajeShieldCop.gd" id="10_vrn4w"]
+[ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/PerseguirGenerico.gd" id="12_3nc5l"]
+[ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/PatrullarGenerico.gd" id="13_fgpuc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nqb0s"]
 animations = [{
@@ -19,14 +19,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"block",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_4sh5m")
-}],
-"loop": true,
-"name": &"counter",
 "speed": 5.0
 }, {
 "frames": [{
@@ -102,8 +94,6 @@ speed = 10
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_nqb0s")
-animation = &"turn"
-frame_progress = 1.0
 
 [node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CapsuleShape2D_lu3y0")
@@ -116,7 +106,11 @@ metadata/_custom_type_script = "uid://d2d3tvhcmf4ja"
 script = ExtResource("12_3nc5l")
 metadata/_custom_type_script = "uid://ds2hrjf7uairh"
 
-[node name="RangoAtaqueGenerico" type="Node" parent="." index="8"]
-script = ExtResource("11_vrn4w")
+[node name="RangoAtaqueShieldCop" type="Node" parent="." index="8"]
+script = ExtResource("10_cp0p1")
 distancia_para_perder = 600
-metadata/_custom_type_script = "uid://cxbp2sq3qmctk"
+metadata/_custom_type_script = "uid://ch28gho3h2lph"
+
+[node name="PlacajeShieldCop" type="Node" parent="." index="9"]
+script = ExtResource("10_vrn4w")
+metadata/_custom_type_script = "uid://bmdewqnsbar8q"

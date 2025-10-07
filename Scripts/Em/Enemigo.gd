@@ -64,13 +64,21 @@ func _physics_process(delta: float) -> void:
 
 func cambiar_alerta(estado:AlertManager.alertStatus):
 	estado_alerta = estado
+	var estado_transicionar:String
 	match estado_alerta:
 		AlertManager.alertStatus.NORMAL:
-			transicion_hijo(state_now, "PatrullarGenerico")
+			for i in get_child_count():
+				if get_child(i) is PatrullarGenerico:
+					estado_transicionar = get_child(i).name
+					break
 		AlertManager.alertStatus.PRECAUCION:
 			pass
 		AlertManager.alertStatus.ALERTA:
-			transicion_hijo(state_now, "RangoAtaqueGenerico")
+			for i in get_child_count():
+				if get_child(i) is RangoAtaqueGenerico:
+					estado_transicionar = get_child(i).name
+					break
+	transicion_hijo(state_now, estado_transicionar)
 
 func ver_jugador():
 	vio_jugador = true
@@ -98,6 +106,7 @@ func transicion_hijo(state:State, new_state_name:String):
 	var new_state = states.get(new_state_name)
 	
 	if !new_state:
+		push_warning("El estado al que", self.name," quiere trancisionar es invalido y/o inexistente")
 		return
 	if state_now:
 		state_now.exit()
