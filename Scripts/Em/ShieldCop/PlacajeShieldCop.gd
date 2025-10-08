@@ -1,7 +1,5 @@
-extends State
+extends RangoAtaqueShieldCop
 class_name PlacajeShieldCop
-
-@onready var padre:Enemigo = get_parent()
 
 const velocidad_placaje = 250
 var ultima_dir:int
@@ -20,6 +18,7 @@ func physics_update(delta:float) -> void:
 		padre.animated_sprite.play("stun")
 		await get_tree().create_timer(1).timeout
 		padre.animated_sprite.stop()
+		padre.placaje_timer_crear()
 		Transiciono.emit(self, "RangoAtaqueShieldCop")
 	else:
 		padre.velocity.x = ultima_dir

@@ -43,7 +43,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	$DistanciaJugador.target_position = to_local(objetivo.position)
-	distancia_objetivo = position.distance_to($DistanciaJugador.target_position)
+	distancia_objetivo = $DistanciaJugador.position.distance_to($DistanciaJugador.target_position)
 	var auxVio = false
 	for i in 3:
 		if $Vista.get_child(i).get_collider() == objetivo:
@@ -73,6 +73,11 @@ func cambiar_alerta(estado:AlertManager.alertStatus):
 					break
 		AlertManager.alertStatus.PRECAUCION:
 			pass
+		AlertManager.alertStatus.EVACION:
+			for i in get_child_count():
+				if get_child(i) is PerseguirGenerico:
+					estado_transicionar = get_child(i).name
+					break
 		AlertManager.alertStatus.ALERTA:
 			for i in get_child_count():
 				if get_child(i) is RangoAtaqueGenerico:
@@ -87,7 +92,9 @@ func ver_jugador():
 		AlertManager.alertStatus.PRECAUCION:
 			alert_manager.llamar_alerta(AlertManager.alertStatus.ALERTA)
 			return
-			
+		AlertManager.alertStatus.EVACION:
+			alert_manager.llamar_alerta(AlertManager.alertStatus.ALERTA)
+			return
 		AlertManager.alertStatus.ALERTA:
 			for i in 3:
 				if $Vista.get_child(i).get_collider() == objetivo:

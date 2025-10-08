@@ -75,15 +75,6 @@ theme_override_font_sizes/normal_font_size = 70
 text = " Estado actual: "
 vertical_alignment = 1
 
-[node name="Label" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Control/Panel"]
-layout_mode = 0
-offset_left = 1814.0
-offset_top = -1114.0
-offset_right = 2194.0
-offset_bottom = -980.0
-theme_override_font_sizes/normal_font_size = 100
-text = "0"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="SubViewportContainer/SubViewport/Control/Panel"]
 layout_mode = 0
 offset_top = 12.0
@@ -116,3 +107,41 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_dewlx")
 material = SubResource("ShaderMaterial_hfhsn")
 layout_mode = 2
 texture = ExtResource("3_qwshj")
+
+[node name="AlertaTemp" type="Panel" parent="SubViewportContainer/SubViewport/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -450.0
+offset_bottom = 330.0
+grow_horizontal = 0
+
+[node name="Estado" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Control/AlertaTemp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41
+anchor_top = -0.0363636
+anchor_right = 0.576667
+anchor_bottom = 0.327273
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/normal_font_size = 100
+text = "0asdad"
+
+[node name="Timer" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Control/AlertaTemp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.417778
+anchor_top = 0.660606
+anchor_right = 0.706667
+anchor_bottom = 0.836364
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 75
+text = "99"

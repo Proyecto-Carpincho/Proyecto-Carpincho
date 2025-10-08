@@ -33,5 +33,9 @@ func RecargaDash(TiempodeEspera:float = 0.4):
 
 func SetState(state:String)->void:
 	get_node("SubViewportContainer/SubViewport/Control/Panel/RichTextLabel").text=" Estado actual: "+state
+
 func set_alert(state) -> void:
-	$SubViewportContainer/SubViewport/Control/Panel/Label.text = str(state)
+	$SubViewportContainer/SubViewport/Control/AlertaTemp/Estado.text = str(state)
+
+func set_timer(tiempo:int):
+	$SubViewportContainer/SubViewport/Control/AlertaTemp/Timer.text = str(tiempo)
