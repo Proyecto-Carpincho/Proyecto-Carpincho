@@ -40,31 +40,30 @@ func _ready() -> void:
 			states[child.name] = child
 			child.Transiciono.connect(transicion_hijo)
 	state_now = estado_inicial
+	state_now.enter()
 
 func _process(delta: float) -> void:
-	$DistanciaJugador.target_position = to_local(objetivo.position)
-	distancia_objetivo = $DistanciaJugador.position.distance_to($DistanciaJugador.target_position)
-	var auxVio = false
-	for i in 3:
-		if $Vista.get_child(i).get_collider() == objetivo:
-			ver_jugador()
-			auxVio = true
-	if !auxVio:
-		vio_jugador = false
+	if state_now is not MuerteGenerica:
+		$DistanciaJugador.target_position = to_local(objetivo.position)
+		distancia_objetivo = $DistanciaJugador.position.distance_to($DistanciaJugador.target_position)
+		var auxVio = false
+		for i in 3:
+			if $Vista.get_child(i).get_collider() == objetivo:
+				ver_jugador()
+				auxVio = true
+		if !auxVio:
+			vio_jugador = false
 	if state_now:
 		state_now.update(delta)
 
 func _physics_process(delta: float) -> void:
-	var direction:Vector2
-	if not is_on_floor():
-		velocity += get_gravity() * delta
 	if state_now:
 		state_now.physics_update(delta)
 	move_and_slide()
 
 func cambiar_alerta(estado:AlertManager.alertStatus):
-	estado_alerta = estado
 	var estado_transicionar:String
+	estado_alerta = estado
 	match estado_alerta:
 		AlertManager.alertStatus.NORMAL:
 			for i in get_child_count():
@@ -102,32 +101,44 @@ func ver_jugador():
 			return
 		AlertManager.alertStatus.NORMAL:
 			await get_tree().create_timer(2).timeout	
-			if !stunned && estado_alerta == AlertManager.alertStatus.NORMAL:
+			if !stunned && estado_alerta == AlertManager.alertStatus.NORMAL && state_now is not MuerteGenerica:
 				alert_manager.llamar_alerta(AlertManager.alertStatus.PRECAUCION)
 				await get_tree().create_timer(0.5).timeout
 				alert_manager.llamar_alerta(AlertManager.alertStatus.ALERTA)
 
 func transicion_hijo(state:State, new_state_name:String):
-	if state != state_now:
-		return
-	var new_state = states.get(new_state_name)
-	
-	if !new_state:
-		push_warning("El estado al que", self.name," quiere trancisionar es invalido y/o inexistente")
-		return
-	if state_now:
-		state_now.exit()
-	new_state.enter()
-	state_now = new_state
+	if state_now is not MuerteGenerica:
+		if state != state_now:
+			return
+		var new_state = states.get(new_state_name)
+		
+		if !new_state:
+			push_warning("El estado al que", self.name," quiere trancisionar es invalido y/o inexistente")
+			return
+		if state_now:
+			state_now.exit()
+		new_state.enter()
+		state_now = new_state
 
 func girar(b:bool):
 	for i in 3:
-		if b == false && $Vista.get_child(i).target_position.x > 0:
+		if (b == false && $Vista.get_child(i).target_position.x > 0) || (b == true && $Vista.get_child(i).target_position.x < 0):
 			$Vista.get_child(i).target_position.x *= -1
 			animated_sprite.play("turn")
-		elif b == true && $Vista.get_child(i).target_position.x < 0:
-			$Vista.get_child(i).target_position.x *= -1
-			animated_sprite.play("turn")
-			
+	
 	await animated_sprite.animation_finished
 	animated_sprite.flip_h = b
+
+func Golpeado(fuerza,mata) -> void:
+	if alert_manager.estado_alerta != AlertManager.alertStatus.NORMAL:
+		super.Golpeado(fuerza, mata)
+	else:
+		life -= life
+	
+	if life <= 0:
+		var estado_transicionar:String
+		for i in get_child_count():
+				if get_child(i) is MuerteGenerica:
+					estado_transicionar = get_child(i).name
+					break
+		transicion_hijo(state_now, estado_transicionar)

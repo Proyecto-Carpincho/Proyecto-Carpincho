@@ -3,6 +3,8 @@ class_name State
 
 signal Transiciono
 
+@onready var padre:Enemigo = get_parent()
+
 func enter():
 	pass
 

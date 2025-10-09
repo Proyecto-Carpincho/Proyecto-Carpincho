@@ -1,7 +1,6 @@
 extends State
 class_name PatrullarGenerico
 
-@onready var padre:Enemigo = get_parent()
 @onready var ruta:Path2D = get_parent().ruta
 
 var cantidad_puntos
@@ -20,14 +19,15 @@ func enter() -> void:
 
 func physics_update(delta:float) -> void:
 	var direction:Vector2
+	print(progreso_ruta, " ", cantidad_puntos)
 	
 	padre.nav.target_position = ruta.curve.get_point_position(progreso_ruta)
 	direction = (padre.nav.get_next_path_position() - padre.global_position).normalized()
-	padre.velocity = padre.velocity.lerp(direction * padre.speed, 5 * delta)
+	padre.velocity.x = lerp(padre.velocity.x, direction.x * padre.speed, 5 * delta)
 	
 	if padre.position.distance_to(ruta.curve.get_point_position(progreso_ruta)) <= 10:
 		if avanzando:
-			if progreso_ruta < ruta.curve.point_count: # No entiendo porque cantidad_puntos es null pero esto no
+			if progreso_ruta < cantidad_puntos: # No entiendo porque cantidad_puntos es null pero esto no
 				progreso_ruta += 1
 			else:
 				avanzando = false

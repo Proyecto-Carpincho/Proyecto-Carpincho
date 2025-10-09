@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7p5mspd0lfxc"]
+[gd_scene load_steps=16 format=3 uid="uid://c7p5mspd0lfxc"]
 
 [ext_resource type="PackedScene" uid="uid://n1wbci6a6faw" path="res://Scenes/Em/BaseEm.tscn" id="1_5l48c"]
 [ext_resource type="Script" uid="uid://dayxga6ky0saq" path="res://Scripts/Em/ShieldCop/ShieldCop.gd" id="2_vrn4w"]
+[ext_resource type="Texture2D" uid="uid://clybg0e6cwycw" path="res://Sprites/Prueba/Em/heavyCop/deadWIP.png" id="4_u2ess"]
 [ext_resource type="Texture2D" uid="uid://h2c4rqbwcdjr" path="res://Sprites/Prueba/Em/heavyCop/idleWIP.png" id="5_4a1h1"]
 [ext_resource type="Texture2D" uid="uid://bcb544n4tknq4" path="res://Sprites/Prueba/Em/heavyCop/placajeWIP.png" id="7_w6tmh"]
 [ext_resource type="Texture2D" uid="uid://c8trs2t3r4bxj" path="res://Sprites/Prueba/Em/heavyCop/walkWIP1.png" id="8_gqarm"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" uid="uid://ch28gho3h2lph" path="res://Scripts/Em/ShieldCop/RangoAtaqueShieldCop.gd" id="10_cp0p1"]
 [ext_resource type="Script" uid="uid://bmdewqnsbar8q" path="res://Scripts/Em/ShieldCop/PlacajeShieldCop.gd" id="10_vrn4w"]
 [ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/PerseguirGenerico.gd" id="12_3nc5l"]
+[ext_resource type="Script" uid="uid://bnfnbhlmlommg" path="res://Scripts/Em/MuerteGenerica.gd" id="13_3nc5l"]
 [ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/PatrullarGenerico.gd" id="13_fgpuc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nqb0s"]
@@ -20,6 +22,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"block",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_u2ess")
+}],
+"loop": true,
+"name": &"dead",
 "speed": 5.0
 }, {
 "frames": [{
@@ -118,3 +128,11 @@ metadata/_custom_type_script = "uid://ch28gho3h2lph"
 [node name="PlacajeShieldCop" type="Node" parent="." index="9"]
 script = ExtResource("10_vrn4w")
 metadata/_custom_type_script = "uid://bmdewqnsbar8q"
+
+[node name="MuerteGenerica" type="Node" parent="." index="10"]
+script = ExtResource("13_3nc5l")
+metadata/_custom_type_script = "uid://bnfnbhlmlommg"
+
+[node name="WallCheck" type="RayCast2D" parent="." index="11"]
+position = Vector2(0, 14)
+target_position = Vector2(-25, 0)

@@ -14,6 +14,8 @@ func enter():
 		Transiciono.emit(self, "RangoAtaqueShieldCop")
 
 func physics_update(delta:float) -> void:
+	#if padre.tocando_jugador(): TODO
+	#	padre.objetivo.Golpeado(daño, 0)
 	if padre.is_on_wall():
 		padre.animated_sprite.play("stun")
 		await get_tree().create_timer(1).timeout

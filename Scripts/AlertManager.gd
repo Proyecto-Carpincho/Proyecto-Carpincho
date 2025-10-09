@@ -27,15 +27,16 @@ func _process(delta: float) -> void:
 			get_tree().call_group(grupo, "cambiar_alerta", estado_alerta)
 	
 	if estado_alerta != alertStatus.ALERTA && estado_alerta != alertStatus.NORMAL:
-		temporizador -= 2*delta
+		temporizador -= _distancia_objetivo()*delta
 		if temporizador < 0:
 			match estado_alerta:
 				alertStatus.EVACION:
 					estado_alerta = alertStatus.PRECAUCION
+					get_tree().call_group(grupo, "cambiar_alerta", estado_alerta)
 					temporizador = 99
 				alertStatus.PRECAUCION:
 					estado_alerta = alertStatus.NORMAL
-					temporizador = 99
+					get_tree().call_group(grupo, "cambiar_alerta", estado_alerta)
 	
 	Ui.set_alert(estado_alerta)
 	Ui.set_timer(temporizador)
@@ -51,5 +52,23 @@ func llamar_alerta(alerta:alertStatus) -> void:
 	get_tree().call_group(grupo, "cambiar_alerta", estado_alerta)
 	Ui.set_alert(estado_alerta)
 	temporizador = 99
+
 func actualizar_upc(pos:Vector2):
 	upc = pos
+
+func llamar_checkeo(em_position:Vector2) -> void:
+	#TODO
+	print("Checkeo llamado")
+
+func _distancia_objetivo() -> int:
+	if estado_alerta != alertStatus.EVACION:
+		return 2
+	
+	var aux_average:int
+	
+	for i in get_tree().get_node_count_in_group(grupo):
+			aux_average += get_tree().get_nodes_in_group(grupo).get(i).distancia_objetivo
+	
+	aux_average /= get_tree().get_node_count_in_group(grupo)
+	
+	return (aux_average*6)/100
