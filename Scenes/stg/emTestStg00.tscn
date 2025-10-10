@@ -265,8 +265,8 @@ velocity_jump = -190.0
 jump_multiply_boosted = 1.1
 wall_velocity = -2000.0
 wall_jump_velocity = -350.0
-max_life = 400
-life = 240
+max_life = 100
+life = 100
 
 [node name="StaticBody2D" parent="." instance=ExtResource("13_r0q7f")]
 position = Vector2(1281, -208)
@@ -285,8 +285,9 @@ navigation_polygon = SubResource("NavigationPolygon_kw0q7")
 curve = SubResource("Curve2D_kw0q7")
 
 [node name="BaseEm" parent="." node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") groups=["Enemigos"] instance=ExtResource("15_acpe2")]
-position = Vector2(284, 50)
+position = Vector2(729, 40)
 scale = Vector2(2.5, 2.5)
 objetivo = NodePath("../Jugador")
 alert_manager = NodePath("../AlertManager")
+grupo = "Enemigos"
 ruta = NodePath("../Path2D")

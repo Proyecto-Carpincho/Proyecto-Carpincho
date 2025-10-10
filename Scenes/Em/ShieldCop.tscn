@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c7p5mspd0lfxc"]
+[gd_scene load_steps=17 format=3 uid="uid://c7p5mspd0lfxc"]
 
 [ext_resource type="PackedScene" uid="uid://n1wbci6a6faw" path="res://Scenes/Em/BaseEm.tscn" id="1_5l48c"]
 [ext_resource type="Script" uid="uid://dayxga6ky0saq" path="res://Scripts/Em/ShieldCop/ShieldCop.gd" id="2_vrn4w"]
@@ -96,12 +96,17 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lu3y0"]
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nc5l"]
+size = Vector2(22, 29)
 
 [node name="BaseEm" node_paths=PackedStringArray("estado_inicial") instance=ExtResource("1_5l48c")]
 script = ExtResource("2_vrn4w")
 cooldown_placaje = 2
 run_speed = 60
 estado_inicial = NodePath("PatrullarGenerico")
+attack_damage = 50
 max_life = 100
 life = 100
 speed = 30
@@ -136,3 +141,7 @@ metadata/_custom_type_script = "uid://bnfnbhlmlommg"
 [node name="WallCheck" type="RayCast2D" parent="." index="11"]
 position = Vector2(0, 14)
 target_position = Vector2(-25, 0)
+
+[node name="CollisionShape2D" parent="DamagArea" index="0"]
+position = Vector2(-3, 1.5)
+shape = SubResource("RectangleShape2D_3nc5l")

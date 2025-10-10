@@ -7,6 +7,7 @@ class_name Enemigo
 @export var run_speed:int
 @export var estado_inicial:State
 @export var ruta:Path2D
+@export var attack_damage:int
 
 @onready var nav:NavigationAgent2D = $NavigationAgent2D
 @onready var dis_obj_ray:RayCast2D = $DistanciaJugador
@@ -71,7 +72,10 @@ func cambiar_alerta(estado:AlertManager.alertStatus):
 					estado_transicionar = get_child(i).name
 					break
 		AlertManager.alertStatus.PRECAUCION:
-			pass
+			for i in get_child_count():
+				if get_child(i) is PatrullarGenerico:
+					estado_transicionar = get_child(i).name
+					break
 		AlertManager.alertStatus.EVACION:
 			for i in get_child_count():
 				if get_child(i) is PerseguirGenerico:
@@ -124,6 +128,7 @@ func girar(b:bool):
 	for i in 3:
 		if (b == false && $Vista.get_child(i).target_position.x > 0) || (b == true && $Vista.get_child(i).target_position.x < 0):
 			$Vista.get_child(i).target_position.x *= -1
+			$DamagArea.size *= -1 # TODO: que funcione
 			animated_sprite.play("turn")
 	
 	await animated_sprite.animation_finished
@@ -142,3 +147,9 @@ func Golpeado(fuerza,mata) -> void:
 					estado_transicionar = get_child(i).name
 					break
 		transicion_hijo(state_now, estado_transicionar)
+
+
+func _on_damag_area_body_entered(body: Node2D) -> void:
+	var auxSelf := self.get_class()
+	if body is Entidad && body is not Enemigo: # TODO: esto no es ideal
+		body.Golpeado(attack_damage, 0)

@@ -77,3 +77,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DistanciaJugador" type="RayCast2D" parent="."]
+
+[node name="DamagArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamagArea"]
+
+[connection signal="body_entered" from="DamagArea" to="." method="_on_damag_area_body_entered"]

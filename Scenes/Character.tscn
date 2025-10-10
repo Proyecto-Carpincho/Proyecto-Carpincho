@@ -66,4 +66,8 @@ TieneAtaqueFuerte = false
 PlayerMachine = NodePath("../Central State Machine")
 Player = NodePath("..")
 
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [connection signal="timeout" from="Timer Coyote" to="Central State Machine" method="_on_timer_coyote_timeout"]

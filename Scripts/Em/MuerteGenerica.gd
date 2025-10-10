@@ -10,6 +10,7 @@ func enter():
 	padre.remove_child(padre.find_child("Vista", true))
 	padre.remove_child(padre.find_child("DistanciaJugador", true))
 	padre.remove_child(padre.find_child("NavigationAgent2D", true))
+	padre.remove_child(padre.find_child("DamagArea", true))
 
 func update(delta:float):
 	timer_checkeo -= 1*delta

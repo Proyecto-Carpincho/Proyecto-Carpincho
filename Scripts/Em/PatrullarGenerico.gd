@@ -12,14 +12,15 @@ func enter() -> void:
 	cantidad_puntos = ruta.curve.point_count
 	progreso_ruta = 0
 	for i in cantidad_puntos:
-		if ruta.curve.get_point_position(i) - padre.position < ruta.curve.get_point_position(progreso_ruta)  - padre.position:
+		print
+		if (ruta.curve.get_point_position(i) - padre.position) > (ruta.curve.get_point_position(progreso_ruta)  - padre.position):
 			progreso_ruta = i
+	
 	if progreso_ruta < cantidad_puntos:
 		avanzando = true
 
 func physics_update(delta:float) -> void:
 	var direction:Vector2
-	print(progreso_ruta, " ", cantidad_puntos)
 	
 	padre.nav.target_position = ruta.curve.get_point_position(progreso_ruta)
 	direction = (padre.nav.get_next_path_position() - padre.global_position).normalized()

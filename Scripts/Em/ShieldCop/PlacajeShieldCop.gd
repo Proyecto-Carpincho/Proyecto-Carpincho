@@ -22,5 +22,6 @@ func physics_update(delta:float) -> void:
 		padre.animated_sprite.stop()
 		padre.placaje_timer_crear()
 		Transiciono.emit(self, "RangoAtaqueShieldCop")
+		
 	else:
 		padre.velocity.x = ultima_dir
