@@ -26,10 +26,9 @@ DashNode = NodePath("Dash")
 metadata/_custom_type_script = "uid://cw1nwm06uvyrq"
 
 [node name="Dash" parent="." instance=ExtResource("2_77l2q")]
-TiempoDeRecarga = 6.0
+TiempoDeRecarga = 2.0
 TiempoDeDash = 0.4
-distancia_maxima = 130.0
-Velocidad = 1500.0
+distancia_maxima = 150.0
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_77l2q")
@@ -57,12 +56,12 @@ one_shot = true
 [node name="Pivot Bate" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot Bate"]
-position = Vector2(40, 1)
+position = Vector2(48, 0)
 scale = Vector2(23, 19)
 texture = SubResource("PlaceholderTexture2D_0yxwd")
 
 [node name="Area2D" type="Area2D" parent="Pivot Bate"]
-position = Vector2(41, 1)
+position = Vector2(49, 0)
 collision_layer = 0
 collision_mask = 4
 

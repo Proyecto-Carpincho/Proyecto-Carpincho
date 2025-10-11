@@ -1,12 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjmre3cjowgo6"]
+[gd_scene load_steps=8 format=3 uid="uid://cjmre3cjowgo6"]
 
 [ext_resource type="Script" uid="uid://dxmerq0pcku17" path="res://Scripts/Jugador/player.gd" id="1_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://b6kauwett0agh" path="res://icon.svg" id="2_677pu"]
 [ext_resource type="Script" uid="uid://ds1vj1qx7bbci" path="res://Scripts/Jugador/Estados Basicos Jugador.gd" id="2_jo2ib"]
+[ext_resource type="Script" uid="uid://dx8d5bvc4qcvn" path="res://Scripts/Jugador/Modular Ability.gd" id="3_vdqda"]
 [ext_resource type="PackedScene" uid="uid://q80g1s5p6aln" path="res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn" id="4_v7dgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
-size = Vector2(30, 43)
+size = Vector2(34.3, 78)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_677pu"]
 size = Vector2(20, 40)
@@ -21,26 +22,29 @@ safe_margin = 2.0
 script = ExtResource("1_7ig0a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_xloa1")
 debug_color = Color(0, 0.6, 0.701961, 1)
 
 [node name="Icon" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -1.90735e-06)
-scale = Vector2(0.25, 0.35)
+scale = Vector2(0.284, 0.617)
 texture = ExtResource("2_677pu")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.35, 1.35)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="Central State Machine" type="Node" parent="." node_paths=PackedStringArray("Player", "AtaqueNodo")]
+[node name="Modular ability" type="Node" parent="." node_paths=PackedStringArray("AtaqueNodo")]
+script = ExtResource("3_vdqda")
+AtaqueNodo = NodePath("../Bate Beisboll")
+
+[node name="Central State Machine" type="Node" parent="." node_paths=PackedStringArray("Player", "HabilidadesModulares")]
 script = ExtResource("2_jo2ib")
 Player = NodePath("..")
-AtaqueNodo = NodePath("../Bate Beisboll")
+HabilidadesModulares = NodePath("../Modular ability")
 PhysicsStates = Dictionary[String, NodePath]({
 "Caida": NodePath("."),
 "Caminar": NodePath("."),
@@ -57,6 +61,10 @@ metadata/_custom_type_script = "uid://ci1ayib00djei"
 shape = SubResource("RectangleShape2D_677pu")
 target_position = Vector2(10, 0)
 
+[node name="Timer WallJump" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
 [node name="Timer Coyote" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -66,4 +74,5 @@ TieneAtaqueFuerte = false
 PlayerMachine = NodePath("../Central State Machine")
 Player = NodePath("..")
 
+[connection signal="timeout" from="Timer WallJump" to="Central State Machine" method="_on_timer_wall_jump_timeout"]
 [connection signal="timeout" from="Timer Coyote" to="Central State Machine" method="_on_timer_coyote_timeout"]

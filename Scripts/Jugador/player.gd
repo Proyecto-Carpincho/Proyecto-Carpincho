@@ -54,5 +54,6 @@ func setShapeRotation(other_rotation:int=0)->void:
 func isOnWall()->bool:
 	return get_node("Shape Pared").is_colliding()
 
+# 1 es derecha y -1 es izquierda
 func getShapeDireccion()->int:
 	return 1 if get_node("Shape Pared").get_rotation_degrees() != 180 else -1

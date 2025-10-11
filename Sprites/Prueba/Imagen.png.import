@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c52tlop4s6ud8"
-path="res://.godot/imported/untitlaed.png-2530c67e9b4ab36369e13b12ff6728d7.ctex"
+uid="uid://kq7wjywcknha"
+path="res://.godot/imported/Imagen.png-22033f88f66dc7a00f38255ab877d6c8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Prueba/Ventanas Prueba/untitlaed.png"
-dest_files=["res://.godot/imported/untitlaed.png-2530c67e9b4ab36369e13b12ff6728d7.ctex"]
+source_file="res://Sprites/Prueba/Imagen.png"
+dest_files=["res://.godot/imported/Imagen.png-22033f88f66dc7a00f38255ab877d6c8.ctex"]
 
 [params]
 
