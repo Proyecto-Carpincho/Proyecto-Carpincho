@@ -1,0 +1,103 @@
+[gd_scene load_steps=20 format=3 uid="uid://or1npwqn6v8y"]
+
+[ext_resource type="Script" uid="uid://byy8ynu6qa71m" path="res://Scripts/Tile Scenes/Chimenea.gd" id="1_bdwb1"]
+[ext_resource type="Texture2D" uid="uid://cup3y4ofi4tai" path="res://Sprites/Tileset/Normal/Decoracion/Chimenea vieja.png" id="2_bdwb1"]
+[ext_resource type="Shader" uid="uid://daxecajh4ywcs" path="res://Shader/Chimenea.tres" id="3_lxpar"]
+[ext_resource type="Texture2D" uid="uid://de717mvm8233q" path="res://Sprites/Particula/Humo prueba.png" id="4_uhg4w"]
+
+[sub_resource type="Gradient" id="Gradient_hi8i1"]
+offsets = PackedFloat32Array(0, 0.543624)
+colors = PackedColorArray(0.479834, 0.479834, 0.479834, 1, 0.4, 0.4, 0.4, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ju5ym"]
+frequency = 0.0297
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y4aoe"]
+color_ramp = SubResource("Gradient_hi8i1")
+noise = SubResource("FastNoiseLite_ju5ym")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ju5ym"]
+shader = ExtResource("3_lxpar")
+shader_parameter/Noise_Textura = SubResource("NoiseTexture2D_y4aoe")
+shader_parameter/Smoke_texture = ExtResource("4_uhg4w")
+
+[sub_resource type="Curve" id="Curve_r4h74"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.519231, 0.194839), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_6mnt7"]
+curve_x = SubResource("Curve_r4h74")
+
+[sub_resource type="Curve" id="Curve_7a4pm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6d3uf"]
+curve = SubResource("Curve_7a4pm")
+
+[sub_resource type="Curve" id="Curve_e7tdn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_qe4ad"]
+curve = SubResource("Curve_e7tdn")
+
+[sub_resource type="Curve" id="Curve_shxds"]
+_data = [Vector2(0, 0.286683), 0.0, 0.0, 0, 0, Vector2(0.391026, 0.505161), 0.0, 0.0, 0, 0, Vector2(0.698718, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_sxb71"]
+curve = SubResource("Curve_shxds")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ryrva"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 20, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+angular_velocity_min = -200.0
+angular_velocity_max = 200.0
+directional_velocity_min = 300.0
+directional_velocity_max = 300.0
+directional_velocity_curve = SubResource("CurveXYZTexture_6mnt7")
+radial_velocity_min = 20.0
+radial_velocity_max = 20.0
+radial_velocity_curve = SubResource("CurveTexture_qe4ad")
+gravity = Vector3(0, -9, 0)
+linear_accel_min = 60.0
+linear_accel_max = 60.0
+linear_accel_curve = SubResource("CurveTexture_6d3uf")
+attractor_interaction_enabled = false
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_sxb71")
+color = Color(0.710047, 0.710047, 0.710047, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7a4pm"]
+polygon = PackedVector2Array(-54, 6, -35, 37, 38, 37, 56, 5, 56, 63, -54, 63)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bwpao"]
+polygon = PackedVector2Array(0, -11, -34, -29, -34, -37, 0, -51, 34, -37, 34, -29)
+
+[node name="Quimenea" type="Node2D"]
+script = ExtResource("1_bdwb1")
+DireccionHumo = -1.0
+
+[node name="Quimenea" type="Sprite2D" parent="."]
+texture = ExtResource("2_bdwb1")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_ju5ym")
+amount = 1000
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_ryrva")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_7a4pm")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_bwpao")

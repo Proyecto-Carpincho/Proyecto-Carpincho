@@ -68,12 +68,12 @@ func _PhysicsMatch(delta:float, State:String) -> void:
 					SetActualState(ESTADO_CAMINAR)
 	
 	if not saltando:
-		gravedad(delta)
+		acceleracion_gravedad(delta)
 	HabilidadesModulares._process_modular(delta)
 	
 	Player.move_and_slide()
 
-func gravedad(delta:float)-> void:
+func acceleracion_gravedad(delta:float)-> void:
 	if not enPiso():
 		var velocidad_caida:float = Player.velocity.y 
 		var gravedad_max = Player.maxGravity

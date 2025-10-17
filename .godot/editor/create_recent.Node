@@ -1,3 +1,5 @@
+LightOccluder2D
+GPUParticles2D
 TileMapLayer
 AnimationPlayer
 Sprite2D
@@ -11,4 +13,3 @@ TileMap
 CollisionShape2D
 StaticBody2D
 Label
-Marker2D

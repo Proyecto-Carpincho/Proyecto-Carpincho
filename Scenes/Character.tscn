@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://q80g1s5p6aln" path="res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn" id="4_v7dgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xloa1"]
-size = Vector2(34.3, 78)
+size = Vector2(34.3, 74)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_677pu"]
 size = Vector2(20, 40)
@@ -22,6 +22,7 @@ safe_margin = 2.0
 script = ExtResource("1_7ig0a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_xloa1")
 debug_color = Color(0, 0.6, 0.701961, 1)
 

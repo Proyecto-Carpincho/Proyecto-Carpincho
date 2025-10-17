@@ -1,10 +1,13 @@
-[gd_scene load_steps=18 format=4 uid="uid://cy84g5jb5i82l"]
+[gd_scene load_steps=23 format=4 uid="uid://cy84g5jb5i82l"]
 
 [ext_resource type="Texture2D" uid="uid://nw076mgo6ocp" path="res://Sprites/Wasteland_Sky.png" id="1_ig7tw"]
 [ext_resource type="Shader" uid="uid://ca6uwogqe2nxj" path="res://Shader/main.gdshader" id="2_d1ilt"]
-[ext_resource type="Texture2D" uid="uid://kq7wjywcknha" path="res://Sprites/Prueba/Imagen.png" id="3_21xkr"]
+[ext_resource type="Texture2D" uid="uid://62xey6fjcchl" path="res://Sprites/Tileset/Normal/Muros.png" id="3_21xkr"]
 [ext_resource type="PackedScene" uid="uid://cjmre3cjowgo6" path="res://Scenes/Character.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dl6h7jtbx2iwf" path="res://Scenes/Tiles Scenes/Chimenea normal.tscn" id="4_6bp64"]
 [ext_resource type="PackedScene" uid="uid://ws714j3bdkap" path="res://Scenes/Muñeco Pruebas.tscn" id="5_kry3j"]
+[ext_resource type="PackedScene" uid="uid://or1npwqn6v8y" path="res://Scenes/Tiles Scenes/Chimenea vieja.tscn" id="8_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://cn16hu1yv3wix" path="res://Sprites/Tileset/Normal/Decoracion/Aire acondicionado.png" id="9_hptm8"]
 [ext_resource type="Texture2D" uid="uid://lyvjlmo16mi6" path="res://Sprites/spritesheet.png" id="20_hibaj"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jjvhh"]
@@ -28,33 +31,6 @@ shader_parameter/speed = 1.0
 shader = ExtResource("2_d1ilt")
 shader_parameter/num_subdivisions = 100
 shader_parameter/speed = 1.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21xkr"]
-texture = ExtResource("3_21xkr")
-texture_region_size = Vector2i(128, 128)
-1:0/0 = 0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-0:1/0 = 0
-0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-2:0/0 = 0
-2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-0:2/0 = 0
-0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-1:2/0 = 0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
-
-[sub_resource type="TileSet" id="TileSet_6bp64"]
-tile_size = Vector2i(128, 128)
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_21xkr")
 
 [sub_resource type="Animation" id="Animation_ee4r6"]
 length = 0.001
@@ -92,6 +68,160 @@ _data = {
 &"RESET": SubResource("Animation_ee4r6"),
 &"new_animation": SubResource("Animation_pdsj5")
 }
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_21xkr"]
+texture = ExtResource("3_21xkr")
+texture_region_size = Vector2i(128, 128)
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 1
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:0/0/terrains_peering_bit/right_side = 1
+1:0/0/terrains_peering_bit/bottom_side = 1
+1:0/0/terrains_peering_bit/left_side = 1
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 1
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:1/0/terrains_peering_bit/right_side = 1
+1:1/0/terrains_peering_bit/bottom_side = 1
+1:1/0/terrains_peering_bit/left_side = 1
+1:1/0/terrains_peering_bit/top_side = 1
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 1
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:0/0/terrains_peering_bit/right_side = 1
+0:0/0/terrains_peering_bit/bottom_side = 1
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 1
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:1/0/terrains_peering_bit/right_side = 1
+0:1/0/terrains_peering_bit/bottom_side = 1
+0:1/0/terrains_peering_bit/top_side = 1
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 1
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:0/0/terrains_peering_bit/bottom_side = 1
+2:0/0/terrains_peering_bit/left_side = 1
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 1
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:1/0/terrains_peering_bit/bottom_side = 1
+2:1/0/terrains_peering_bit/left_side = 1
+2:1/0/terrains_peering_bit/top_side = 1
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 1
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:2/0/terrains_peering_bit/right_side = 1
+0:2/0/terrains_peering_bit/top_side = 1
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 1
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:2/0/terrains_peering_bit/right_side = 1
+1:2/0/terrains_peering_bit/left_side = 1
+1:2/0/terrains_peering_bit/top_side = 1
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 1
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+2:2/0/terrains_peering_bit/left_side = 1
+2:2/0/terrains_peering_bit/top_side = 1
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/terrains_peering_bit/right_side = 0
+3:0/0/terrains_peering_bit/bottom_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/right_side = 0
+3:1/0/terrains_peering_bit/bottom_side = 0
+3:1/0/terrains_peering_bit/top_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/terrains_peering_bit/right_side = 0
+3:2/0/terrains_peering_bit/top_side = 0
+4:2/0 = 0
+4:2/0/terrain_set = 0
+4:2/0/terrain = 0
+4:2/0/terrains_peering_bit/right_side = 0
+4:2/0/terrains_peering_bit/left_side = 0
+4:2/0/terrains_peering_bit/top_side = 0
+4:1/0 = 0
+4:1/0/terrain_set = 0
+4:1/0/terrain = 0
+4:1/0/terrains_peering_bit/right_side = 0
+4:1/0/terrains_peering_bit/bottom_side = 0
+4:1/0/terrains_peering_bit/left_side = 0
+4:1/0/terrains_peering_bit/top_side = 0
+4:0/0 = 0
+4:0/0/terrain_set = 0
+4:0/0/terrain = 0
+4:0/0/terrains_peering_bit/right_side = 0
+4:0/0/terrains_peering_bit/bottom_side = 0
+4:0/0/terrains_peering_bit/left_side = 0
+5:1/0 = 0
+5:1/0/terrain_set = 0
+5:1/0/terrain = 0
+5:1/0/terrains_peering_bit/bottom_side = 0
+5:1/0/terrains_peering_bit/left_side = 0
+5:1/0/terrains_peering_bit/top_side = 0
+5:0/0 = 0
+5:0/0/terrain_set = 0
+5:0/0/terrain = 0
+5:0/0/terrains_peering_bit/bottom_side = 0
+5:0/0/terrains_peering_bit/left_side = 0
+5:2/0 = 0
+5:2/0/terrain_set = 0
+5:2/0/terrain = 0
+5:2/0/terrains_peering_bit/left_side = 0
+5:2/0/terrains_peering_bit/top_side = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/terrain = 1
+5:3/0 = 0
+5:3/0/terrain_set = 0
+5:3/0/terrain = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_344ge"]
+resource_name = "Quimeneas"
+scenes/1/scene = ExtResource("4_6bp64")
+scenes/2/scene = ExtResource("8_ynf5e")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d1ilt"]
+texture = ExtResource("9_hptm8")
+texture_region_size = Vector2i(128, 128)
+0:0/animation_speed = 10.0
+0:0/animation_frame_0/duration = 0.2
+0:0/animation_frame_1/duration = 0.2
+0:0/animation_frame_2/duration = 0.2
+0:0/animation_frame_3/duration = 0.2
+0:0/animation_frame_4/duration = 0.2
+0:0/animation_frame_5/duration = 0.2
+0:0/animation_frame_6/duration = 0.2
+0:0/animation_frame_7/duration = 0.2
+0:0/animation_frame_8/duration = 0.2
+0:0/animation_frame_9/duration = 0.2
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6bp64"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Muros dañados"
+terrain_set_0/terrain_0/color = Color(0.5, 0.4375, 0.25, 1)
+terrain_set_0/terrain_1/name = "Muros"
+terrain_set_0/terrain_1/color = Color(0.227384, 0.0562835, 0.0774687, 1)
+sources/0 = SubResource("TileSetAtlasSource_21xkr")
+sources/1 = SubResource("TileSetScenesCollectionSource_344ge")
+sources/2 = SubResource("TileSetAtlasSource_d1ilt")
 
 [node name="Node2D" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-440.0, -1867.0]
@@ -139,11 +269,6 @@ repeat_times = 10
 
 [node name="Tiles Mundo" type="Node2D" parent="."]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Tiles Mundo"]
-scale = Vector2(0.4, 0.4)
-tile_map_data = PackedByteArray("AAACAP//AAABAAAAAAABAP//AAABAAAAAAAAAP//AAAAAAAAAAADAP//AAABAAAAAAAFAP//AAACAAAAAAAEAP//AAABAAAAAAAAAAAAAAAAAAEAAAAFAAAAAAACAAEAAAAEAAAAAAABAAEAAAADAAAAAAABAAEAAAACAAAAAAABAAEAAAABAAAAAAABAAEAAAAAAAEAAAAAAAEAAAABAAEAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAAEAAEAAAABAAEAAAAFAAEAAAACAAEAAAAAAAIAAAAAAAIAAAABAAIAAAABAAIAAAACAAIAAAABAAIAAAADAAIAAAABAAIAAAAEAAIAAAABAAIAAAAFAAIAAAACAAIAAAA=")
-tile_set = SubResource("TileSet_6bp64")
-
 [node name="Entidades" type="Node2D" parent="."]
 
 [node name="Jugador" parent="Entidades" instance=ExtResource("3_h2yge")]
@@ -172,6 +297,7 @@ position = Vector2(223, -290)
 position = Vector2(1901, -504)
 
 [node name="Sprite2D" type="Sprite2D" parent="Entidades"]
+visible = false
 z_index = 1
 position = Vector2(121, -100)
 scale = Vector2(0.5, 0.5)
@@ -187,3 +313,15 @@ libraries = {
 autoplay = "new_animation"
 
 [node name="Tiles Adelante" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = 1
+scale = Vector2(0.4, 0.4)
+tile_map_data = PackedByteArray("AAAEAAAAAAABAAEAAAAFAAIAAAACAAIAAAAAAAIAAAAAAAIAAAABAAIAAAABAAIAAAACAAIAAAABAAIAAAADAAIAAAABAAIAAAAEAAIAAAABAAIAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAP//AAAAAAAAAAAFAAAAAAACAAEAAAAFAAEAAAACAAEAAAAFAP//AAACAAAAAAACAP//AAABAAAAAAABAP//AAABAAAAAAADAP//AAABAAAAAAAEAP//AAABAAAAAAACAAEAAAABAAEAAAACAAAAAAABAAEAAAABAAAAAAABAAEAAAABAAEAAAABAAEAAAADAAAAAAABAAEAAAADAAEAAAABAAEAAAAEAAEAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_6bp64")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+z_index = 1
+scale = Vector2(0.4, 0.4)
+tile_map_data = PackedByteArray("AAAEAAAAAgAAAAAAAAA=")
+tile_set = SubResource("TileSet_6bp64")

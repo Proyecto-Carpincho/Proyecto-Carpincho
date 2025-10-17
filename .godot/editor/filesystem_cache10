@@ -1,7 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1760045897
-export_presets.cfg::TextFile/TextFile::-1::1758399208::0::1::::<><><>0<>0<><>::
-icon.svg::CompressedTexture2D/CompressedTexture2D::4582955492473367723::1747787078::1755384004::1::::<><><>0<>0<>2767fa82992bc1c16ac969eb6ca39230<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://::1760671885
+export_presets.cfg::TextFile/TextFile::-1::1760221335::0::1::::<><><>0<>0<><>::
+icon.svg::CompressedTexture2D/CompressedTexture2D::4582955492473367723::1747787078::1760221346::1::::<><><>0<>0<>2767fa82992bc1c16ac969eb6ca39230<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://addons/::1757296334
 ::res://addons/State Machine Ultimate/::1757296334
 plugin.cfg::TextFile/TextFile::-1::1757296334::0::1::::<><><>0<>0<><>::
@@ -12,68 +12,88 @@ State Machine.gd::GDScript/GDScript::5388069220050760892::1757296334::0::1::::St
 ::res://addons/State Machine Ultimate/Nodes/State Tree/::1757296334
 Executor State Tree.gd::GDScript/GDScript::7687778535415653355::1757296334::0::1::::ExecutorStateTree<>Node<><>0<>0<><>::
 State Tree.gd::GDScript/GDScript::4188412660181929953::1757296334::0::1::::StateTree<>Node<><>0<>0<><>::
-::res://Materials/::1758386927
-::res://Materials/Prueba/::1760045916
-::res://Scenes/::1760054346
-Character.tscn::PackedScene::5430354299401772867::1760054346::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/Jugador/player.gd<>uid://b6kauwett0agh::::res://icon.svg<>uid://ds1vj1qx7bbci::::res://Scripts/Jugador/Estados Basicos Jugador.gd<>uid://dx8d5bvc4qcvn::::res://Scripts/Jugador/Modular Ability.gd<>uid://q80g1s5p6aln::::res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn
-Efectos Visuales.tscn::PackedScene/PackedScene::2926245584511451278::1757700186::0::1::::<><><>0<>0<><>::uid://dbncsedlyj7f::::res://Scripts/Efectos Visuales.gd<>uid://bkym27wgfbqwq::::res://Shader/Bullet Time.tres
+::res://Scenes/::1760649732
+Character.tscn::PackedScene/PackedScene::5430354299401772867::1760586923::0::1::::<><><>0<>0<><>::uid://dxmerq0pcku17::::res://Scripts/Jugador/player.gd<>uid://b6kauwett0agh::::res://icon.svg<>uid://ds1vj1qx7bbci::::res://Scripts/Jugador/Estados Basicos Jugador.gd<>uid://dx8d5bvc4qcvn::::res://Scripts/Jugador/Modular Ability.gd<>uid://q80g1s5p6aln::::res://Scenes/Habilidades Modulares/Armas Melee/Bate Beisboll.tscn
+Efectos Visuales.tscn::PackedScene/PackedScene::2926245584511451278::1760221335::0::1::::<><><>0<>0<><>::uid://dbncsedlyj7f::::res://Scripts/Efectos Visuales.gd<>uid://bkym27wgfbqwq::::res://Shader/Bullet Time.tres
 Enemigo blindado.tscn::PackedScene/PackedScene::1880283882559021794::1757296334::0::1::::<><><>0<>0<><>::uid://cr3l2cdhhgvof::::res://Scripts/enemigo.gd<>uid://b6kauwett0agh::::res://icon.svg
-main.tscn::PackedScene::6527271177826231845::1760054346::0::1::::<><><>0<>0<><>::uid://nw076mgo6ocp::::res://Sprites/Wasteland_Sky.png<>uid://ca6uwogqe2nxj::::res://Shader/main.gdshader<>uid://kq7wjywcknha::::res://Sprites/Prueba/Imagen.png<>uid://cjmre3cjowgo6::::res://Scenes/Character.tscn<>uid://ws714j3bdkap::::res://Scenes/Muñeco Pruebas.tscn<>uid://lyvjlmo16mi6::::res://Sprites/spritesheet.png
-Muñeco Pruebas.tscn::PackedScene::1583304272373894175::1760054346::0::1::::<><><>0<>0<><>::uid://ba3s73ac4nbj7::::res://Scripts/Muñeco.gd<>uid://b6kauwett0agh::::res://icon.svg
+main.tscn::PackedScene::6527271177826231845::1760649732::0::1::::<><><>0<>0<><>::uid://nw076mgo6ocp::::res://Sprites/Wasteland_Sky.png<>uid://ca6uwogqe2nxj::::res://Shader/main.gdshader<>uid://62xey6fjcchl::::res://Sprites/Tileset/Normal/Muros.png<>uid://cjmre3cjowgo6::::res://Scenes/Character.tscn<>uid://dl6h7jtbx2iwf::::res://Scenes/Tiles Scenes/Chimenea normal.tscn<>uid://ws714j3bdkap::::res://Scenes/Muñeco Pruebas.tscn<>uid://or1npwqn6v8y::::res://Scenes/Tiles Scenes/Chimenea vieja.tscn<>uid://cn16hu1yv3wix::::res://Sprites/Tileset/Normal/Decoracion/Aire acondicionado.png<>uid://lyvjlmo16mi6::::res://Sprites/spritesheet.png
+Muñeco Pruebas.tscn::PackedScene/PackedScene::1583304272373894175::1760586922::0::1::::<><><>0<>0<><>::uid://ba3s73ac4nbj7::::res://Scripts/Muñeco.gd<>uid://b6kauwett0agh::::res://icon.svg
 testEm.tscn::PackedScene/PackedScene::3324041308109776407::1757296334::0::1::::<><><>0<>0<><>::uid://c0hoop61ucisf::::res://Scripts/test_em.gd<>uid://b6kauwett0agh::::res://icon.svg
-UI.tscn::PackedScene::1569257852081533593::1760054346::0::1::::<><><>0<>0<><>::uid://hb7hnjiy5lmh::::res://Scripts/UI.gd<>uid://7n36rfciw6en::::res://Shader/Recarga.tres<>uid://b6kauwett0agh::::res://icon.svg
-::res://Scenes/Em/::1758574421
-heavyCop.tscn::PackedScene/PackedScene::2940240438849975418::1758574421::0::1::::<><><>0<>0<><>::uid://bu8rwuldekqp::::res://Scripts/Em/Enemigo.gd
-::res://Scenes/Habilidades Modulares/::1759777151
-Bullet Time.tscn::PackedScene/PackedScene::3067156409790634004::1759777151::0::1::::<><><>0<>0<><>::uid://dcincqt52m876::::res://Scripts/Jugador/Habilidades Modulares/Bullet Time.gd
-::res://Scenes/Habilidades Modulares/Armas Melee/::1760054346
-Bate Beisboll.tscn::PackedScene::1192675998472991531::1760054346::0::1::::<><><>0<>0<><>::uid://dsf7hlfohayn3::::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/Bate Beisboll.gd<>uid://c2sirg4no04bb::::res://Scenes/Habilidades Modulares/Dash/Dash Normal.tscn<>uid://bq3hguf0dhuk6::::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/Maquina Bate.gd
-::res://Scenes/Habilidades Modulares/Dash/::1760054346
-Dash Normal.tscn::PackedScene::6705615400174481695::1760054346::0::1::::<><><>0<>0<><>::uid://bnn4cdijx1ixg::::res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Dash.gd<>uid://bq45bc81yb4sr::::res://Shader/Linea.tres<>uid://bwy0wlcn0e62w::::res://Sprites/Flecha.png<>uid://debvgkj4sm887::::res://Shader/Viento Dash.tres<>uid://c76pnj52yjy3k::::res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Estado Dash.gd<>uid://bjx0val8vkyye::::res://Scenes/Habilidades Modulares/Bullet Time.tscn
-::res://Scripts/::1758574421
+UI.tscn::PackedScene/PackedScene::1569257852081533593::1760463016::0::1::::<><><>0<>0<><>::uid://hb7hnjiy5lmh::::res://Scripts/UI.gd<>uid://7n36rfciw6en::::res://Shader/Recarga.tres<>uid://b6kauwett0agh::::res://icon.svg
+::res://Scenes/Em/::1760221435
+heavyCop.tscn::PackedScene/PackedScene::2940240438849975418::1760221435::0::1::::<><><>0<>0<><>::uid://bu8rwuldekqp::::res://Scripts/Em/Enemigo.gd
+::res://Scenes/Habilidades Modulares/::1760221435
+Bullet Time.tscn::PackedScene/PackedScene::3067156409790634004::1760221435::0::1::::<><><>0<>0<><>::uid://dcincqt52m876::::res://Scripts/Jugador/Habilidades Modulares/Bullet Time.gd
+::res://Scenes/Habilidades Modulares/Armas Melee/::1760586922
+Bate Beisboll.tscn::PackedScene/PackedScene::1192675998472991531::1760586922::0::1::::<><><>0<>0<><>::uid://dsf7hlfohayn3::::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/Bate Beisboll.gd<>uid://c2sirg4no04bb::::res://Scenes/Habilidades Modulares/Dash/Dash Normal.tscn<>uid://bq3hguf0dhuk6::::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/Maquina Bate.gd
+::res://Scenes/Habilidades Modulares/Dash/::1760586922
+Dash Normal.tscn::PackedScene/PackedScene::6705615400174481695::1760586922::0::1::::<><><>0<>0<><>::uid://bnn4cdijx1ixg::::res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Dash.gd<>uid://bq45bc81yb4sr::::res://Shader/Linea.tres<>uid://bwy0wlcn0e62w::::res://Sprites/Flecha.png<>uid://debvgkj4sm887::::res://Shader/Viento Dash.tres<>uid://c76pnj52yjy3k::::res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/Estado Dash.gd<>uid://bjx0val8vkyye::::res://Scenes/Habilidades Modulares/Bullet Time.tscn
+::res://Scenes/Tiles Scenes/::1760636706
+Chimenea normal.tscn::PackedScene::7995817707966511929::1760636706::0::1::::<><><>0<>0<><>::uid://byy8ynu6qa71m::::res://Scripts/Tile Scenes/Chimenea.gd<>uid://cb74v3chuellx::::res://Sprites/Tileset/Normal/Decoracion/Chimenea normal.png<>uid://daxecajh4ywcs::::res://Shader/Chimenea.tres<>uid://de717mvm8233q::::res://Sprites/Particula/Humo prueba.png
+Chimenea vieja.tscn::PackedScene/PackedScene::1019340912465693590::1760586923::0::1::::<><><>0<>0<><>::uid://byy8ynu6qa71m::::res://Scripts/Tile Scenes/Chimenea.gd<>uid://cup3y4ofi4tai::::res://Sprites/Tileset/Normal/Decoracion/Chimenea vieja.png<>uid://daxecajh4ywcs::::res://Shader/Chimenea.tres<>uid://de717mvm8233q::::res://Sprites/Particula/Humo prueba.png
+::res://Scripts/::1760461916
 Central Enemigos.gd::GDScript/GDScript::22029292330244634::1748467024::0::1::::CentralEnemigo<>CharacterBody2D<><>0<>0<><>::
 Daño.gd::GDScript/GDScript::620802462871906858::1747848430::0::1::::<>Node2D<><>0<>0<><>::
-Efectos Visuales.gd::GDScript/GDScript::213424752913411769::1757429671::0::1::::<>CanvasLayer<><>0<>0<><>::
+Efectos Visuales.gd::GDScript/GDScript::213424752913411769::1760221335::0::1::::<>CanvasLayer<><>0<>0<><>::
 enemigo.gd::GDScript/GDScript::6024570499711066101::1757296334::0::1::::<>CentralEnemigo<><>0<>0<><>::
-Entidad.gd::GDScript/GDScript::3550611604880223666::1758574421::0::1::::Entidad<>CharacterBody2D<><>0<>0<><>::
-Muñeco.gd::GDScript/GDScript::2445374782865468878::1758574421::0::1::::<>StaticBody2D<><>0<>0<><>::
+Entidad.gd::GDScript/GDScript::3550611604880223666::1760221435::0::1::::Entidad<>CharacterBody2D<><>0<>0<><>::
+Muñeco.gd::GDScript/GDScript::2445374782865468878::1760221435::0::1::::<>StaticBody2D<><>0<>0<><>::
 test_em.gd::GDScript/GDScript::6542888978576154457::1757296334::0::1::::<>CentralEnemigo<><>0<>0<><>::
-UI.gd::GDScript/GDScript::495342424649686907::1758383471::0::1::::<>CanvasLayer<><>0<>0<><>::
-::res://Scripts/Em/::1758574421
-Enemigo.gd::GDScript/GDScript::1363868024606616896::1758574421::0::1::::Enemigo<>Entidad<><>0<>0<><>::
-::res://Scripts/Jugador/::1759885054
-Estados Basicos Jugador.gd::GDScript/GDScript::8477627578574472504::1759885054::0::1::::<>StateMachine<><>0<>0<><>::
-Modular Ability.gd::GDScript/GDScript::8841965730527966255::1759885054::0::1::::<>Node<><>0<>0<><>::
-player.gd::GDScript/GDScript::8798652093948548212::1759774740::0::1::::<>CharacterBody2D<><>0<>0<><>::
-::res://Scripts/Jugador/Habilidades Modulares/::1759777151
-Bullet Time.gd::GDScript/GDScript::7316948524006160883::1758574421::0::1::::<>Node<><>0<>0<><>::
-::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/::1757428724
-Arma Melee.gd::GDScript/GDScript::6371499027736731194::1757428724::0::1::::ArmaMelee<>Node2D<><>0<>0<><>::
-::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/::1758574421
-Bate Beisboll.gd::GDScript/GDScript::8434939155786398246::1758574421::0::1::::<>ArmaMelee<><>0<>0<><>::
-Maquina Bate.gd::GDScript/GDScript::3567681552059305739::1758574421::0::1::::<>StateMachine<><>0<>0<><>::
+UI.gd::GDScript/GDScript::495342424649686907::1760221335::0::1::::<>CanvasLayer<><>0<>0<><>::
+::res://Scripts/Em/::1760221435
+Enemigo.gd::GDScript/GDScript::1363868024606616896::1760221435::0::1::::Enemigo<>Entidad<><>0<>0<><>::
+::res://Scripts/Jugador/::1760463176
+Estados Basicos Jugador.gd::GDScript/GDScript::8477627578574472504::1760463176::0::1::::<>StateMachine<><>0<>0<><>::
+Modular Ability.gd::GDScript/GDScript::8841965730527966255::1760221435::0::1::::<>Node<><>0<>0<><>::
+player.gd::GDScript/GDScript::8798652093948548212::1760221435::0::1::::<>CharacterBody2D<><>0<>0<><>::
+::res://Scripts/Jugador/Habilidades Modulares/::1760221435
+Bullet Time.gd::GDScript/GDScript::7316948524006160883::1760221435::0::1::::<>Node<><>0<>0<><>::
+::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/::1760221335
+Arma Melee.gd::GDScript/GDScript::6371499027736731194::1760221335::0::1::::ArmaMelee<>Node2D<><>0<>0<><>::
+::res://Scripts/Jugador/Habilidades Modulares/Ataque Mele/Bate de Beisboll/::1760221435
+Bate Beisboll.gd::GDScript/GDScript::8434939155786398246::1760221435::0::1::::<>ArmaMelee<><>0<>0<><>::
+Maquina Bate.gd::GDScript/GDScript::3567681552059305739::1760221435::0::1::::<>StateMachine<><>0<>0<><>::
 ::res://Scripts/Jugador/Habilidades Modulares/Dash/::1757296334
-::res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/::1758382937
-Dash.gd::GDScript/GDScript::3327477096537508628::1758382531::0::1::::NormalDash<>Node2D<><>0<>0<><>::
-Estado Dash.gd::GDScript/GDScript::7083814564704846794::1758382937::0::1::::<>StateMachine<><>0<>0<><>::
-::res://Shader/::1760054346
-Bullet Time.tres::VisualShader::3138632721531743828::1760054346::0::1::::<><><>0<>0<><>::
-Cambio de Color.gdshader::Shader::2629357771094084730::1760054346::0::1::::<><><>0<>0<><>::
-Linea.tres::VisualShader::3571132589584964081::1760054346::0::1::::<><><>0<>0<><>::
-main.gdshader::Shader::4838091450412409827::1760054346::0::1::::<><><>0<>0<><>::
-Recarga.tres::VisualShader::2274636243351762881::1760054346::0::1::::<><><>0<>0<><>::
-Viento Dash.tres::VisualShader::7443368115475951078::1760054346::0::1::::<><><>0<>0<><>::
-::res://Sprites/::1760027382
-ATTACK 1.png::CompressedTexture2D/CompressedTexture2D::4833326557990849675::1747787078::1757298090::1::::<><><>0<>0<>1ef0d811c4a6076868b522f700a116cc<>res://.godot/imported/ATTACK 1.png-02a33b2d9daee950a40ff9374d0c0dad.ctex::
-Flecha Punta.png.png::CompressedTexture2D/CompressedTexture2D::3496563185049127993::1757296334::1757298090::1::::<><><>0<>0<>cc6d1129142670bb57e53ced3316b287<>res://.godot/imported/Flecha Punta.png.png-2c4ba410014f445633e5639a703e0bf7.ctex::
-Flecha.png::CompressedTexture2D/CompressedTexture2D::3981678103583040760::1757296334::1757298090::1::::<><><>0<>0<>3ffbe9fd66f6cf8cd126380f48ff0d42<>res://.godot/imported/Flecha.png-26b27bab26654662426ca76a9fc1586a.ctex::
-HURT.png::CompressedTexture2D/CompressedTexture2D::4622352753479509996::1747787078::1757298090::1::::<><><>0<>0<>0db95a29e289d0a7ea51998c3ddad702<>res://.godot/imported/HURT.png-4edeb227a23436c945e7d3975eb2bf20.ctex::
-IDLE.png::CompressedTexture2D/CompressedTexture2D::8832208405341393815::1747787078::1757298090::1::::<><><>0<>0<>d1be7b163f3cb1ea93fe0eeb0ccb6a8e<>res://.godot/imported/IDLE.png-504bb8e5fa2ed9fddab3806a328e3e84.ctex::
-RUN.png::CompressedTexture2D/CompressedTexture2D::6846987321705527115::1747787078::1757298090::1::::<><><>0<>0<>e0aa15e31e80c8808c94d6fcd609a05b<>res://.godot/imported/RUN.png-8e3df264ddb3e6a1c3066ac32fe2678e.ctex::
-spritesheet.png::CompressedTexture2D/CompressedTexture2D::822914072075608503::1760027381::1760027382::1::::<><><>0<>0<>507deb03da1db1ea406f3e6b9692d70f<>res://.godot/imported/spritesheet.png-8d1e45e7c563b1fc59afddcd8efeb8ef.ctex::
-Tile set prueba.png::CompressedTexture2D/CompressedTexture2D::8219976853349778848::1748215888::1757298090::1::::<><><>0<>0<>5e100939019b5fc1544dd964da9e4c97<>res://.godot/imported/Tile set prueba.png-99551a3d66fb2364978a5bbbf0283508.ctex::
-Wasteland-Files.png::CompressedTexture2D/CompressedTexture2D::3611193304434345847::1747787078::1757298090::1::::<><><>0<>0<>5fda5fc5d39147fb112024d5d6ce9901<>res://.godot/imported/Wasteland-Files.png-ed73e7032c3eefb732182a2ef18c890f.ctex::
-Wasteland_Mountains_2.png::CompressedTexture2D/CompressedTexture2D::6122294926948839155::1747787078::1757298090::1::::<><><>0<>0<>2a5aa7485824699a61dc5d64bb19c1b5<>res://.godot/imported/Wasteland_Mountains_2.png-07346041740a979f2f0a1e54221fc65b.ctex::
-Wasteland_Sky.png::CompressedTexture2D/CompressedTexture2D::959447995161917731::1747787078::1757298090::1::::<><><>0<>0<>f54cc6dcb2a555c6e050215b9f70b568<>res://.godot/imported/Wasteland_Sky.png-a0af0fc9b59b5e5dac761444d3b824ea.ctex::
-::res://Sprites/Prueba/::1760062181
-Imagen.png::CompressedTexture2D::736901222467832402::1760062172::1760062190::1::::<><><>0<>0<>fa666a851b2ec78971d8463e500fa616<>res://.godot/imported/Imagen.png-22033f88f66dc7a00f38255ab877d6c8.ctex::
+::res://Scripts/Jugador/Habilidades Modulares/Dash/Dash Normal/::1760221335
+Dash.gd::GDScript/GDScript::3327477096537508628::1760221335::0::1::::NormalDash<>Node2D<><>0<>0<><>::
+Estado Dash.gd::GDScript/GDScript::7083814564704846794::1760221335::0::1::::<>StateMachine<><>0<>0<><>::
+::res://Scripts/Tile Scenes/::1760463013
+Chimenea.gd::GDScript/GDScript::4122545232047881312::1760463013::0::1::::<>Node2D<><>0<>0<><>::
+::res://Shader/::1760649733
+Bullet Time.tres::VisualShader::3138632721531743828::1760636706::0::1::::<><><>0<>0<><>::
+Cambio de Color.gdshader::Shader/Shader::2629357771094084730::1760456469::0::1::::<><><>0<>0<><>::
+Chimenea.tres::VisualShader::7206989193242563934::1760649733::0::1::::<><><>0<>0<><>::
+Linea.tres::VisualShader::3571132589584964081::1760636706::0::1::::<><><>0<>0<><>::
+main.gdshader::Shader::4838091450412409827::1760636706::0::1::::<><><>0<>0<><>::
+Recarga.tres::VisualShader::2274636243351762881::1760636706::0::1::::<><><>0<>0<><>::
+Viento Dash.tres::VisualShader::7443368115475951078::1760636706::0::1::::<><><>0<>0<><>::
+::res://Sprites/::1760586440
+ATTACK 1.png::CompressedTexture2D/CompressedTexture2D::4833326557990849675::1747787078::1760221346::1::::<><><>0<>0<>1ef0d811c4a6076868b522f700a116cc<>res://.godot/imported/ATTACK 1.png-02a33b2d9daee950a40ff9374d0c0dad.ctex::
+Flecha Punta.png.png::CompressedTexture2D/CompressedTexture2D::3496563185049127993::1757296334::1760221346::1::::<><><>0<>0<>cc6d1129142670bb57e53ced3316b287<>res://.godot/imported/Flecha Punta.png.png-2c4ba410014f445633e5639a703e0bf7.ctex::
+Flecha.png::CompressedTexture2D/CompressedTexture2D::3981678103583040760::1757296334::1760221346::1::::<><><>0<>0<>3ffbe9fd66f6cf8cd126380f48ff0d42<>res://.godot/imported/Flecha.png-26b27bab26654662426ca76a9fc1586a.ctex::
+HURT.png::CompressedTexture2D/CompressedTexture2D::4622352753479509996::1747787078::1760221346::1::::<><><>0<>0<>0db95a29e289d0a7ea51998c3ddad702<>res://.godot/imported/HURT.png-4edeb227a23436c945e7d3975eb2bf20.ctex::
+IDLE.png::CompressedTexture2D/CompressedTexture2D::8832208405341393815::1747787078::1760221346::1::::<><><>0<>0<>d1be7b163f3cb1ea93fe0eeb0ccb6a8e<>res://.godot/imported/IDLE.png-504bb8e5fa2ed9fddab3806a328e3e84.ctex::
+RUN.png::CompressedTexture2D/CompressedTexture2D::6846987321705527115::1747787078::1760221346::1::::<><><>0<>0<>e0aa15e31e80c8808c94d6fcd609a05b<>res://.godot/imported/RUN.png-8e3df264ddb3e6a1c3066ac32fe2678e.ctex::
+spritesheet.png::CompressedTexture2D/CompressedTexture2D::822914072075608503::1760221435::1760402479::1::::<><><>0<>0<>507deb03da1db1ea406f3e6b9692d70f<>res://.godot/imported/spritesheet.png-8d1e45e7c563b1fc59afddcd8efeb8ef.ctex::
+Tile set prueba.png::CompressedTexture2D/CompressedTexture2D::8219976853349778848::1748215888::1760221346::1::::<><><>0<>0<>5e100939019b5fc1544dd964da9e4c97<>res://.godot/imported/Tile set prueba.png-99551a3d66fb2364978a5bbbf0283508.ctex::
+Wasteland-Files.png::CompressedTexture2D/CompressedTexture2D::3611193304434345847::1747787078::1760221346::1::::<><><>0<>0<>5fda5fc5d39147fb112024d5d6ce9901<>res://.godot/imported/Wasteland-Files.png-ed73e7032c3eefb732182a2ef18c890f.ctex::
+Wasteland_Mountains_2.png::CompressedTexture2D/CompressedTexture2D::6122294926948839155::1747787078::1760221346::1::::<><><>0<>0<>2a5aa7485824699a61dc5d64bb19c1b5<>res://.godot/imported/Wasteland_Mountains_2.png-07346041740a979f2f0a1e54221fc65b.ctex::
+Wasteland_Sky.png::CompressedTexture2D/CompressedTexture2D::959447995161917731::1747787078::1760221346::1::::<><><>0<>0<>f54cc6dcb2a555c6e050215b9f70b568<>res://.godot/imported/Wasteland_Sky.png-a0af0fc9b59b5e5dac761444d3b824ea.ctex::
+::res://Sprites/Particula/::1760460140
+Humo prueba.png::CompressedTexture2D/CompressedTexture2D::7507713964289743456::1760460137::1760460140::1::::<><><>0<>0<>9d32bd6daa79885d269eaa5f60538299<>res://.godot/imported/Humo prueba.png-6ddec669541fbd64e27c291df7d8ecc0.ctex::
+::res://Sprites/Tileset/::1760629001
+::res://Sprites/Tileset/Normal/::1760671864
+Muros.png::CompressedTexture2D/CompressedTexture2D::2232997294836491777::1760671864::1760671887::1::::<><><>0<>0<>f7581053bf8be931f039fced0a73dd6a<>res://.godot/imported/Muros.png-0e50bb431ec8f66a5082198d08b0b46f.ctex::
+::res://Sprites/Tileset/Normal/Decoracion/::1760636694
+Aire acondicionado.png::CompressedTexture2D/CompressedTexture2D::5740865975370829103::1760585491::1760586478::1::::<><><>0<>0<>e97e20741bef07e9ba71ae7d55b807c2<>res://.godot/imported/Aire acondicionado.png-e9ae2bb21d303d9969b5189cbefc6d71.ctex::
+Chimenea normal.png::CompressedTexture2D/CompressedTexture2D::4910890067704735481::1760572286::1760636694::1::::<><><>0<>0<>083007382c1e042f3a5af19060163795<>res://.godot/imported/Chimenea normal.png-2873aef0d6d2d7679332b7cb1d9c5171.ctex::
+Chimenea parte de abajo.png::CompressedTexture2D/CompressedTexture2D::3958965585735292770::1760584061::1760586454::1::::<><><>0<>0<>abdf7daf4e1190c6468edd2c5b863578<>res://.godot/imported/Chimenea parte de abajo.png-1ec53a468b8440965d64a62b9ffee43a.ctex::
+Chimenea vieja.png::CompressedTexture2D/CompressedTexture2D::6209328386352370524::1760576223::1760586454::1::::<><><>0<>0<>32792fa4dd11d7b849ceeab9aff75d40<>res://.godot/imported/Chimenea vieja.png-369a55c39e57e4b6b56b1af2e129907b.ctex::
+Puerta.png::CompressedTexture2D/CompressedTexture2D::985084682830706860::1760629717::1760634873::1::::<><><>0<>0<>4feb75dd0163f9a3178e6f8d27a20810<>res://.godot/imported/Puerta.png-0979c8efb29b5ea41bef439c504bab7f.ctex::
+::res://Sprites/Tileset/Normal/Tuberias/::1760659050
+Tuberia de aire.png::CompressedTexture2D/CompressedTexture2D::653724661387822425::1760646898::1760646945::1::::<><><>0<>0<>c90e26ef2b5963bbc151d2ffc26e1693<>res://.godot/imported/Tuberia de aire.png-6edf77866b41571ee554d00466cce90e.ctex::
+Tuberias.png::CompressedTexture2D/CompressedTexture2D::6869584174577030917::1760645053::1760646945::1::::<><><>0<>0<>dd3fc01742727c2cc86c57f3078fea57<>res://.godot/imported/Tuberias.png-322dd8cc2e4df393b3fb4ebc99fca4de.ctex::
+WhatsApp Image 2025-10-16 at 20.57.18 (1).jpeg::CompressedTexture2D::7284749632948635867::1760659050::1760671888::1::::<><><>0<>0<>131e729470c179c2668448233178c13a<>res://.godot/imported/WhatsApp Image 2025-10-16 at 20.57.18 (1).jpeg-e80e081ccfde41719947d0f1e31281c1.ctex::
+WhatsApp Image 2025-10-16 at 20.57.18.jpeg::CompressedTexture2D::1380177823505481594::1760659046::1760671888::1::::<><><>0<>0<>2a831f16840161adfd089244a63cf545<>res://.godot/imported/WhatsApp Image 2025-10-16 at 20.57.18.jpeg-5458d9301cdb74295bea52dbc9da0d9c.ctex::
+::res://Sprites/Tileset/Normal/Ventana/::1760637439
+Ventana normal.png::CompressedTexture2D/CompressedTexture2D::3928387199989335527::1760629654::1760634873::1::::<><><>0<>0<>cf92407a70e6b6706a91470824229869<>res://.godot/imported/Ventana normal.png-a9b87ca480096d395c71aaa71fcd135a.ctex::
