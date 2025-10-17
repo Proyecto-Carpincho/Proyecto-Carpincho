@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 		$DistanciaJugador.target_position = to_local(objetivo.position)
 		distancia_objetivo = $DistanciaJugador.position.distance_to($DistanciaJugador.target_position)
 		var auxVio = false
+		# TODO: Hacer que un solo RayCast checkee todo
 		for i in 3:
 			if $Vista.get_child(i).get_collider() == objetivo:
 				ver_jugador()
@@ -148,8 +149,13 @@ func Golpeado(fuerza,mata) -> void:
 					break
 		transicion_hijo(state_now, estado_transicionar)
 
+func _pathfind(delta:float, speed_path:float) -> void:
+	var direction:Vector2 = (nav.get_next_path_position() - global_position).normalized()
+	velocity.x = lerp(velocity.x, direction.x * speed_path, 5 * delta)
 
-func _on_damag_area_body_entered(body: Node2D) -> void:
-	var auxSelf := self.get_class()
-	if body is Entidad && body is not Enemigo: # TODO: esto no es ideal
-		body.Golpeado(attack_damage, 0)
+func _check_damage(body: Node2D) -> void: # Creo que se va a tener que mover todo esto a un Animation algo
+	if $DamagArea.monitoring:
+		var auxSelf := self.get_class()
+		if body is Entidad && body is not Enemigo: # TODO: esto no es ideal
+			body.Golpeado(attack_damage, 0)
+			$DamagArea.monitoring = false

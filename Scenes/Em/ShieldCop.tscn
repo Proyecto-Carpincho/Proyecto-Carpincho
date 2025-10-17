@@ -10,9 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://gwyuscvrlx4p" path="res://Sprites/Prueba/Em/heavyCop/turn1WIP.png" id="10_0yxdh"]
 [ext_resource type="Script" uid="uid://ch28gho3h2lph" path="res://Scripts/Em/ShieldCop/RangoAtaqueShieldCop.gd" id="10_cp0p1"]
 [ext_resource type="Script" uid="uid://bmdewqnsbar8q" path="res://Scripts/Em/ShieldCop/PlacajeShieldCop.gd" id="10_vrn4w"]
-[ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/PerseguirGenerico.gd" id="12_3nc5l"]
-[ext_resource type="Script" uid="uid://bnfnbhlmlommg" path="res://Scripts/Em/MuerteGenerica.gd" id="13_3nc5l"]
-[ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/PatrullarGenerico.gd" id="13_fgpuc"]
+[ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/EstadosGenericos/PerseguirGenerico.gd" id="12_3nc5l"]
+[ext_resource type="Script" uid="uid://bnfnbhlmlommg" path="res://Scripts/Em/EstadosGenericos/MuerteGenerica.gd" id="13_3nc5l"]
+[ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/EstadosGenericos/PatrullarGenerico.gd" id="13_fgpuc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nqb0s"]
 animations = [{

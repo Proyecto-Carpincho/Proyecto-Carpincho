@@ -79,6 +79,7 @@ vertical_alignment = 1
 [node name="DistanciaJugador" type="RayCast2D" parent="."]
 
 [node name="DamagArea" type="Area2D" parent="."]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamagArea"]
 

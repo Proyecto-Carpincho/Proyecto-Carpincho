@@ -15,14 +15,17 @@ func _process(delta: float) -> void:
 		cooldown_timer -= 1*delta
 
 func _physics_process(delta: float) -> void:
-	#TODO: Mejorar
-	if $WallCheck.is_colliding():
-		if $WallCheck.get_collider() is TileMapLayer:
-			velocity.y -= 10
-	else:
-		if not is_on_floor():
-			velocity += get_gravity() * delta
 	super._physics_process(delta)
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+
+func _pathfind(delta:float, speed_path:float) -> void:
+	super._pathfind(delta, speed_path)
+	# TODO mejorar
+	if $WallCheck.is_colliding():
+		if $WallCheck.get_collider() is TileMapLayer && nav.get_next_path_position().y >= position.y:
+			velocity.y -= 50
+			velocity.x *= 2
 
 func girar(b:bool) -> void:
 	for i in 3:

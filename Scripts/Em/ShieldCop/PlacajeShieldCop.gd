@@ -5,6 +5,7 @@ const velocidad_placaje = 250
 var ultima_dir:int
 
 func enter():
+	padre.find_child("DamagArea").monitoring = true
 	padre.animated_sprite.play("placaje")
 	if padre.velocity.x > 0:
 		ultima_dir = velocidad_placaje
@@ -14,14 +15,21 @@ func enter():
 		Transiciono.emit(self, "RangoAtaqueShieldCop")
 
 func physics_update(delta:float) -> void:
-	#if padre.tocando_jugador(): TODO
-	#	padre.objetivo.Golpeado(daño, 0)
 	if padre.is_on_wall():
-		padre.animated_sprite.play("stun")
-		await get_tree().create_timer(1).timeout
-		padre.animated_sprite.stop()
-		padre.placaje_timer_crear()
-		Transiciono.emit(self, "RangoAtaqueShieldCop")
-		
+		var body := padre.objetivo.get_class()
+		if padre.find_child("WallCheck").get_collider() is TileMapLayer:
+			padre.animated_sprite.play("stun")
+			await get_tree().create_timer(1).timeout
+			padre.animated_sprite.stop()
+			padre.placaje_timer_crear()
+			Transiciono.emit(self, "RangoAtaqueShieldCop")
+		elif padre.find_child("WallCheck").get_collider() is Entidad && padre.objetivo is not Enemigo: # TODO otra vez, no ideal
+			if padre.find_child("DamagArea").monitoring:
+				padre._check_damage(padre.objetivo)
+			padre.animated_sprite.play("stun")
+			await get_tree().create_timer(1).timeout
+			padre.animated_sprite.stop()
+			padre.placaje_timer_crear()
+			Transiciono.emit(self, "RangoAtaqueShieldCop")
 	else:
 		padre.velocity.x = ultima_dir

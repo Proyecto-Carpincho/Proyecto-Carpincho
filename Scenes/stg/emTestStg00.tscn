@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b30xoslhqynh1" path="res://Sprites/Prueba/Ventanas Prueba/Ventanas.png" id="10_68uta"]
 [ext_resource type="PackedScene" uid="uid://cjmre3cjowgo6" path="res://Scenes/Character.tscn" id="11_p00kn"]
 [ext_resource type="PackedScene" uid="uid://ws714j3bdkap" path="res://Scenes/Muñeco Pruebas.tscn" id="13_r0q7f"]
-[ext_resource type="Script" uid="uid://cl5id8ntqh8y3" path="res://Scripts/AlertManager.gd" id="14_kw0q7"]
+[ext_resource type="Script" uid="uid://cl5id8ntqh8y3" path="res://Scripts/Em/AlertManager.gd" id="14_kw0q7"]
 [ext_resource type="PackedScene" uid="uid://c7p5mspd0lfxc" path="res://Scenes/Em/ShieldCop.tscn" id="15_acpe2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xrf5d"]
@@ -228,9 +228,9 @@ sources/2 = SubResource("TileSetAtlasSource_0g3x0")
 sources/5 = SubResource("TileSetAtlasSource_at1lk")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kw0q7"]
-vertices = PackedVector2Array(1365.95, 384.203, -336.5, 419.789, -389.477, -626.078, 1361.04, -639.922)
+vertices = PackedVector2Array(1559.48, -618.047, 1509.48, 373.063, -1044.35, 390.93, -1080.64, -631.938)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-346, 430, -400, -636, 1371, -650, 1376, 394)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1054, 401, -1091, -642, 1570, -628, 1519, 383)])
 
 [sub_resource type="Curve2D" id="Curve2D_kw0q7"]
 _data = {
@@ -285,7 +285,7 @@ navigation_polygon = SubResource("NavigationPolygon_kw0q7")
 curve = SubResource("Curve2D_kw0q7")
 
 [node name="BaseEm" parent="." node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") groups=["Enemigos"] instance=ExtResource("15_acpe2")]
-position = Vector2(729, 40)
+position = Vector2(529, 45)
 scale = Vector2(2.5, 2.5)
 objetivo = NodePath("../Jugador")
 alert_manager = NodePath("../AlertManager")

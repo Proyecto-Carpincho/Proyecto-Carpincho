@@ -9,9 +9,8 @@ func physics_update(delta:float) -> void:
 	var direction:Vector2
 	
 	if padre.vio_jugador == false:
-		padre.nav.target_position = padre.alert_manager.upc
-		direction = (padre.nav.get_next_path_position() - padre.global_position).normalized()
-		padre.velocity.x = lerp(padre.velocity.x, direction.x * padre.speed, 5 * delta)
+		padre.nav.target_position = padre.alert_manager.upc # TODO hacer que avance despues del UPC
+		padre._pathfind(delta, padre.run_speed)
 		if padre.velocity.x > 0:
 			padre.girar(true)
 		elif padre.velocity.x < 0:
