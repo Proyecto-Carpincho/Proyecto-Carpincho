@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://wlyot2qy4yvo"]
+[gd_scene load_steps=25 format=4 uid="uid://wlyot2qy4yvo"]
 
 [ext_resource type="Material" uid="uid://b6xw1kstcgqfw" path="res://Materials/Prueba/capa 0/Muros.tres" id="1_uq5mc"]
 [ext_resource type="Texture2D" uid="uid://cj88mhn4epkua" path="res://Sprites/Prueba/Columna Tile.png" id="2_r0q7f"]
@@ -234,9 +234,15 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-1054, 401, -1091, -642
 
 [sub_resource type="Curve2D" id="Curve2D_kw0q7"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 444, 54, 0, 0, 0, 0, 714, 57, 0, 0, 0, 0, 933, -64, 0, 0, 0, 0, 1130, 63, 0, 0, 0, 0, 1309, 61)
+"points": PackedVector2Array(0, 0, 0, 0, 444, 54, 0, 0, 0, 0, 565, 66, 0, 0, 0, 0, 692, 67, 0, 0, 0, 0, 927, -84, 0, 0, 0, 0, 1309, 61)
 }
 point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_acpe2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -863, 56, 0, 0, 0, 0, -724, 138, 0, 0, 0, 0, -597, 71, 0, 0, 0, 0, -376, 87)
+}
+point_count = 4
 
 [node name="EmTestStg00" type="Node2D"]
 
@@ -281,13 +287,26 @@ visible = false
 position = Vector2(-38, -26)
 navigation_polygon = SubResource("NavigationPolygon_kw0q7")
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_kw0q7")
-
 [node name="BaseEm" parent="." node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") groups=["Enemigos"] instance=ExtResource("15_acpe2")]
-position = Vector2(529, 45)
+position = Vector2(555, 43)
 scale = Vector2(2.5, 2.5)
 objetivo = NodePath("../Jugador")
 alert_manager = NodePath("../AlertManager")
 grupo = "Enemigos"
 ruta = NodePath("../Path2D")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(3.05176e-05, 0)
+scale = Vector2(1, 1)
+curve = SubResource("Curve2D_kw0q7")
+
+[node name="BaseEm2" parent="." node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") instance=ExtResource("15_acpe2")]
+position = Vector2(-724, 130)
+scale = Vector2(2, 2)
+objetivo = NodePath("../Jugador")
+alert_manager = NodePath("../AlertManager")
+grupo = "Enemigos"
+ruta = NodePath("../Path2D2")
+
+[node name="Path2D2" type="Path2D" parent="."]
+curve = SubResource("Curve2D_acpe2")

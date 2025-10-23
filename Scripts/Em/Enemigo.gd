@@ -61,6 +61,11 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if state_now:
 		state_now.physics_update(delta)
+	
+	# Siento que hay una manera mas eficiente de hacer esto
+	if state_now is not MuerteGenerica:
+		_animacion_y_rotar()
+	
 	move_and_slide()
 
 func cambiar_alerta(estado:AlertManager.alertStatus):
@@ -105,11 +110,12 @@ func ver_jugador():
 					alert_manager.actualizar_upc(objetivo.position)
 			return
 		AlertManager.alertStatus.NORMAL:
-			await get_tree().create_timer(2).timeout	
-			if !stunned && estado_alerta == AlertManager.alertStatus.NORMAL && state_now is not MuerteGenerica:
-				alert_manager.llamar_alerta(AlertManager.alertStatus.PRECAUCION)
-				await get_tree().create_timer(0.5).timeout
-				alert_manager.llamar_alerta(AlertManager.alertStatus.ALERTA)
+			var estado_transicionar:String
+			for i in get_child_count():
+				if get_child(i) is VerObjGenerico:
+					estado_transicionar = get_child(i).name
+					break
+			transicion_hijo(state_now, estado_transicionar)
 
 func transicion_hijo(state:State, new_state_name:String):
 	if state_now is not MuerteGenerica:
@@ -118,27 +124,30 @@ func transicion_hijo(state:State, new_state_name:String):
 		var new_state = states.get(new_state_name)
 		
 		if !new_state:
-			push_warning("El estado al que", self.name," quiere trancisionar es invalido y/o inexistente")
+			push_warning("El estado al que ", self.name," quiere trancisionar es invalido y/o inexistente")
 			return
 		if state_now:
 			state_now.exit()
 		new_state.enter()
 		state_now = new_state
 
-func girar(b:bool):
+func _girar(b:bool):
+	# false = izquierda
+	# true = derecha
 	for i in 3:
 		if (b == false && $Vista.get_child(i).target_position.x > 0) || (b == true && $Vista.get_child(i).target_position.x < 0):
 			$Vista.get_child(i).target_position.x *= -1
-			$DamagArea.size *= -1 # TODO: que funcione
+			$DamagArea.scale *= -1 # TODO: que funcione
 			animated_sprite.play("turn")
-	
-	await animated_sprite.animation_finished
-	animated_sprite.flip_h = b
+			await animated_sprite.animation_finished
+			animated_sprite.flip_h = b
 
 func Golpeado(fuerza,mata) -> void:
 	if alert_manager.estado_alerta != AlertManager.alertStatus.NORMAL:
 		super.Golpeado(fuerza, mata)
 	else:
+		if !vio_jugador:
+			_girar(animated_sprite.flip_h)
 		life -= life
 	
 	if life <= 0:
@@ -148,6 +157,7 @@ func Golpeado(fuerza,mata) -> void:
 					estado_transicionar = get_child(i).name
 					break
 		transicion_hijo(state_now, estado_transicionar)
+
 
 func _pathfind(delta:float, speed_path:float) -> void:
 	var direction:Vector2 = (nav.get_next_path_position() - global_position).normalized()
@@ -159,3 +169,16 @@ func _check_damage(body: Node2D) -> void: # Creo que se va a tener que mover tod
 		if body is Entidad && body is not Enemigo: # TODO: esto no es ideal
 			body.Golpeado(attack_damage, 0)
 			$DamagArea.monitoring = false
+
+func _animacion_y_rotar():
+	if velocity.x > 0:
+		_girar(true)
+		if !animated_sprite.is_playing() || animated_sprite.animation == "idle":
+			animated_sprite.play("run")
+	elif velocity.x < 0:
+		_girar(false)
+		if !animated_sprite.is_playing() || animated_sprite.animation == "idle":
+			animated_sprite.play("run")
+	else:
+		if !animated_sprite.is_playing() || animated_sprite.animation == "run":
+			animated_sprite.play("idle")

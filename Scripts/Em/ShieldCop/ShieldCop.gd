@@ -23,19 +23,27 @@ func _pathfind(delta:float, speed_path:float) -> void:
 	super._pathfind(delta, speed_path)
 	# TODO mejorar
 	if $WallCheck.is_colliding():
-		if $WallCheck.get_collider() is TileMapLayer && nav.get_next_path_position().y >= position.y:
-			velocity.y -= 50
+		if $WallCheck.get_collider() is TileMapLayer:
+			velocity.y -= 25
 			velocity.x *= 2
 
-func girar(b:bool) -> void:
+func _girar(b:bool) -> void:
+	# false = izquierda
+	# true = derecha
 	for i in 3:
 		if (b == false && $Vista.get_child(i).target_position.x > 0) || (b == true && $Vista.get_child(i).target_position.x < 0):
 			$Vista.get_child(i).target_position.x *= -1
+			$DamagArea.scale *= -1 # TODO: que funcione
 			$WallCheck.target_position.x *= -1
 			animated_sprite.play("turn")
-	
-	await animated_sprite.animation_finished
-	animated_sprite.flip_h = b
+			await animated_sprite.animation_finished
+			animated_sprite.flip_h = b
 
 func placaje_timer_crear() -> void:
 	cooldown_timer = cooldown_placaje
+
+func Golpeado(fuerza,mata) -> void:
+	if false: # Enemigo golpea del frente
+		transicion_hijo(state_now, "BloqueoShieldCop")
+	else:
+		super.Golpeado(fuerza,mata)

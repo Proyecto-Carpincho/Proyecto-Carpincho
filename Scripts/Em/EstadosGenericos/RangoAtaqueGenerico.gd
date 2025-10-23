@@ -10,9 +10,9 @@ func physics_update(delta:float) -> void:
 			padre.nav.target_position = padre.objetivo.position
 			padre._pathfind(delta, padre.run_speed)
 			if padre.velocity.x > 0:
-				padre.girar(true)
+				padre._girar(true)
 			elif padre.velocity.x < 0:
-				padre.girar(false)
+				padre._girar(false)
 			if !padre.animated_sprite.is_playing():
 				padre.animated_sprite.play("run")
 		else:
