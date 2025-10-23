@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cup3y4ofi4tai"
-path="res://.godot/imported/Chimenea vieja.png-369a55c39e57e4b6b56b1af2e129907b.ctex"
+uid="uid://cfon42uttk5n5"
+path="res://.godot/imported/Respiradero.png-45c71a4ef343073b5f2acf1109befa4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tileset/Normal/Decoracion/Chimenea vieja.png"
-dest_files=["res://.godot/imported/Chimenea vieja.png-369a55c39e57e4b6b56b1af2e129907b.ctex"]
+source_file="res://Sprites/Tileset/Normal/Decoracion/Respiradero.png"
+dest_files=["res://.godot/imported/Respiradero.png-45c71a4ef343073b5f2acf1109befa4a.ctex"]
 
 [params]
 

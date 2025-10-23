@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctspucbtlvuoi"
-path="res://.godot/imported/Aire acondicionado.png-e9ae2bb21d303d9969b5189cbefc6d71.ctex"
+uid="uid://bko75i23xutx4"
+path="res://.godot/imported/Chimenea.png-e67fed05822932fcffdad5d5be6f6697.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tileset/Normal/Decoracion/Aire acondicionado.png"
-dest_files=["res://.godot/imported/Aire acondicionado.png-e9ae2bb21d303d9969b5189cbefc6d71.ctex"]
+source_file="res://Sprites/Tileset/Normal/Decoracion/Chimenea.png"
+dest_files=["res://.godot/imported/Chimenea.png-e67fed05822932fcffdad5d5be6f6697.ctex"]
 
 [params]
 

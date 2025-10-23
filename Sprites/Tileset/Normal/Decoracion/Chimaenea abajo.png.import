@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwn0t5angegqk"
-path="res://.godot/imported/Chimenea parte de abajo.png-1ec53a468b8440965d64a62b9ffee43a.ctex"
+uid="uid://ch56sx5yhlevy"
+path="res://.godot/imported/Chimaenea abajo.png-9a98bfebc48f0b570151612b6c084f35.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Tileset/Normal/Decoracion/Chimenea parte de abajo.png"
-dest_files=["res://.godot/imported/Chimenea parte de abajo.png-1ec53a468b8440965d64a62b9ffee43a.ctex"]
+source_file="res://Sprites/Tileset/Normal/Decoracion/Chimaenea abajo.png"
+dest_files=["res://.godot/imported/Chimaenea abajo.png-9a98bfebc48f0b570151612b6c084f35.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://or1npwqn6v8y"]
 
 [ext_resource type="Script" uid="uid://byy8ynu6qa71m" path="res://Scripts/Tile Scenes/Chimenea.gd" id="1_bdwb1"]
-[ext_resource type="Texture2D" uid="uid://cup3y4ofi4tai" path="res://Sprites/Tileset/Normal/Decoracion/Chimenea vieja.png" id="2_bdwb1"]
+[ext_resource type="Texture2D" uid="uid://bko75i23xutx4" path="res://Sprites/Tileset/Normal/Decoracion/Chimenea.png" id="2_bdwb1"]
 [ext_resource type="Shader" uid="uid://daxecajh4ywcs" path="res://Shader/Chimenea.tres" id="3_lxpar"]
 [ext_resource type="Texture2D" uid="uid://de717mvm8233q" path="res://Sprites/Particula/Humo prueba.png" id="4_uhg4w"]
 
@@ -89,6 +89,8 @@ DireccionHumo = -1.0
 
 [node name="Quimenea" type="Sprite2D" parent="."]
 texture = ExtResource("2_bdwb1")
+hframes = 2
+frame = 1
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_ju5ym")
