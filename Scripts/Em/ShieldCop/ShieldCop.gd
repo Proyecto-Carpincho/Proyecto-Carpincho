@@ -30,20 +30,21 @@ func _pathfind(delta:float, speed_path:float) -> void:
 func _girar(b:bool) -> void:
 	# false = izquierda
 	# true = derecha
-	for i in 3:
-		if (b == false && $Vista.get_child(i).target_position.x > 0) || (b == true && $Vista.get_child(i).target_position.x < 0):
-			$Vista.get_child(i).target_position.x *= -1
-			$DamagArea.scale *= -1 # TODO: que funcione
-			$WallCheck.target_position.x *= -1
-			animated_sprite.play("turn")
-			await animated_sprite.animation_finished
-			animated_sprite.flip_h = b
+	if (b == false && $Vision.target_position.x > 0) || (b == true && $Vision.target_position.x < 0):
+		$Vision.target_position.x *= -1
+		$DamagArea.position.x *= -1 # TODO: que funcione
+		$WallCheck.target_position.x *= -1
+		animated_sprite.play("turn")
+		await animated_sprite.animation_finished
+		animated_sprite.flip_h = b
+
 
 func placaje_timer_crear() -> void:
 	cooldown_timer = cooldown_placaje
 
-func Golpeado(fuerza,mata) -> void:
-	if false: # Enemigo golpea del frente
+func Golpeado(fuerza, agresor:Entidad) -> void:
+	if (agresor.position.x < self.position.x && !animated_sprite.flip_h) || (agresor.position.x > self.position.x && animated_sprite.flip_h): # Enemigo golpea del frente
 		transicion_hijo(state_now, "BloqueoShieldCop")
 	else:
-		super.Golpeado(fuerza,mata)
+		
+		super.Golpeado(fuerza,agresor)

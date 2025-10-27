@@ -8,7 +8,7 @@ func physics_update(delta:float) -> void:
 	if padre.dis_obj_ray.get_collider() != null:
 		if padre.distancia_objetivo <= distancia_para_perder && padre.dis_obj_ray.get_collider().is_class(padre.objetivo.get_class()):
 			padre.nav.target_position = padre.objetivo.position
-			padre._pathfind(delta, padre.run_speed)
+			padre._pathfind(delta, padre.RUN_SPEED)
 			if padre.velocity.x > 0:
 				padre._girar(true)
 			elif padre.velocity.x < 0:

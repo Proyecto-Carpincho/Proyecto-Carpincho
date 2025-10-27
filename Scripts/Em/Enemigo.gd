@@ -1,13 +1,14 @@
 extends Entidad
 class_name Enemigo
 
+const ATTACK_DAMAGE:int = 50
+const RUN_SPEED:int = 60
+
 @export var objetivo:Entidad
 @export var alert_manager:AlertManager
 @export var grupo:String
-@export var run_speed:int
 @export var estado_inicial:State
 @export var ruta:Path2D
-@export var attack_damage:int
 
 @onready var nav:NavigationAgent2D = $NavigationAgent2D
 @onready var dis_obj_ray:RayCast2D = $DistanciaJugador
@@ -40,6 +41,8 @@ func _ready() -> void:
 		if child is State:
 			states[child.name] = child
 			child.Transiciono.connect(transicion_hijo)
+	if objetivo == null && alert_manager == null && grupo == null && estado_inicial == null && ruta == null:
+		push_error("Todos los exports son nulos, es probable que el editor tenga que ser reiniciado")
 	state_now = estado_inicial
 	state_now.enter()
 
@@ -48,9 +51,9 @@ func _process(delta: float) -> void:
 		$DistanciaJugador.target_position = to_local(objetivo.position)
 		distancia_objetivo = $DistanciaJugador.position.distance_to($DistanciaJugador.target_position)
 		var auxVio = false
-		# TODO: Hacer que un solo RayCast checkee todo
-		for i in 3:
-			if $Vista.get_child(i).get_collider() == objetivo:
+		for i in range(-35, 36):
+			$Vision.target_position.y = i
+			if $Vision.get_collider() == objetivo:
 				ver_jugador()
 				auxVio = true
 		if !auxVio:
@@ -76,6 +79,7 @@ func cambiar_alerta(estado:AlertManager.alertStatus):
 			for i in get_child_count():
 				if get_child(i) is PatrullarGenerico:
 					estado_transicionar = get_child(i).name
+					$Vision.target_position.x /= 2
 					break
 		AlertManager.alertStatus.PRECAUCION:
 			for i in get_child_count():
@@ -91,6 +95,7 @@ func cambiar_alerta(estado:AlertManager.alertStatus):
 			for i in get_child_count():
 				if get_child(i) is RangoAtaqueGenerico:
 					estado_transicionar = get_child(i).name
+					$Vision.target_position.x += $Vision.target_position.x
 					break
 	transicion_hijo(state_now, estado_transicionar)
 
@@ -105,9 +110,8 @@ func ver_jugador():
 			alert_manager.llamar_alerta(AlertManager.alertStatus.ALERTA)
 			return
 		AlertManager.alertStatus.ALERTA:
-			for i in 3:
-				if $Vista.get_child(i).get_collider() == objetivo:
-					alert_manager.actualizar_upc(objetivo.position)
+			if $Vision.get_collider() == objetivo:
+				alert_manager.actualizar_upc(objetivo.position)
 			return
 		AlertManager.alertStatus.NORMAL:
 			var estado_transicionar:String
@@ -134,20 +138,26 @@ func transicion_hijo(state:State, new_state_name:String):
 func _girar(b:bool):
 	# false = izquierda
 	# true = derecha
-	for i in 3:
-		if (b == false && $Vista.get_child(i).target_position.x > 0) || (b == true && $Vista.get_child(i).target_position.x < 0):
-			$Vista.get_child(i).target_position.x *= -1
-			$DamagArea.scale *= -1 # TODO: que funcione
-			animated_sprite.play("turn")
-			await animated_sprite.animation_finished
-			animated_sprite.flip_h = b
+	if (b == false && $Vison.target_position.x > 0) || (b == true && $Vision.target_position.x < 0):
+		$Vision.target_position.x *= -1
+		$DamagArea.position.x *= -1 # TODO: que funcione
+		animated_sprite.play("turn")
+		await animated_sprite.animation_finished
+		animated_sprite.flip_h = b
 
-func Golpeado(fuerza,mata) -> void:
+func Golpeado(fuerza, agresor:Entidad) -> void:
 	if alert_manager.estado_alerta != AlertManager.alertStatus.NORMAL:
-		super.Golpeado(fuerza, mata)
-	else:
 		if !vio_jugador:
-			_girar(animated_sprite.flip_h)
+			_girar(!animated_sprite.flip_h)
+			var estado_transicionar:String
+			for i in get_child_count():
+				if get_child(i) is VerObjGenerico:
+					estado_transicionar = get_child(i).name
+					break
+			transicion_hijo(state_now, estado_transicionar)
+		
+		super.Golpeado(fuerza, agresor)
+	else:
 		life -= life
 	
 	if life <= 0:
@@ -167,7 +177,7 @@ func _check_damage(body: Node2D) -> void: # Creo que se va a tener que mover tod
 	if $DamagArea.monitoring:
 		var auxSelf := self.get_class()
 		if body is Entidad && body is not Enemigo: # TODO: esto no es ideal
-			body.Golpeado(attack_damage, 0)
+			body.Golpeado(ATTACK_DAMAGE, self)
 			$DamagArea.monitoring = false
 
 func _animacion_y_rotar():

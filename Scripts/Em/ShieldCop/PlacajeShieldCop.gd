@@ -5,14 +5,18 @@ const velocidad_placaje = 250
 var ultima_dir:int
 
 func enter():
-	padre.find_child("DamagArea").monitoring = true
-	padre.animated_sprite.play("placaje")
 	if padre.velocity.x > 0:
 		ultima_dir = velocidad_placaje
 	elif padre.velocity.x < 0:
 		ultima_dir = -velocidad_placaje
 	else:
 		Transiciono.emit(self, "RangoAtaqueShieldCop")
+	padre.animated_sprite.play("preparar_placaje")
+	padre.velocity.x = 0
+	await get_tree().create_timer(0.5).timeout
+	padre.find_child("DamagArea").monitoring = true
+	padre.animated_sprite.play("placaje")
+	padre.velocity.x = ultima_dir
 
 func physics_update(delta:float) -> void:
 	if padre.is_on_wall():
@@ -31,5 +35,3 @@ func physics_update(delta:float) -> void:
 			padre.animated_sprite.stop()
 			padre.placaje_timer_crear()
 			Transiciono.emit(self, "RangoAtaqueShieldCop")
-	else:
-		padre.velocity.x = ultima_dir

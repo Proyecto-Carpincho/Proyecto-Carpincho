@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	for label:Label in A:
 		label.rotation = -rotation
 
-func Golpeado(fuerza,mata) -> void:
+func Golpeado(fuerza, agresor:Entidad) -> void:
 	life -= fuerza
 	text(fuerza)
 	

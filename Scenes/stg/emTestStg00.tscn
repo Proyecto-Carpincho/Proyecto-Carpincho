@@ -216,7 +216,8 @@ texture_region_size = Vector2i(64, 64)
 
 [sub_resource type="TileSet" id="TileSet_l773a"]
 tile_size = Vector2i(64, 64)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 2
 terrain_set_0/terrain_0/name = "Tuberias"
 terrain_set_0/terrain_0/color = Color(0.227498, 0.182477, 1, 1)
@@ -228,9 +229,9 @@ sources/2 = SubResource("TileSetAtlasSource_0g3x0")
 sources/5 = SubResource("TileSetAtlasSource_at1lk")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kw0q7"]
-vertices = PackedVector2Array(1559.48, -618.047, 1509.48, 373.063, -1044.35, 390.93, -1080.64, -631.938)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1054, 401, -1091, -642, 1570, -628, 1519, 383)])
+vertices = PackedVector2Array(-870.273, 118.547, -875.703, -78.6797, -739.953, -74.7031, -758.133, 113.547, -602.547, 126.023, -605.563, 191.328, -757.117, 196.648, 1484.08, -529, 1489.9, 119.906, 1051.76, 116.078, 1048.76, -9, -741.953, -529.992, 916, -9, 916, 123.008)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 3, 2), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 7, 10, 12, 2), PackedInt32Array(4, 2, 12, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-880, 129, -886, -89, -750, -85, -752, -540, 1494, -539, 1500, 130, 1042, 126, 1039, 1, 926, 1, 926, 133, -593, 136, -596, 201, -767, 207, -768, 124)])
 
 [sub_resource type="Curve2D" id="Curve2D_kw0q7"]
 _data = {
@@ -257,7 +258,7 @@ tile_set = SubResource("TileSet_l773a")
 z_index = 0
 position = Vector2(255, -190)
 collision_layer = 9
-maxLife = 20
+maxLife = 1000
 gravity = 1000.0
 maxGravity = 1000.0
 gravityMultiplyWall = 0.03
@@ -271,8 +272,8 @@ velocity_jump = -190.0
 jump_multiply_boosted = 1.1
 wall_velocity = -2000.0
 wall_jump_velocity = -350.0
-max_life = 100
-life = 100
+max_life = 1000
+life = 1000
 
 [node name="StaticBody2D" parent="." instance=ExtResource("13_r0q7f")]
 position = Vector2(1281, -208)
@@ -283,7 +284,6 @@ grupo = "Enemigos"
 metadata/_custom_type_script = "uid://cl5id8ntqh8y3"
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 position = Vector2(-38, -26)
 navigation_polygon = SubResource("NavigationPolygon_kw0q7")
 
@@ -297,7 +297,6 @@ ruta = NodePath("../Path2D")
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(3.05176e-05, 0)
-scale = Vector2(1, 1)
 curve = SubResource("Curve2D_kw0q7")
 
 [node name="BaseEm2" parent="." node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") instance=ExtResource("15_acpe2")]

@@ -93,12 +93,11 @@ func _TimerCongelacion_Timeout() -> void:
 
 
 func _Area2D_bodyEntered(body: Node2D) -> void:
-	print(body)
 	if body.has_method("Golpeado"):
 		# Si es un ataque fuerte entonces la fuerza es Fuerza * MultiplicadorFuerza o sea (Multi ataque fuerte) 
 		# pero si no es un ataque fuerte entonces es solo Fuerza
 		var Fuerza = get_parent().Fuerza if not EsAtaqueFuerte else get_parent().Fuerza * get_parent().MultiplicadorFuerza
-		body.call("Golpeado", Fuerza , get_parent().Mata)
+		body.call("Golpeado", Fuerza , get_parent().get_parent())
 		if EsAtaqueFuerte:
 			EfectosVisuales.CongelarTiempo()
 			timer_congelacion.start()
