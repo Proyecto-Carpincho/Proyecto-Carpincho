@@ -11,6 +11,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	super._process(delta)
+	$RichTextLabel.text = state_now.name
 	if cooldown_timer:
 		cooldown_timer -= 1*delta
 
@@ -43,8 +44,10 @@ func placaje_timer_crear() -> void:
 	cooldown_timer = cooldown_placaje
 
 func Golpeado(fuerza, agresor:Entidad) -> void:
-	if (agresor.position.x < self.position.x && !animated_sprite.flip_h) || (agresor.position.x > self.position.x && animated_sprite.flip_h): # Enemigo golpea del frente
-		transicion_hijo(state_now, "BloqueoShieldCop")
+	if state_now is not PlacajeShieldCop:
+		if (agresor.position.x < self.position.x && !animated_sprite.flip_h) || (agresor.position.x > self.position.x && animated_sprite.flip_h): # Enemigo golpea del frente
+			transicion_hijo(state_now, "BloqueoShieldCop")
+		else:
+			super.Golpeado(fuerza,agresor)
 	else:
-		
 		super.Golpeado(fuerza,agresor)

@@ -167,3 +167,11 @@ position = Vector2(-3, 0)
 [node name="CollisionShape2D" parent="DamagArea" index="0"]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_3nc5l")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="15"]
+offset_left = -26.0
+offset_top = -29.0
+offset_right = 27.0
+offset_bottom = -14.0
+theme_override_font_sizes/normal_font_size = 8
+text = "asdasd"

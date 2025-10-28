@@ -6,7 +6,7 @@ var llamo_checkeo:bool = false
 
 func enter():
 	padre.animated_sprite.play("dead")
-	padre.velocity = Vector2(0, 0)
+	padre.velocity.x = 0
 	padre.remove_child(padre.find_child("Vision", true))
 	padre.remove_child(padre.find_child("DistanciaJugador", true))
 	padre.remove_child(padre.find_child("NavigationAgent2D", true))

@@ -1,7 +1,8 @@
 extends State
 class_name PatrullarGenerico
 
-@onready var ruta:Path2D = get_parent().ruta
+@onready var ruta:RutaPatrullaje = get_parent().ruta
+@onready var loop:bool = ruta.loop
 
 var cantidad_puntos
 var progreso_ruta:int
@@ -28,9 +29,15 @@ func physics_update(delta:float) -> void:
 			if progreso_ruta < (cantidad_puntos - 1):
 				progreso_ruta += 1
 			else:
-				avanzando = false
+				if !loop:
+					avanzando = false
+				else:
+					progreso_ruta = 0
 		else:
 			if progreso_ruta > 0:
 				progreso_ruta -= 1
 			else:
-				avanzando = true
+				if !loop:
+					avanzando = true
+				else:
+					progreso_ruta = cantidad_puntos - 1

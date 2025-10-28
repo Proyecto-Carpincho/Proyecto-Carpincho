@@ -2,7 +2,7 @@ extends State
 class_name BloqueoShieldCop
 
 func enter() -> void:
-	padre.velocity = Vector2(0,0)
+	padre.velocity.x = 0
 	padre.animated_sprite.play("block")
 	await get_tree().create_timer(2).timeout
 	var estado_transicionar:String

@@ -21,17 +21,15 @@ func enter():
 func physics_update(delta:float) -> void:
 	if padre.is_on_wall():
 		var body := padre.objetivo.get_class()
-		if padre.find_child("WallCheck").get_collider() is TileMapLayer:
-			padre.animated_sprite.play("stun")
-			await get_tree().create_timer(1).timeout
-			padre.animated_sprite.stop()
-			padre.placaje_timer_crear()
-			Transiciono.emit(self, "RangoAtaqueShieldCop")
-		elif padre.find_child("WallCheck").get_collider() is Entidad && padre.objetivo is not Enemigo: # TODO otra vez, no ideal
+		if padre.find_child("WallCheck").get_collider() is Entidad && !padre.objetivo.is_in_group(padre.grupo):
 			if padre.find_child("DamagArea").monitoring:
 				padre._check_damage(padre.objetivo)
-			padre.animated_sprite.play("stun")
-			await get_tree().create_timer(1).timeout
-			padre.animated_sprite.stop()
-			padre.placaje_timer_crear()
-			Transiciono.emit(self, "RangoAtaqueShieldCop")
+			_volver_ataque()
+		else:
+			_volver_ataque()
+func _volver_ataque():
+	padre.animated_sprite.play("stun")
+	await get_tree().create_timer(1).timeout
+	padre.animated_sprite.stop()
+	padre.placaje_timer_crear()
+	Transiciono.emit(self, "RangoAtaqueShieldCop")

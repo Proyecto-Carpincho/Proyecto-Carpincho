@@ -8,7 +8,7 @@ const RUN_SPEED:int = 60
 @export var alert_manager:AlertManager
 @export var grupo:String
 @export var estado_inicial:State
-@export var ruta:Path2D
+@export var ruta:RutaPatrullaje
 
 @onready var nav:NavigationAgent2D = $NavigationAgent2D
 @onready var dis_obj_ray:RayCast2D = $DistanciaJugador
@@ -51,11 +51,10 @@ func _process(delta: float) -> void:
 		$DistanciaJugador.target_position = to_local(objetivo.position)
 		distancia_objetivo = $DistanciaJugador.position.distance_to($DistanciaJugador.target_position)
 		var auxVio = false
-		for i in range(-35, 36):
-			$Vision.target_position.y = i
-			if $Vision.get_collider() == objetivo:
-				ver_jugador()
-				auxVio = true
+		$Vision.target_position.y = 35*sin(Engine.get_frames_drawn())
+		if $Vision.get_collider() == objetivo:
+			ver_jugador()
+			auxVio = true
 		if !auxVio:
 			vio_jugador = false
 	if state_now:
@@ -72,32 +71,33 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func cambiar_alerta(estado:AlertManager.alertStatus):
-	var estado_transicionar:String
-	estado_alerta = estado
-	match estado_alerta:
-		AlertManager.alertStatus.NORMAL:
-			for i in get_child_count():
-				if get_child(i) is PatrullarGenerico:
-					estado_transicionar = get_child(i).name
-					$Vision.target_position.x /= 2
-					break
-		AlertManager.alertStatus.PRECAUCION:
-			for i in get_child_count():
-				if get_child(i) is PatrullarGenerico:
-					estado_transicionar = get_child(i).name
-					break
-		AlertManager.alertStatus.EVACION:
-			for i in get_child_count():
-				if get_child(i) is PerseguirGenerico:
-					estado_transicionar = get_child(i).name
-					break
-		AlertManager.alertStatus.ALERTA:
-			for i in get_child_count():
-				if get_child(i) is RangoAtaqueGenerico:
-					estado_transicionar = get_child(i).name
-					$Vision.target_position.x += $Vision.target_position.x
-					break
-	transicion_hijo(state_now, estado_transicionar)
+	if state_now is not MuerteGenerica:
+		var estado_transicionar:String
+		estado_alerta = estado
+		match estado_alerta:
+			AlertManager.alertStatus.NORMAL:
+				for i in get_child_count():
+					if get_child(i) is PatrullarGenerico:
+						estado_transicionar = get_child(i).name
+						$Vision.target_position.x = -75
+						break
+			AlertManager.alertStatus.PRECAUCION:
+				for i in get_child_count():
+					if get_child(i) is PatrullarGenerico:
+						estado_transicionar = get_child(i).name
+						break
+			AlertManager.alertStatus.EVACION:
+				for i in get_child_count():
+					if get_child(i) is PerseguirGenerico:
+						estado_transicionar = get_child(i).name
+						break
+			AlertManager.alertStatus.ALERTA:
+				for i in get_child_count():
+					if get_child(i) is RangoAtaqueGenerico:
+						estado_transicionar = get_child(i).name
+						$Vision.target_position.x = -145
+						break
+		transicion_hijo(state_now, estado_transicionar)
 
 func ver_jugador():
 	vio_jugador = true
@@ -126,7 +126,6 @@ func transicion_hijo(state:State, new_state_name:String):
 		if state != state_now:
 			return
 		var new_state = states.get(new_state_name)
-		
 		if !new_state:
 			push_warning("El estado al que ", self.name," quiere trancisionar es invalido y/o inexistente")
 			return
@@ -190,5 +189,6 @@ func _animacion_y_rotar():
 		if !animated_sprite.is_playing() || animated_sprite.animation == "idle":
 			animated_sprite.play("run")
 	else:
+		_girar(animated_sprite.flip_h)
 		if !animated_sprite.is_playing() || animated_sprite.animation == "run":
 			animated_sprite.play("idle")
