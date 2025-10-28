@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bjx0val8vkyye"]
 
-[ext_resource type="Script" uid="uid://dcincqt52m876" path="res://Scenes/Habilidades Modulares/Bullet Time.gd" id="1_spem1"]
+[ext_resource type="Script" uid="uid://dcincqt52m876" path="res://Scripts/Jugador/Habilidades Modulares/Bullet Time.gd" id="1_spem1"]
 
 [node name="Bullet Time" type="Node"]
 script = ExtResource("1_spem1")
