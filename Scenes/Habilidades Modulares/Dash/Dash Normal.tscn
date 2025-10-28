@@ -68,8 +68,8 @@ DashNode = NodePath("State Dash")
 BulletTime = NodePath("Bullet Time")
 TiempoDeRecarga = 1.0
 TiempoDeDash = 0.5
-distancia_maxima = 150.0
-Velocidad = 2000.0
+distancia_maxima = 130.0
+Velocidad = 1500.0
 MultFrenado = 0.3
 factor_aceleracion = 0.2
 
