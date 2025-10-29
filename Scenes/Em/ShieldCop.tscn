@@ -1,9 +1,10 @@
-[gd_scene load_steps=75 format=3 uid="uid://c7p5mspd0lfxc"]
+[gd_scene load_steps=76 format=3 uid="uid://c7p5mspd0lfxc"]
 
 [ext_resource type="PackedScene" uid="uid://n1wbci6a6faw" path="res://Scenes/Em/BaseEm.tscn" id="1_5l48c"]
 [ext_resource type="Script" uid="uid://dayxga6ky0saq" path="res://Scripts/Em/ShieldCop/ShieldCop.gd" id="2_vrn4w"]
 [ext_resource type="Texture2D" uid="uid://clybg0e6cwycw" path="res://Sprites/Prueba/Em/heavyCop/deadWIP.png" id="4_u2ess"]
 [ext_resource type="Texture2D" uid="uid://h2c4rqbwcdjr" path="res://Sprites/Prueba/Em/heavyCop/idleWIP.png" id="5_4a1h1"]
+[ext_resource type="Script" uid="uid://jwngsnj83t21" path="res://Scripts/Em/EstadosGenericos/CheckeoGenerico.gd" id="5_4gl7v"]
 [ext_resource type="Texture2D" uid="uid://bcb544n4tknq4" path="res://Sprites/Prueba/Em/heavyCop/placajeWIP.png" id="7_w6tmh"]
 [ext_resource type="Script" uid="uid://vluvoq5ueh7" path="res://Scripts/Em/ShieldCop/BloqueoShieldCop.gd" id="8_4gl7v"]
 [ext_resource type="Script" uid="uid://ceqrrvkd8trf0" path="res://Scripts/Em/EstadosGenericos/VerObjGenerico.gd" id="8_fgpuc"]
@@ -686,46 +687,50 @@ metadata/_custom_type_script = "uid://bnfnbhlmlommg"
 script = ExtResource("13_fgpuc")
 metadata/_custom_type_script = "uid://d2d3tvhcmf4ja"
 
-[node name="VerObjGenerico" type="Node" parent="." index="2"]
+[node name="CheckeoGenerico" type="Node" parent="." index="2"]
+script = ExtResource("5_4gl7v")
+metadata/_custom_type_script = "uid://jwngsnj83t21"
+
+[node name="VerObjGenerico" type="Node" parent="." index="3"]
 script = ExtResource("8_fgpuc")
 metadata/_custom_type_script = "uid://ceqrrvkd8trf0"
 
-[node name="PerseguirGenerico" type="Node" parent="." index="3"]
+[node name="PerseguirGenerico" type="Node" parent="." index="4"]
 script = ExtResource("12_3nc5l")
 metadata/_custom_type_script = "uid://ds2hrjf7uairh"
 
-[node name="RangoAtaqueShieldCop" type="Node" parent="." index="4"]
+[node name="RangoAtaqueShieldCop" type="Node" parent="." index="5"]
 script = ExtResource("10_cp0p1")
 distancia_para_perder = 600
 metadata/_custom_type_script = "uid://ch28gho3h2lph"
 
-[node name="BloqueoShieldCop" type="Node" parent="." index="5"]
+[node name="BloqueoShieldCop" type="Node" parent="." index="6"]
 script = ExtResource("8_4gl7v")
 metadata/_custom_type_script = "uid://vluvoq5ueh7"
 
-[node name="PlacajeShieldCop" type="Node" parent="." index="6"]
+[node name="PlacajeShieldCop" type="Node" parent="." index="7"]
 script = ExtResource("10_vrn4w")
 metadata/_custom_type_script = "uid://bmdewqnsbar8q"
 
-[node name="AnimatedSprite2D" parent="." index="7"]
+[node name="AnimatedSprite2D" parent="." index="8"]
 sprite_frames = SubResource("SpriteFrames_nqb0s")
 animation = &"run"
 
-[node name="CollisionShape2D" parent="." index="8"]
+[node name="CollisionShape2D" parent="." index="9"]
 shape = SubResource("CapsuleShape2D_lu3y0")
 
-[node name="WallCheck" type="RayCast2D" parent="." index="13"]
+[node name="WallCheck" type="RayCast2D" parent="." index="14"]
 position = Vector2(0, 14)
 target_position = Vector2(-25, 0)
 
-[node name="DamagArea" parent="." index="14"]
+[node name="DamagArea" parent="." index="15"]
 position = Vector2(-3, 0)
 
 [node name="CollisionShape2D" parent="DamagArea" index="0"]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_3nc5l")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." index="15"]
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="16"]
 offset_left = -26.0
 offset_top = -29.0
 offset_right = 27.0

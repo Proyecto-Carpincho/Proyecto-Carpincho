@@ -4,16 +4,14 @@ class_name AlertManager
 enum alertStatus{NORMAL, PRECAUCION, EVACION, ALERTA}
 
 @export var grupo:String
-@export var tiempo_maximo:int
+@export var estado_alerta:alertStatus
 
-var estado_alerta:alertStatus
 var fuerza_alerta:int
 var upc:Vector2 # Ultima posicion conocida
 var temporizador:float
 
 func _ready() -> void:
 	fuerza_alerta = 0
-	estado_alerta = alertStatus.NORMAL
 	get_tree().call_group(grupo, "cambiar_alerta", estado_alerta)
 
 func _process(delta: float) -> void:
@@ -57,8 +55,24 @@ func actualizar_upc(pos:Vector2):
 	upc = pos
 
 func llamar_checkeo(em_position:Vector2) -> void:
-	#TODO
-	print("Checkeo llamado")
+	if get_tree().get_node_count_in_group(grupo) == 0:
+		push_warning("No hay nodos en el grupo")
+		return
+	
+	var em_cerca:int
+	for i in get_tree().get_node_count_in_group(grupo):
+		if get_tree().get_nodes_in_group(grupo).get(i).state_now is not MuerteGenerica:
+			em_cerca = i
+			break
+	
+	for i in get_tree().get_node_count_in_group(grupo):
+		if get_tree().get_nodes_in_group(grupo).get(i).state_now is not MuerteGenerica:
+			if (em_position.distance_to(get_tree().get_nodes_in_group(grupo).get(i).position)) < (em_position.distance_to(get_tree().get_nodes_in_group(grupo).get(em_cerca).position)):
+					em_cerca = i
+	
+	print(get_tree().get_nodes_in_group(grupo).get(em_cerca).name)
+	get_tree().get_nodes_in_group(grupo).get(em_cerca).checkear(em_position)
+
 
 func _distancia_objetivo() -> int:
 	if estado_alerta != alertStatus.EVACION:

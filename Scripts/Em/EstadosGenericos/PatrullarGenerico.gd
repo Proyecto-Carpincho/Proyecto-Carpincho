@@ -32,7 +32,6 @@ func physics_update(delta:float) -> void:
 		if avanzando:
 			if (progreso_ruta < (cantidad_puntos - 1)):
 				progreso_ruta += 1
-				print(progreso_ruta)
 			else:
 				if !loop:
 					avanzando = false

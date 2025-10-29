@@ -134,16 +134,6 @@ func transicion_hijo(state:State, new_state_name:String):
 		new_state.enter()
 		state_now = new_state
 
-func _girar(b:bool):
-	# false = izquierda
-	# true = derecha
-	if (b == false && $Vison.target_position.x > 0) || (b == true && $Vision.target_position.x < 0):
-		$Vision.target_position.x *= -1
-		$DamagArea.position.x *= -1 # TODO: que funcione
-		animated_sprite.play("turn")
-		await animated_sprite.animation_finished
-		animated_sprite.flip_h = b
-
 func Golpeado(fuerza, agresor:Entidad) -> void:
 	if alert_manager.estado_alerta != AlertManager.alertStatus.NORMAL:
 		if !vio_jugador:
@@ -167,6 +157,30 @@ func Golpeado(fuerza, agresor:Entidad) -> void:
 					break
 		transicion_hijo(state_now, estado_transicionar)
 
+func checkear(em_posicion:Vector2) -> void:
+	if state_now is not MuerteGenerica:
+		var estado_check:CheckeoGenerico
+		state_now.exit()
+		for i in get_child_count():
+			if get_child(i) is CheckeoGenerico:
+				estado_check = get_child(i)
+		
+		if estado_check != null:
+			estado_check.enter_check(em_posicion)
+			state_now = estado_check
+		else:
+			push_warning(self.name," no tiene estado de checkeo")
+
+
+func _girar(b:bool):
+	# false = izquierda
+	# true = derecha
+	if (b == false && $Vison.target_position.x > 0) || (b == true && $Vision.target_position.x < 0):
+		$Vision.target_position.x *= -1
+		$DamagArea.position.x *= -1 # TODO: que funcione
+		animated_sprite.play("turn")
+		await animated_sprite.animation_finished
+		animated_sprite.flip_h = b
 
 func _pathfind(delta:float, speed_path:float) -> void:
 	var direction:Vector2 = (nav.get_next_path_position() - global_position).normalized()
@@ -175,7 +189,7 @@ func _pathfind(delta:float, speed_path:float) -> void:
 func _check_damage(body: Node2D) -> void: # Creo que se va a tener que mover todo esto a un Animation algo
 	if $DamagArea.monitoring:
 		var auxSelf := self.get_class()
-		if body is Entidad && body is not Enemigo: # TODO: esto no es ideal
+		if body is Entidad && !body.is_in_group(grupo):
 			body.Golpeado(ATTACK_DAMAGE, self)
 			$DamagArea.monitoring = false
 
