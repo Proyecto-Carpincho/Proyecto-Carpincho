@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://wlyot2qy4yvo"]
+[gd_scene load_steps=34 format=4 uid="uid://wlyot2qy4yvo"]
 
 [ext_resource type="Shader" uid="uid://ca6uwogqe2nxj" path="res://Shader/main.gdshader" id="1_ab3jn"]
 [ext_resource type="Texture2D" uid="uid://nw076mgo6ocp" path="res://Sprites/Wasteland_Sky.png" id="2_jlbwp"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://biooor022vnj2" path="res://Sprites/Tileset/Normal/Tuberias/Tuberias.png" id="16_at1lk"]
 [ext_resource type="Texture2D" uid="uid://cxe36xoxsgh3a" path="res://Sprites/Tileset/Normal/Tuberias/Tuberia de aire.png" id="17_l773a"]
 [ext_resource type="Texture2D" uid="uid://qqcjjksnks7k" path="res://Sprites/Tileset/Normal/Ventana.png" id="18_bpm51"]
+[ext_resource type="Script" uid="uid://d1amwrkjw7tc4" path="res://Scripts/Em/SpawnerEm.gd" id="18_pee4o"]
 [ext_resource type="Texture2D" uid="uid://j5yfdp1urn2n" path="res://Sprites/Tileset/Normal/Decoracion/Techos.png" id="19_exjbe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pee4o"]
@@ -1374,6 +1375,7 @@ navigation_polygon = SubResource("NavigationPolygon_kw0q7")
 [node name="BaseEm" parent="." node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") groups=["Enemigos"] instance=ExtResource("15_acpe2")]
 position = Vector2(448, 48)
 scale = Vector2(2.5, 2.5)
+collision_mask = 3
 objetivo = NodePath("../Jugador")
 alert_manager = NodePath("../AlertManager")
 grupo = "Enemigos"
@@ -1386,8 +1388,9 @@ script = ExtResource("15_ab3jn")
 metadata/_custom_type_script = "uid://brm33xe6nqyup"
 
 [node name="BaseEm2" parent="." node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") instance=ExtResource("15_acpe2")]
-position = Vector2(-72, 72)
+position = Vector2(-336, 56)
 scale = Vector2(2, 2)
+collision_mask = 3
 objetivo = NodePath("../Jugador")
 alert_manager = NodePath("../AlertManager")
 grupo = "Enemigos"
@@ -1398,5 +1401,35 @@ visible = false
 curve = SubResource("Curve2D_acpe2")
 script = ExtResource("15_ab3jn")
 metadata/_custom_type_script = "uid://brm33xe6nqyup"
+
+[node name="SpawnerEm" type="Node2D" parent="." node_paths=PackedStringArray("alert_manager")]
+position = Vector2(-1184, 56)
+script = ExtResource("18_pee4o")
+alert_manager = NodePath("../AlertManager")
+metadata/_custom_type_script = "uid://d1amwrkjw7tc4"
+
+[node name="ShieldCop" parent="SpawnerEm" node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") instance=ExtResource("15_acpe2")]
+scale = Vector2(2, 2)
+collision_mask = 3
+objetivo = NodePath("../../Jugador")
+alert_manager = NodePath("../../AlertManager")
+grupo = "Enemigos"
+ruta = NodePath("../../Ruta1")
+
+[node name="ShieldCop2" parent="SpawnerEm" node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") instance=ExtResource("15_acpe2")]
+scale = Vector2(2, 2)
+collision_mask = 3
+objetivo = NodePath("../../Jugador")
+alert_manager = NodePath("../../AlertManager")
+grupo = "Enemigos"
+ruta = NodePath("../../Ruta2")
+
+[node name="ShieldCop3" parent="SpawnerEm" node_paths=PackedStringArray("objetivo", "alert_manager", "ruta") instance=ExtResource("15_acpe2")]
+scale = Vector2(2, 2)
+collision_mask = 3
+objetivo = NodePath("../../Jugador")
+alert_manager = NodePath("../../AlertManager")
+grupo = "Enemigos"
+ruta = NodePath("../../Ruta1")
 
 [editable path="Jugador"]

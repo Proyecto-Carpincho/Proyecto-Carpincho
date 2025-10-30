@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://c7p5mspd0lfxc"]
+[gd_scene load_steps=77 format=3 uid="uid://c7p5mspd0lfxc"]
 
 [ext_resource type="PackedScene" uid="uid://n1wbci6a6faw" path="res://Scenes/Em/BaseEm.tscn" id="1_5l48c"]
 [ext_resource type="Script" uid="uid://dayxga6ky0saq" path="res://Scripts/Em/ShieldCop/ShieldCop.gd" id="2_vrn4w"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://gwyuscvrlx4p" path="res://Sprites/Prueba/Em/heavyCop/turn1WIP.png" id="10_0yxdh"]
 [ext_resource type="Script" uid="uid://ch28gho3h2lph" path="res://Scripts/Em/ShieldCop/RangoAtaqueShieldCop.gd" id="10_cp0p1"]
 [ext_resource type="Script" uid="uid://bmdewqnsbar8q" path="res://Scripts/Em/ShieldCop/PlacajeShieldCop.gd" id="10_vrn4w"]
+[ext_resource type="Script" uid="uid://vjtk4cr28bxr" path="res://Scripts/Em/EstadosGenericos/Esperar.gd" id="11_giu52"]
 [ext_resource type="Script" uid="uid://ds2hrjf7uairh" path="res://Scripts/Em/EstadosGenericos/PerseguirGenerico.gd" id="12_3nc5l"]
 [ext_resource type="Script" uid="uid://bnfnbhlmlommg" path="res://Scripts/Em/EstadosGenericos/MuerteGenerica.gd" id="13_3nc5l"]
 [ext_resource type="Script" uid="uid://d2d3tvhcmf4ja" path="res://Scripts/Em/EstadosGenericos/PatrullarGenerico.gd" id="13_fgpuc"]
@@ -670,8 +671,8 @@ height = 32.0
 size = Vector2(22, 29)
 
 [node name="ShieldCop" node_paths=PackedStringArray("estado_inicial") instance=ExtResource("1_5l48c")]
-collision_layer = 7
-collision_mask = 7
+collision_layer = 12
+collision_mask = 3
 script = ExtResource("2_vrn4w")
 cooldown_placaje = 2
 estado_inicial = NodePath("PatrullarGenerico")
@@ -712,25 +713,29 @@ metadata/_custom_type_script = "uid://vluvoq5ueh7"
 script = ExtResource("10_vrn4w")
 metadata/_custom_type_script = "uid://bmdewqnsbar8q"
 
-[node name="AnimatedSprite2D" parent="." index="8"]
-sprite_frames = SubResource("SpriteFrames_nqb0s")
-animation = &"run"
+[node name="EsperarGenerico" type="Node" parent="." index="8"]
+script = ExtResource("11_giu52")
+metadata/_custom_type_script = "uid://vjtk4cr28bxr"
 
-[node name="CollisionShape2D" parent="." index="9"]
+[node name="AnimatedSprite2D" parent="." index="9"]
+sprite_frames = SubResource("SpriteFrames_nqb0s")
+animation = &"hit"
+
+[node name="CollisionShape2D" parent="." index="10"]
 shape = SubResource("CapsuleShape2D_lu3y0")
 
-[node name="WallCheck" type="RayCast2D" parent="." index="14"]
+[node name="WallCheck" type="RayCast2D" parent="." index="15"]
 position = Vector2(0, 14)
 target_position = Vector2(-25, 0)
 
-[node name="DamagArea" parent="." index="15"]
+[node name="DamagArea" parent="." index="16"]
 position = Vector2(-3, 0)
 
 [node name="CollisionShape2D" parent="DamagArea" index="0"]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_3nc5l")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." index="16"]
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="17"]
 offset_left = -26.0
 offset_top = -29.0
 offset_right = 27.0

@@ -6,8 +6,10 @@ var ultima_dir:int
 
 func enter():
 	if padre.velocity.x > 0:
+		padre._girar(true)
 		ultima_dir = velocidad_placaje
 	elif padre.velocity.x < 0:
+		padre._girar(false)
 		ultima_dir = -velocidad_placaje
 	else:
 		Transiciono.emit(self, "RangoAtaqueShieldCop")
